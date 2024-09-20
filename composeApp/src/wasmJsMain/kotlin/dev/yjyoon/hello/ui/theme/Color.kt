@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.theme
+package dev.yjyoon.hello.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

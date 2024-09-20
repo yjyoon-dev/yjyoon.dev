@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.theme
+package dev.yjyoon.hello.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

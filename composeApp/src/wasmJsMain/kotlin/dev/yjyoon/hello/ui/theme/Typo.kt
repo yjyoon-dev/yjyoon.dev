@@ -1,10 +1,10 @@
-package dev.yjyoon.hello.theme
+package dev.yjyoon.hello.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.resources.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import org.jetbrains.compose.resources.Font
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.pretendard_black
 import yjyoondev.composeapp.generated.resources.pretendard_bold
@@ -42,7 +42,7 @@ fun PretendardTypography() = Typography().run {
         titleLarge = titleLarge.copy(fontFamily = fontFamily),
         titleMedium = titleMedium.copy(fontFamily = fontFamily),
         titleSmall = titleSmall.copy(fontFamily = fontFamily),
-        bodyLarge = bodyLarge.copy(fontFamily =  fontFamily),
+        bodyLarge = bodyLarge.copy(fontFamily = fontFamily),
         bodyMedium = bodyMedium.copy(fontFamily = fontFamily),
         bodySmall = bodySmall.copy(fontFamily = fontFamily),
         labelLarge = labelLarge.copy(fontFamily = fontFamily),
