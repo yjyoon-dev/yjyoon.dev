@@ -7,7 +7,8 @@ val KotlinWhite = Color(0xFFFFFFFF)
 
 val KotlinDarkGray = Color(0xFF19191C)
 val KotlinGray = Color(0xFF303033)
-val KotlinLightGray = Color(0xFFFFFFB2)
+val KotlinLightGray = Color(0xFF9E9E9E)
 
+val KotlinBlue = Color(0xFF5B38E3)
 val KotlinPurple = Color(0xFF6A46D2)
 val KotlinRed = Color(0xFFE54857)

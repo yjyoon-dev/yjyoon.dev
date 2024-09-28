@@ -1,0 +1,17 @@
+<resources>
+    <string name="language">KOR</string>
+
+    <string name="section_home">Home</string>
+    <string name="section_about">About me</string>
+    <string name="section_career">Career</string>
+    <string name="section_experience">Experience</string>
+    <string name="section_contact">Contact</string>
+
+    <string name="hi">Hi</string>
+    <string name="i_am">I am </string>
+    <string name="yjyoon">Yeojun Yoon</string>
+    <string name="intro">Software engineer and junior android developer at NAVER. Specialize in\nmobile application development for android using Kotlin.</string>
+
+    <string name="get_in_touch">Get in touch</string>
+    <string name="download_cv">Download CV</string>
+</resources>

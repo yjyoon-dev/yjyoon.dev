@@ -9,8 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
-import dev.yjyoon.hello.ui.screen.MobileScreen
-import dev.yjyoon.hello.ui.screen.PcScreen
+import dev.yjyoon.hello.ui.screen.mobile.MobileScreen
+import dev.yjyoon.hello.ui.screen.pc.PcScreen
 import dev.yjyoon.hello.ui.theme.KotlinTheme
 
 @Composable

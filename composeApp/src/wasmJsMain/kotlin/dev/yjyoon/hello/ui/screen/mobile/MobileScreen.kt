@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.ui.screen
+package dev.yjyoon.hello.ui.screen.mobile
 
 import androidx.compose.runtime.Composable
 
