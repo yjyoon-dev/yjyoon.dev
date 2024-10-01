@@ -28,8 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.yjyoon.hello.ui.theme.KotlinGray
-import dev.yjyoon.hello.ui.theme.KotlinLightGray
+import dev.yjyoon.hello.ui.model.ThemeMode
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
@@ -38,14 +37,17 @@ import yjyoondev.composeapp.generated.resources.get_in_touch
 import yjyoondev.composeapp.generated.resources.hi
 import yjyoondev.composeapp.generated.resources.i_am
 import yjyoondev.composeapp.generated.resources.ic_open_in_new
+import yjyoondev.composeapp.generated.resources.img_graphic_dark
 import yjyoondev.composeapp.generated.resources.img_graphic_light
 import yjyoondev.composeapp.generated.resources.intro
 import yjyoondev.composeapp.generated.resources.yjyoon
 
 @Composable
 fun HomeSection(
+    themeMode: ThemeMode,
     modifier: Modifier = Modifier
 ) {
+    val defaultTextColor = MaterialTheme.colorScheme.onBackground
     val greetingString = buildAnnotatedString {
         withStyle(
             SpanStyle(
@@ -53,13 +55,13 @@ fun HomeSection(
                 fontWeight = FontWeight.Black,
             )
         ) {
-            withStyle(SpanStyle(color = MaterialTheme.colorScheme.onBackground)) {
+            withStyle(SpanStyle(color = defaultTextColor)) {
                 append(stringResource(Res.string.hi))
             }
-            withStyle(SpanStyle(color = KotlinLightGray.copy(alpha = 0.5f))) {
+            withStyle(SpanStyle(color = defaultTextColor.copy(alpha = 0.2f))) {
                 append(",\n")
             }
-            withStyle(SpanStyle(color = MaterialTheme.colorScheme.onBackground)) {
+            withStyle(SpanStyle(color = defaultTextColor)) {
                 append(stringResource(Res.string.i_am))
             }
             withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary)) {
@@ -91,8 +93,7 @@ fun HomeSection(
             Spacer(Modifier.height(12.dp))
             Text(
                 text = stringResource(Res.string.intro),
-                color = KotlinGray.copy(alpha = 0.8f),
-                fontWeight = FontWeight.Medium,
+                color = defaultTextColor.copy(alpha = 0.5f),
                 fontSize = 16.sp,
                 lineHeight = 24.sp
             )
@@ -124,17 +125,33 @@ fun HomeSection(
                     Text(
                         text = stringResource(Res.string.download_cv),
                         fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 16.sp
                     )
                 }
             }
         }
-        Image(
-            painter = painterResource(Res.drawable.img_graphic_light),
-            contentDescription = null,
+        GraphicImage(
+            themeMode = themeMode,
             modifier = Modifier
                 .width((CONTENT_WIDTH * 3 / 5).dp)
                 .align(Alignment.BottomEnd)
         )
     }
+}
+
+@Composable
+private fun GraphicImage(
+    themeMode: ThemeMode,
+    modifier: Modifier = Modifier
+) {
+    val graphicRes = when (themeMode) {
+        ThemeMode.Light -> Res.drawable.img_graphic_light
+        ThemeMode.Dark -> Res.drawable.img_graphic_dark
+    }
+    Image(
+        painter = painterResource(graphicRes),
+        contentDescription = null,
+        modifier = modifier
+    )
 }

@@ -22,14 +22,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.model.Section
+import dev.yjyoon.hello.ui.model.ThemeMode
+import dev.yjyoon.hello.ui.model.toggle
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
-import yjyoondev.composeapp.generated.resources.ic_light_mode
 import yjyoondev.composeapp.generated.resources.img_logo_black
+import yjyoondev.composeapp.generated.resources.img_logo_white
 
 @Composable
-fun PcHeader(modifier: Modifier = Modifier) {
+fun PcHeader(
+    themeMode: ThemeMode,
+    onThemeChanged: (ThemeMode) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = modifier.then(
             Modifier
@@ -39,11 +45,7 @@ fun PcHeader(modifier: Modifier = Modifier) {
         ),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(Res.drawable.img_logo_black),
-            contentDescription = null,
-            modifier = Modifier.height(24.dp)
-        )
+        LogoImage(themeMode)
         Spacer(Modifier.weight(1f))
         Row(
             horizontalArrangement = Arrangement.spacedBy(48.dp)
@@ -61,15 +63,15 @@ fun PcHeader(modifier: Modifier = Modifier) {
             }
         }
         Spacer(Modifier.weight(1f))
-        IconButton(onClick = {}) {
+        IconButton(onClick = { onThemeChanged(themeMode.toggle()) }) {
             Icon(
-                painterResource(Res.drawable.ic_light_mode),
+                painterResource(themeMode.iconRes),
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(24.dp)
             )
         }
-        Spacer(Modifier.width(24.dp))
+        Spacer(Modifier.width(16.dp))
         IconButton(onClick = {}) {
             Icon(
                 Icons.Default.Share,
@@ -79,6 +81,22 @@ fun PcHeader(modifier: Modifier = Modifier) {
             )
         }
     }
+}
+
+@Composable
+private fun LogoImage(
+    themeMode: ThemeMode,
+    modifier: Modifier = Modifier
+) {
+    val logoRes = when (themeMode) {
+        ThemeMode.Light -> Res.drawable.img_logo_black
+        ThemeMode.Dark -> Res.drawable.img_logo_white
+    }
+    Image(
+        painter = painterResource(logoRes),
+        contentDescription = null,
+        modifier = Modifier.height(24.dp)
+    )
 }
 
 private const val HEADER_HEIGHT = 72
