@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import dev.yjyoon.hello.ui.ThemeMode
+import dev.yjyoon.hello.ui.screen.pc.section.AboutSection
+import dev.yjyoon.hello.ui.screen.pc.section.HomeSection
 
 @Composable
 fun PcScreen(

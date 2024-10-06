@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.ui.screen.pc
+package dev.yjyoon.hello.ui.screen.pc.section
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,8 +26,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.yjyoon.hello.ui.LocalScreenSize
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
+import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
@@ -47,6 +48,7 @@ import yjyoondev.composeapp.generated.resources.yjyoon
 fun HomeSection(
     modifier: Modifier = Modifier
 ) {
+    val screenSize = LocalScreenSize.current
     val themeMode = LocalThemeMode.current
     val defaultTextColor = MaterialTheme.colorScheme.onBackground
     val greetingString = buildAnnotatedString {
@@ -79,12 +81,10 @@ fun HomeSection(
                     end = (CONTENT_HORIZONTAL_PADDING / 2).dp
                 )
                 .width(CONTENT_WIDTH.dp)
-                .aspectRatio(21 / 9f)
         )
     ) {
         Column(
             modifier = Modifier
-                .fillMaxHeight()
                 .width((CONTENT_WIDTH * 2 / 3).dp)
                 .align(Alignment.BottomStart)
                 .padding(vertical = 72.dp),
@@ -135,7 +135,7 @@ fun HomeSection(
         GraphicImage(
             themeMode = themeMode,
             modifier = Modifier
-                .width((CONTENT_WIDTH * 3 / 5).dp)
+                .width((screenSize.width / 2).coerceAtMost(CONTENT_WIDTH * 3 / 5).dp)
                 .align(Alignment.BottomEnd)
         )
     }

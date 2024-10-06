@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.ui.screen.pc
+package dev.yjyoon.hello.ui.screen.pc.section
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -36,6 +35,8 @@ import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.component.CenteredImage
 import dev.yjyoon.hello.ui.model.Skill
+import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
 import dev.yjyoon.hello.ui.theme.KotlinDarkGray
 import dev.yjyoon.hello.ui.theme.KotlinLightGray
 import dev.yjyoon.hello.ui.theme.KotlinTheme
@@ -57,13 +58,11 @@ fun AboutSection(modifier: Modifier = Modifier) {
                 Modifier
                     .background(color = MaterialTheme.colorScheme.background)
                     .fillMaxWidth()
-                    .aspectRatio(21 / 9f)
             ),
             contentAlignment = Alignment.Center
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxHeight()
                     .width(CONTENT_WIDTH.dp)
                     .padding(
                         horizontal = CONTENT_HORIZONTAL_PADDING.dp,
@@ -101,7 +100,7 @@ fun AboutSection(modifier: Modifier = Modifier) {
                     contentPadding = PaddingValues(4.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.width(720.dp)
+                    modifier = Modifier.size(width = 720.dp, height = 480.dp)
 
                 ) {
                     items(Skill.entries) {
