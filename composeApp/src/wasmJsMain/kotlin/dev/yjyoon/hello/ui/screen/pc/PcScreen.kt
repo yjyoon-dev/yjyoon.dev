@@ -9,11 +9,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import dev.yjyoon.hello.ui.model.ThemeMode
+import dev.yjyoon.hello.ui.ThemeMode
 
 @Composable
 fun PcScreen(
-    themeMode: ThemeMode,
     onThemeChanged: (ThemeMode) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -28,10 +27,9 @@ fun PcScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         PcHeader(
-            themeMode = themeMode,
             onThemeChanged = onThemeChanged
         )
-        HomeSection(themeMode = themeMode)
+        HomeSection()
         AboutSection()
     }
 }

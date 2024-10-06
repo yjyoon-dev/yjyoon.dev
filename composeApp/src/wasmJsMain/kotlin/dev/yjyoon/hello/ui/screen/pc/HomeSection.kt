@@ -28,7 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.yjyoon.hello.ui.model.ThemeMode
+import dev.yjyoon.hello.ui.LocalThemeMode
+import dev.yjyoon.hello.ui.ThemeMode
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
@@ -44,9 +45,9 @@ import yjyoondev.composeapp.generated.resources.yjyoon
 
 @Composable
 fun HomeSection(
-    themeMode: ThemeMode,
     modifier: Modifier = Modifier
 ) {
+    val themeMode = LocalThemeMode.current
     val defaultTextColor = MaterialTheme.colorScheme.onBackground
     val greetingString = buildAnnotatedString {
         withStyle(

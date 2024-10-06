@@ -11,23 +11,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
-import dev.yjyoon.hello.ui.model.ThemeMode
 import dev.yjyoon.hello.ui.screen.MainScreen
 import dev.yjyoon.hello.ui.theme.KotlinTheme
 
 @Composable
 fun App() {
-    var screenSize by remember { mutableStateOf(ScreenSize()) }
     val isSystemInDarkTheme = isSystemInDarkTheme()
     var themeMode by remember { mutableStateOf(if (isSystemInDarkTheme) ThemeMode.Dark else ThemeMode.Light) }
+    var screenSize by remember { mutableStateOf(ScreenSize()) }
 
     Layout(
         content = {
             Box(modifier = Modifier.fillMaxSize()) {
-                CompositionLocalProvider(LocalScreenSize provides screenSize) {
+                CompositionLocalProvider(
+                    LocalScreenSize provides screenSize,
+                    LocalThemeMode provides themeMode
+                ) {
                     KotlinTheme(isDarkTheme = themeMode == ThemeMode.Dark) {
                         MainScreen(
-                            themeMode = themeMode,
                             onThemeChanged = { themeMode = it }
                         )
                     }

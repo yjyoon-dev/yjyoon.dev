@@ -21,9 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.yjyoon.hello.ui.LocalThemeMode
+import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.model.Section
-import dev.yjyoon.hello.ui.model.ThemeMode
-import dev.yjyoon.hello.ui.model.toggle
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
@@ -32,10 +32,10 @@ import yjyoondev.composeapp.generated.resources.img_logo_white
 
 @Composable
 fun PcHeader(
-    themeMode: ThemeMode,
     onThemeChanged: (ThemeMode) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val themeMode = LocalThemeMode.current
     Row(
         modifier = modifier.then(
             Modifier
