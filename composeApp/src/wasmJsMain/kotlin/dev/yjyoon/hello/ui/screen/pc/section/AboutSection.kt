@@ -100,11 +100,11 @@ fun AboutSection(modifier: Modifier = Modifier) {
                     contentPadding = PaddingValues(4.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.size(width = 720.dp, height = 480.dp)
+                    modifier = Modifier.width(720.dp).height(360.dp)
 
                 ) {
                     items(Skill.entries) {
-                        SkillCard(it)
+                        SkillCard(it, modifier = Modifier.weight(1f))
                     }
                 }
             }
@@ -137,22 +137,27 @@ private fun SkillCard(
         modifier = modifier.then(Modifier.aspectRatio(1f))
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            modifier = Modifier.fillMaxSize().padding(top = 36.dp, bottom = 24.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CenteredImage(
                 resource = skill.logo,
                 modifier = Modifier.size(48.dp)
             )
-            Spacer(Modifier.height(16.dp))
-            Text(
-                stringResource(skill.title),
-                fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
-                lineHeight = 18.sp,
-                textAlign = TextAlign.Center
-            )
+            Spacer(Modifier.height(12.dp))
+            Box(
+                modifier = Modifier.height(40.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    stringResource(skill.title),
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 16.sp,
+                    lineHeight = 20.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
