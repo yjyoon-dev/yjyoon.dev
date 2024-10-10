@@ -1,7 +1,6 @@
 package dev.yjyoon.hello.ui.screen.pc.section
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,9 +32,9 @@ import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.component.CenteredImage
+import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.model.Skill
 import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
-import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
 import dev.yjyoon.hello.ui.theme.KotlinDarkGray
 import dev.yjyoon.hello.ui.theme.KotlinLightGray
 import dev.yjyoon.hello.ui.theme.KotlinTheme
@@ -53,59 +51,42 @@ fun AboutSection(modifier: Modifier = Modifier) {
     KotlinTheme(
         isDarkTheme = themeMode != ThemeMode.Dark
     ) {
-        Box(
-            modifier = modifier.then(
-                Modifier
-                    .background(color = MaterialTheme.colorScheme.background)
-                    .fillMaxWidth()
-            ),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
-                modifier = Modifier
-                    .width(CONTENT_WIDTH.dp)
-                    .padding(
-                        horizontal = CONTENT_HORIZONTAL_PADDING.dp,
-                        vertical = 72.dp
-                    ),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    stringResource(Res.string.section_about),
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 36.sp,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(Modifier.height(36.dp))
-                Text(
-                    stringResource(Res.string.about_me),
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 28.sp,
-                    modifier = Modifier.padding(horizontal = (CONTENT_HORIZONTAL_PADDING / 2).dp)
-                )
-                Spacer(Modifier.height(72.dp))
-                Text(
-                    stringResource(Res.string.favorites),
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(Modifier.height(36.dp))
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(4),
-                    contentPadding = PaddingValues(4.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.width(720.dp).height(360.dp)
+        SectionColumn(modifier = modifier) {
+            Text(
+                stringResource(Res.string.section_about),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 36.sp,
+                textAlign = TextAlign.Center
+            )
+            Spacer(Modifier.height(36.dp))
+            Text(
+                stringResource(Res.string.about_me),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center,
+                lineHeight = 28.sp,
+                modifier = Modifier.padding(horizontal = (CONTENT_HORIZONTAL_PADDING / 2).dp)
+            )
+            Spacer(Modifier.height(72.dp))
+            Text(
+                stringResource(Res.string.favorites),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center
+            )
+            Spacer(Modifier.height(36.dp))
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(4),
+                contentPadding = PaddingValues(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.width(720.dp).height(360.dp)
 
-                ) {
-                    items(Skill.entries) {
-                        SkillCard(it, modifier = Modifier.weight(1f))
-                    }
+            ) {
+                items(Skill.entries) {
+                    SkillCard(it, modifier = Modifier.weight(1f))
                 }
             }
         }
