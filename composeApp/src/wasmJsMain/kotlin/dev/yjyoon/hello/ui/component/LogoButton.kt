@@ -78,7 +78,7 @@ fun LogoButton(
                 containerColor = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.onSurface
             ),
-            modifier = modifier
+            modifier = modifier.then(Modifier.size(size))
         ) {
             Box(
                 modifier = Modifier.fillMaxSize(),
