@@ -33,7 +33,6 @@ fun CareerSection(modifier: Modifier = Modifier) {
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
             Text(

@@ -37,7 +37,6 @@ import dev.yjyoon.hello.ui.model.Skill
 import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
 import dev.yjyoon.hello.ui.theme.KotlinDarkGray
 import dev.yjyoon.hello.ui.theme.KotlinLightGray
-import dev.yjyoon.hello.ui.theme.KotlinTheme
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.about_me
@@ -46,48 +45,45 @@ import yjyoondev.composeapp.generated.resources.section_about
 
 @Composable
 fun AboutSection(modifier: Modifier = Modifier) {
-    val themeMode = LocalThemeMode.current
-
-    KotlinTheme(
-        isDarkTheme = themeMode != ThemeMode.Dark
+    SectionColumn(
+        modifier = modifier,
+        reverseTheme = true
     ) {
-        SectionColumn(modifier = modifier) {
-            Text(
-                stringResource(Res.string.section_about),
-                color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 36.sp,
-                textAlign = TextAlign.Center
-            )
-            Spacer(Modifier.height(36.dp))
-            Text(
-                stringResource(Res.string.about_me),
-                color = MaterialTheme.colorScheme.onBackground,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-                lineHeight = 28.sp,
-                modifier = Modifier.padding(horizontal = (CONTENT_HORIZONTAL_PADDING / 2).dp)
-            )
-            Spacer(Modifier.height(72.dp))
-            Text(
-                stringResource(Res.string.favorites),
-                color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center
-            )
-            Spacer(Modifier.height(36.dp))
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(4),
-                contentPadding = PaddingValues(4.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.width(720.dp).height(360.dp)
+        Text(
+            stringResource(Res.string.section_about),
+            color = MaterialTheme.colorScheme.onBackground,
+            fontWeight = FontWeight.ExtraBold,
+            fontSize = 36.sp,
+            textAlign = TextAlign.Center
+        )
+        Spacer(Modifier.height(36.dp))
+        Text(
+            stringResource(Res.string.about_me),
+            color = MaterialTheme.colorScheme.onBackground,
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center,
+            lineHeight = 28.sp,
+            modifier = Modifier.padding(horizontal = (CONTENT_HORIZONTAL_PADDING / 2).dp)
+        )
+        Spacer(Modifier.height(72.dp))
+        Text(
+            stringResource(Res.string.favorites),
+            color = MaterialTheme.colorScheme.onBackground,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            textAlign = TextAlign.Center
+        )
+        Spacer(Modifier.height(36.dp))
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(4),
+            contentPadding = PaddingValues(4.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.width(720.dp).height(360.dp)
 
-            ) {
-                items(Skill.entries) {
-                    SkillCard(it, modifier = Modifier.weight(1f))
-                }
+        ) {
+            items(Skill.entries) {
+                SkillCard(it, modifier = Modifier.weight(1f))
             }
         }
     }
