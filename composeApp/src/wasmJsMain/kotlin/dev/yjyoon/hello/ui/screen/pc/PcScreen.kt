@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.screen.pc.section.AboutSection
 import dev.yjyoon.hello.ui.screen.pc.section.CareerSection
+import dev.yjyoon.hello.ui.screen.pc.section.ExperienceSection
 import dev.yjyoon.hello.ui.screen.pc.section.HomeSection
 
 @Composable
@@ -35,6 +36,7 @@ fun PcScreen(
         HomeSection()
         AboutSection()
         CareerSection()
+        ExperienceSection()
     }
 }
 

@@ -12,6 +12,7 @@ import yjyoondev.composeapp.generated.resources.flutter_developer
 import yjyoondev.composeapp.generated.resources.ic_exp_dpm
 import yjyoondev.composeapp.generated.resources.ic_exp_nexters
 import yjyoondev.composeapp.generated.resources.ic_exp_swm
+import yjyoondev.composeapp.generated.resources.ic_exp_yapp
 
 enum class Club(
     val logoRes: DrawableResource,
@@ -28,7 +29,7 @@ enum class Club(
         url = "https://swmaestro.org/"
     ),
     Yapp(
-        logoRes = Res.drawable.ic_exp_swm,
+        logoRes = Res.drawable.ic_exp_yapp,
         titleRes = Res.string.club_yapp,
         positionRes = Res.string.android_developer,
         year = 20,

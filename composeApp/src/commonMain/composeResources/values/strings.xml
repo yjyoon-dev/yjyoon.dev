@@ -2,7 +2,7 @@
     <string name="language">KOR</string>
 
     <string name="section_home">Home</string>
-    <string name="section_about">About me</string>
+    <string name="section_about">About</string>
     <string name="section_career">Career</string>
     <string name="section_experience">Experience</string>
     <string name="section_contact">Contact</string>
@@ -38,11 +38,73 @@
     <string name="career_kakaobrain_desc"> - AI 소설 프로토타이핑 서비스 개발\n - LLM 기반 프롬프트 엔지니어링 학습\n - Kotlin Multiplatform 과 Compose 를 이용한 Desktop 앱 개발</string>
     <string name="career_neurosky_desc"> - 실시간 EEG 통신 서비스 개발\n - Bluetooth를 이용한 실시간 뇌파 측정 헤드셋 데이터 시각화\n - Compose 와 MediaRecorder 를 이용한 게이미피케이션 및 녹화 기능 개발</string>
 
-    <string name="club_class">%1$d기</string>
+    <string name="club_year">%1$d기</string>
     <string name="club_swm">SW마에스트로</string>
     <string name="club_yapp">YAPP</string>
     <string name="club_dpm">디프만</string>
     <string name="club_nexters">넥스터즈</string>
 
+    <string name="side_alreadyme">ALREADYME.md</string>
+    <string name="side_coverist">커버리스트</string>
+    <string name="side_droidknights2023">드로이드나이츠2023</string>
+    <string name="side_enphago">엔파고</string>
+    <string name="side_goorlemap">구를지도</string>
+    <string name="side_jsgame">JS 미니게임천국</string>
+    <string name="side_knowlly">널리</string>
+    <string name="side_kwdorm">KW 기숙사</string>
+    <string name="side_kwnoti">KW 알리미</string>
+    <string name="side_kwpass">KW 패스</string>
+    <string name="side_loco">LOCO AI</string>
+    <string name="side_mbtmi">MBTMI</string>
+    <string name="side_missing">실종아동찾기</string>
+    <string name="side_moime">모이미</string>
+    <string name="side_neuro">뉴로스카이</string>
+    <string name="side_pimo">피모</string>
+    <string name="side_ssoda">쏘다</string>
+    <string name="side_whatnow">왔나</string>
 
+    <string name="experience_for">Experiences for...</string>
+    <string name="experience_development">Development</string>
+    <string name="experience_mentor">Mentor</string>
+    <string name="experience_global">Global</string>
+    <string name="experience_awards">Honors and Awards</string>
+    <string name="experience_certificates">Certificates</string>
+    <string name="side_project_lover">...and I'm a lover of side projects!</string>
+
+    <string name="mentor_sw_meister_high_school">SW마이스터고 연합해커톤 기술 멘토</string>
+    <string name="mentor_sw_meister_high_school_date">2022.10</string>
+    <string name="mentor_woongjin_game_challenge">웅진씽크빅 게임 개발 챌린지 리뷰어</string>
+    <string name="mentor_woongjin_game_challenge_date">2022.09 2023.09</string>
+    <string name="mentor_kusitms">한국대학생IT경영학회 KUSITMS 밋업데이 심사위원</string>
+    <string name="mentor_kusitms_date">2024.05 2024.11</string>
+
+    <string name="global_neurosky">U.S. 캘리포니아 실리콘밸리 소재 기업 해외 인턴십</string>
+    <string name="global_neurosky_date">2022.08 ~ 2022.12</string>
+    <string name="global_san_jose_univ">U.S. San Jose State University 연계 프로젝트 수행</string>
+    <string name="global_san_jose_univ_date">2022.07 ~ 2022.08</string>
+
+    <string name="achievements">Achievements</string>
+
+    <string name="awards_oss_contest">공개SW 개발자 대회</string>
+    <string name="awards_oss_contest_prize">금상</string>
+    <string name="awards_oss_contest_year">2022</string>
+    <string name="awards_sw_univ_hackathon">SW중심대학 공동 해커톤</string>
+    <string name="awards_sw_univ_hackathon_prize">우수상</string>
+    <string name="awards_sw_univ_hackathon_year">2022</string>
+    <string name="awards_cau_campus_town">중앙대학교 캠퍼스타운 창업경진대회</string>
+    <string name="awards_cau_campus_town_prize">대상</string>
+    <string name="awards_cau_campus_town_year">2022</string>
+    <string name="awards_swm_hackathon">SW마에스트로 12기 해커톤</string>
+    <string name="awards_swm_hackathon_prize">최우수상</string>
+    <string name="awards_swm_hackathon_year">2021</string>
+    <string name="awards_kw_univ_ai">광운대학교 AI 아이디어 공모전</string>
+    <string name="awards_kw_univ_ai_prize">우수상</string>
+    <string name="awards_kw_univ_ai_year">2018</string>
+
+    <string name="certificates_topcit">TOPCIT</string>
+    <string name="certificates_topcit_level">Level 3</string>
+    <string name="certificates_topcit_year">2021</string>
+    <string name="certificates_aws_csa">AWS Certified Solutions Architect</string>
+    <string name="certificates_aws_csa_level">Associate</string>
+    <string name="certificates_aws_csa_year">2021</string>
 </resources>
