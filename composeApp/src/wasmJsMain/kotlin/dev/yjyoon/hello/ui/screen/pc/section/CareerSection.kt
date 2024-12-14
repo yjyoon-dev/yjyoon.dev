@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.component.LogoButton
 import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.component.Stepper
@@ -90,7 +91,8 @@ private fun CareerStep(
             LogoButton(
                 logoRes = career.logoRes,
                 url = career.url,
-                size = CAREER_LOGO_SIZE
+                size = CAREER_LOGO_SIZE,
+                theme = LocalThemeMode.current
             )
             Spacer(Modifier.height(12.dp))
             Text(

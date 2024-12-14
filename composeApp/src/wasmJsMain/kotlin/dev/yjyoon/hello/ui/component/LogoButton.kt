@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,7 +22,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.theme.KotlinLightGray
 import org.jetbrains.compose.resources.DrawableResource
@@ -32,21 +32,23 @@ fun LogoButton(
     logoRes: DrawableResource,
     url: String,
     size: Dp,
-    modifier: Modifier = Modifier
+    theme: ThemeMode,
+    modifier: Modifier = Modifier,
+    cornerRadius: Dp = 32.dp,
+    contentPadding: PaddingValues = PaddingValues(12.dp)
 ) {
-    val themeMode = LocalThemeMode.current
     val uriHandler = LocalUriHandler.current
 
-    if (themeMode == ThemeMode.Light) {
+    if (theme == ThemeMode.Light) {
         Surface(
-            shape = RoundedCornerShape(32.dp),
+            shape = RoundedCornerShape(cornerRadius),
             color = MaterialTheme.colorScheme.background,
             modifier = modifier.then(
                 Modifier
                     .size(size)
                     .shadow(
                         elevation = 24.dp,
-                        shape = RoundedCornerShape(32.dp),
+                        shape = RoundedCornerShape(cornerRadius),
                         clip = false,
                         ambientColor = KotlinLightGray.copy(0.01f),
                         spotColor = KotlinLightGray.copy(0.01f)
@@ -57,7 +59,7 @@ fun LogoButton(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(color = MaterialTheme.colorScheme.background)
-                    .clip(RoundedCornerShape(32.dp))
+                    .clip(RoundedCornerShape(cornerRadius))
                     .clickable { uriHandler.openUri(url) },
                 contentAlignment = Alignment.Center
             ) {
@@ -65,14 +67,14 @@ fun LogoButton(
                     painter = painterResource(logoRes),
                     contentDescription = null,
                     contentScale = ContentScale.Fit,
-                    modifier = Modifier.padding(12.dp)
+                    modifier = Modifier.padding(contentPadding)
                 )
             }
         }
     } else {
         Card(
             onClick = { uriHandler.openUri(url) },
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(cornerRadius),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
             colors = CardDefaults.outlinedCardColors(
                 containerColor = MaterialTheme.colorScheme.surface,
@@ -88,7 +90,7 @@ fun LogoButton(
                     painter = painterResource(logoRes),
                     contentDescription = null,
                     contentScale = ContentScale.Fit,
-                    modifier = Modifier.padding(12.dp)
+                    modifier = Modifier.padding(contentPadding)
                 )
             }
         }
