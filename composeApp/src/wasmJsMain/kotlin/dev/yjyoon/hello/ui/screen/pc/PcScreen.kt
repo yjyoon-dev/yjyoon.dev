@@ -15,6 +15,7 @@ import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.screen.pc.section.AboutSection
 import dev.yjyoon.hello.ui.screen.pc.section.CareerSection
 import dev.yjyoon.hello.ui.screen.pc.section.ExperienceSection
+import dev.yjyoon.hello.ui.screen.pc.section.FooterSection
 import dev.yjyoon.hello.ui.screen.pc.section.HomeSection
 import kotlinx.coroutines.launch
 
@@ -52,6 +53,7 @@ fun PcScreen(
             item { AboutSection() }
             item { CareerSection() }
             item { ExperienceSection() }
+            item { FooterSection() }
         }
     }
 }
