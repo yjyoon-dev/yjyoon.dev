@@ -171,21 +171,20 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
                 stringResource(Res.string.side_project_lover),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold,
-                fontSize = 32.sp,
+                fontSize = 36.sp,
                 textAlign = TextAlign.Center
             )
         }
-        Spacer(Modifier.height(36.dp))
-        LazyRow(
-            state = listState,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(List(100) { SideProject.entries }.flatten()) { sideProject ->
-                AppButton(
-                    sideProject = sideProject,
-                    size = 92.dp
-                )
-            }
+    }
+    LazyRow(
+        state = listState,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        items(List(100) { SideProject.entries }.flatten()) { sideProject ->
+            AppButton(
+                sideProject = sideProject,
+                size = 92.dp
+            )
         }
     }
 }
