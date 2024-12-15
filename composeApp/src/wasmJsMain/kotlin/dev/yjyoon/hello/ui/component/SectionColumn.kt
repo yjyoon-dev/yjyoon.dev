@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -21,14 +22,18 @@ import dev.yjyoon.hello.ui.theme.KotlinTheme
 @Composable
 fun SectionColumn(
     modifier: Modifier = Modifier,
-    reverseTheme: Boolean = false,
+    inverseTheme: Boolean = false,
     horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
+    contentPadding: PaddingValues = PaddingValues(
+        horizontal = CONTENT_HORIZONTAL_PADDING.dp,
+        vertical = 72.dp
+    ),
     content: @Composable ColumnScope.() -> Unit
 ) {
     val themeMode = LocalThemeMode.current
 
     KotlinTheme(
-        isDarkTheme = if (reverseTheme) themeMode != ThemeMode.Dark else themeMode == ThemeMode.Dark
+        isDarkTheme = if (inverseTheme) themeMode != ThemeMode.Dark else themeMode == ThemeMode.Dark
     ) {
         Box(
             modifier = modifier.then(
@@ -41,10 +46,7 @@ fun SectionColumn(
             Column(
                 modifier = Modifier
                     .width(CONTENT_WIDTH.dp)
-                    .padding(
-                        horizontal = CONTENT_HORIZONTAL_PADDING.dp,
-                        vertical = 72.dp
-                    ),
+                    .padding(contentPadding),
                 horizontalAlignment = horizontalAlignment,
                 content = content
             )

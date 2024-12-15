@@ -1,5 +1,7 @@
 package dev.yjyoon.hello.ui.screen.pc.section
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
@@ -33,6 +36,7 @@ import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.component.CenteredImage
 import dev.yjyoon.hello.ui.component.SectionColumn
+import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Skill
 import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
 import dev.yjyoon.hello.ui.theme.KotlinDarkGray
@@ -45,45 +49,71 @@ import yjyoondev.composeapp.generated.resources.section_about
 
 @Composable
 fun AboutSection(modifier: Modifier = Modifier) {
+    val visibleState = remember {
+        MutableTransitionState(false).apply {
+            targetState = true
+        }
+    }
+
     SectionColumn(
         modifier = modifier,
-        reverseTheme = true
+        inverseTheme = true
     ) {
-        Text(
-            stringResource(Res.string.section_about),
-            color = MaterialTheme.colorScheme.onBackground,
-            fontWeight = FontWeight.ExtraBold,
-            fontSize = 36.sp,
-            textAlign = TextAlign.Center
-        )
-        Spacer(Modifier.height(36.dp))
-        Text(
-            stringResource(Res.string.about_me),
-            color = MaterialTheme.colorScheme.onBackground,
-            fontSize = 16.sp,
-            textAlign = TextAlign.Center,
-            lineHeight = 28.sp,
-            modifier = Modifier.padding(horizontal = (CONTENT_HORIZONTAL_PADDING / 2).dp)
-        )
-        Spacer(Modifier.height(72.dp))
-        Text(
-            stringResource(Res.string.favorites),
-            color = MaterialTheme.colorScheme.onBackground,
-            fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
-            textAlign = TextAlign.Center
-        )
-        Spacer(Modifier.height(36.dp))
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(4),
-            contentPadding = PaddingValues(4.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.width(720.dp).height(360.dp)
-
+        AnimatedVisibility(
+            visibleState = visibleState,
+            enter = defaultEnterAnim(),
+            modifier = Modifier.padding(bottom = 36.dp)
         ) {
-            items(Skill.entries) {
-                SkillCard(it, modifier = Modifier.weight(1f))
+            Text(
+                stringResource(Res.string.section_about),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 36.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+        AnimatedVisibility(
+            visibleState = visibleState,
+            enter = defaultEnterAnim(delayMillis = 400),
+            modifier = Modifier.padding(bottom = 72.dp)
+        ) {
+            Text(
+                stringResource(Res.string.about_me),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center,
+                lineHeight = 28.sp,
+                modifier = Modifier.padding(horizontal = (CONTENT_HORIZONTAL_PADDING / 2).dp)
+            )
+        }
+        AnimatedVisibility(
+            visibleState = visibleState,
+            enter = defaultEnterAnim(delayMillis = 800),
+            modifier = Modifier.padding(bottom = 36.dp)
+        ) {
+            Text(
+                stringResource(Res.string.favorites),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+        AnimatedVisibility(
+            visibleState = visibleState,
+            enter = defaultEnterAnim(delayMillis = 1200)
+        ) {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(4),
+                contentPadding = PaddingValues(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.width(720.dp).height(360.dp)
+
+            ) {
+                items(Skill.entries) {
+                    SkillCard(it, modifier = Modifier.weight(1f))
+                }
             }
         }
     }

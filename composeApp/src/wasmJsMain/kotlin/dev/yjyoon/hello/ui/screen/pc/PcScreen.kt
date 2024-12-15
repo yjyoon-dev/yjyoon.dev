@@ -17,6 +17,7 @@ import dev.yjyoon.hello.ui.screen.pc.section.CareerSection
 import dev.yjyoon.hello.ui.screen.pc.section.ExperienceSection
 import dev.yjyoon.hello.ui.screen.pc.section.FooterSection
 import dev.yjyoon.hello.ui.screen.pc.section.HomeSection
+import dev.yjyoon.hello.ui.screen.pc.section.SideProjectSection
 import kotlinx.coroutines.launch
 
 @Composable
@@ -53,6 +54,7 @@ fun PcScreen(
             item { AboutSection() }
             item { CareerSection() }
             item { ExperienceSection() }
+            item { SideProjectSection() }
             item { FooterSection() }
         }
     }

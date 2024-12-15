@@ -1,5 +1,8 @@
 package dev.yjyoon.hello.ui.screen.pc.section
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -21,6 +25,7 @@ import dev.yjyoon.hello.ui.component.LogoButton
 import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.component.Stepper
 import dev.yjyoon.hello.ui.component.TagText
+import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Career
 import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
 import org.jetbrains.compose.resources.stringResource
@@ -29,28 +34,44 @@ import yjyoondev.composeapp.generated.resources.section_career
 
 @Composable
 fun CareerSection(modifier: Modifier = Modifier) {
+    val visibleState = remember {
+        MutableTransitionState(false).apply {
+            targetState = true
+        }
+    }
+
     SectionColumn(
         modifier = modifier
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
+        AnimatedVisibility(
+            visibleState = visibleState,
+            enter = defaultEnterAnim(orientation = Orientation.Horizontal, inverseSlide = true),
+            modifier = Modifier.padding(bottom = 48.dp)
         ) {
-            Text(
-                stringResource(Res.string.section_career),
-                color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 36.sp
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Text(
+                    stringResource(Res.string.section_career),
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 36.sp
+                )
+            }
         }
-        Spacer(Modifier.height(48.dp))
         Column(modifier = Modifier.width((CONTENT_WIDTH / 2).dp)) {
             Career.entries.forEachIndexed { index, career ->
-                CareerStep(
-                    career = career,
-                    isFirst = index == 0,
-                    isLast = index == Career.entries.lastIndex
-                )
+                AnimatedVisibility(
+                    visibleState = visibleState,
+                    enter = defaultEnterAnim(delayMillis = (index + 1) * 300)
+                ) {
+                    CareerStep(
+                        career = career,
+                        isFirst = index == 0,
+                        isLast = index == Career.entries.lastIndex
+                    )
+                }
             }
         }
     }
