@@ -99,7 +99,7 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
             columns = GridCells.Fixed(2),
             modifier = Modifier.height(172.dp),
             horizontalArrangement = Arrangement.Center,
-            verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically)
+            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
         ) {
             items(Club.entries) {
                 ClubListItem(club = it, modifier = Modifier.weight(1f))

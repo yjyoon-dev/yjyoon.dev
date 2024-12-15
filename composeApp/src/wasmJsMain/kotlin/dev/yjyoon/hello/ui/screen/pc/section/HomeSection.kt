@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -20,13 +22,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.yjyoon.hello.ui.LocalScreenSize
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
@@ -48,7 +50,6 @@ import yjyoondev.composeapp.generated.resources.yjyoon
 fun HomeSection(
     modifier: Modifier = Modifier
 ) {
-    val screenSize = LocalScreenSize.current
     val themeMode = LocalThemeMode.current
     val defaultTextColor = MaterialTheme.colorScheme.onBackground
     val greetingString = buildAnnotatedString {
@@ -67,6 +68,7 @@ fun HomeSection(
             withStyle(SpanStyle(color = defaultTextColor)) {
                 append(stringResource(Res.string.i_am))
             }
+            append("\n")
             withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary)) {
                 append(stringResource(Res.string.yjyoon))
             }
@@ -78,16 +80,22 @@ fun HomeSection(
                 .background(color = MaterialTheme.colorScheme.background)
                 .padding(
                     start = CONTENT_HORIZONTAL_PADDING.dp,
-                    end = (CONTENT_HORIZONTAL_PADDING / 2).dp
+                    end = CONTENT_HORIZONTAL_PADDING.dp / 2
                 )
                 .width(CONTENT_WIDTH.dp)
         )
     ) {
+        GraphicImage(
+            themeMode = themeMode,
+            modifier = Modifier
+                .fillMaxHeight()
+                .align(Alignment.BottomEnd)
+        )
         Column(
             modifier = Modifier
                 .width((CONTENT_WIDTH * 2 / 3).dp)
                 .align(Alignment.BottomStart)
-                .padding(vertical = 72.dp),
+                .padding(vertical = 36.dp),
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(greetingString, lineHeight = 92.sp)
@@ -98,7 +106,7 @@ fun HomeSection(
                 fontSize = 16.sp,
                 lineHeight = 24.sp
             )
-            Spacer(Modifier.height(56.dp))
+            Spacer(Modifier.height(36.dp))
             Row {
                 Button(
                     onClick = {},
@@ -121,6 +129,9 @@ fun HomeSection(
                 OutlinedButton(
                     onClick = {},
                     modifier = Modifier.height(56.dp),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        containerColor = MaterialTheme.colorScheme.background
+                    ),
                     contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp)
                 ) {
                     Text(
@@ -132,12 +143,6 @@ fun HomeSection(
                 }
             }
         }
-        GraphicImage(
-            themeMode = themeMode,
-            modifier = Modifier
-                .width((screenSize.width / 2).coerceAtMost(CONTENT_WIDTH * 3 / 5).dp)
-                .align(Alignment.BottomEnd)
-        )
     }
 }
 
@@ -153,6 +158,7 @@ private fun GraphicImage(
     Image(
         painter = painterResource(graphicRes),
         contentDescription = null,
+        contentScale = ContentScale.FillHeight,
         modifier = modifier
     )
 }

@@ -12,12 +12,12 @@
     <string name="hi">Hi</string>
     <string name="i_am">I am </string>
     <string name="yjyoon">Yeojun Yoon</string>
-    <string name="intro">Software engineer and junior android developer at NAVER. Specialize in\nmobile application development for android using Kotlin.</string>
+    <string name="intro">Software Engineer &amp; Junior Android Developer specialized in\nmobile application development for Android using Kotlin.</string>
 
     <string name="get_in_touch">Get in touch</string>
     <string name="download_cv">Download CV</string>
 
-    <string name="about_me">아직 1년 차밖에 되지 않은 주니어 안드로이드 개발자입니다. 내가 좋아하는 것, 나에게 필요한 것을 직접 만들 수 있다는 매력을 느껴 개발을 시작하게 되었고 그 중 우리에게 가장 가까이 있는 모바일 플랫폼에 푹 빠지게 되었습니다. 지금까지 20개가 넘는 팀 또는 개인 사이드 프로젝트에 참여하였으며, 현재는 네이버에서 안드로이드 개발자로 근무하고 있습니다. 최근에는 Kotlin Multiplatform 에 관심이 많아, 이 페이지 또한 Kotlin/Wasm 과 Compose Multiplatform 을 이용해 개발하게 되었습니다.</string>
+    <string name="about_me">이제 막 2년 차에 접어든 주니어 안드로이드 개발자입니다. 내가 좋아하는 것, 나에게 필요한 것을 직접 만들 수 있다는 매력을 느껴 개발을 시작하게 되었고 그 중 우리에게 가장 가까이 있는 모바일 플랫폼에 푹 빠지게 되었습니다. 지금까지 20개가 넘는 팀 또는 개인 사이드 프로젝트에 참여하였으며, 현재는 네이버에서 안드로이드 개발자로 근무하고 있습니다. 최근에는 Kotlin Multiplatform 에 관심이 많아, 이 페이지 또한 Kotlin/Wasm 과 Compose Multiplatform 을 이용해 개발하게 되었습니다.</string>
 
     <string name="favorites">Favorites</string>
     <string name="kotlin">Kotlin</string>
@@ -71,7 +71,7 @@
     <string name="experience_global">Global</string>
     <string name="experience_awards">Honors and Awards</string>
     <string name="experience_certificates">Certificates</string>
-    <string name="side_project_lover">...and I'm a lover of side projects!</string>
+    <string name="side_project_lover">...and I love enjoying side projects!</string>
 
     <string name="mentor_sw_meister_high_school">SW마이스터고 연합해커톤 기술 멘토</string>
     <string name="mentor_sw_meister_high_school_date">2022.10</string>

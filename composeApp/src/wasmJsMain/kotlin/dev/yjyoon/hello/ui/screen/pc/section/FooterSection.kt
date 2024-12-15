@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.model.Contact
 import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
 import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
-import dev.yjyoon.hello.ui.theme.KotlinDarkGray
+import dev.yjyoon.hello.ui.theme.KotlinGray
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
@@ -37,7 +37,7 @@ fun FooterSection(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.then(
             Modifier
-                .background(color = KotlinDarkGray)
+                .background(color = KotlinGray)
                 .fillMaxWidth()
         ),
         contentAlignment = Alignment.Center
@@ -47,13 +47,13 @@ fun FooterSection(modifier: Modifier = Modifier) {
                 .width(CONTENT_WIDTH.dp)
                 .padding(
                     horizontal = CONTENT_HORIZONTAL_PADDING.dp,
-                    vertical = 36.dp
+                    vertical = 48.dp
                 ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 stringResource(Res.string.section_contact),
-                color = Color.White.copy(0.15f),
+                color = Color.White.copy(0.4f),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Medium
             )
@@ -68,7 +68,7 @@ fun FooterSection(modifier: Modifier = Modifier) {
             Spacer(Modifier.height(16.dp))
             Text(
                 stringResource(Res.string.copyright),
-                color = Color.White.copy(0.15f),
+                color = Color.White.copy(0.2f),
                 fontSize = 16.sp
             )
         }
@@ -89,7 +89,7 @@ private fun ContactButton(
         Icon(
             painterResource(contact.iconRes),
             contentDescription = contact.name,
-            tint = Color.White.copy(0.15f),
+            tint = Color.White.copy(0.3f),
             modifier = Modifier.size(36.dp)
         )
     }
