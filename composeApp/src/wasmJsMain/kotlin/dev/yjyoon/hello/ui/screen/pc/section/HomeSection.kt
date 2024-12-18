@@ -2,6 +2,8 @@ package dev.yjyoon.hello.ui.screen.pc.section
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
@@ -11,7 +13,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -26,13 +27,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.yjyoon.hello.ui.LocalScreenSize
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
@@ -41,14 +46,17 @@ import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
-import yjyoondev.composeapp.generated.resources.download_cv
-import yjyoondev.composeapp.generated.resources.get_in_touch
+import yjyoondev.composeapp.generated.resources.follow_github
 import yjyoondev.composeapp.generated.resources.hi
 import yjyoondev.composeapp.generated.resources.i_am
+import yjyoondev.composeapp.generated.resources.ic_github
 import yjyoondev.composeapp.generated.resources.ic_open_in_new
 import yjyoondev.composeapp.generated.resources.img_graphic_dark
+import yjyoondev.composeapp.generated.resources.img_graphic_dark_large
 import yjyoondev.composeapp.generated.resources.img_graphic_light
+import yjyoondev.composeapp.generated.resources.img_graphic_light_large
 import yjyoondev.composeapp.generated.resources.intro
+import yjyoondev.composeapp.generated.resources.visit_blog
 import yjyoondev.composeapp.generated.resources.yjyoon
 
 @Composable
@@ -56,6 +64,9 @@ fun HomeSection(
     modifier: Modifier = Modifier
 ) {
     val themeMode = LocalThemeMode.current
+    val uriHandler = LocalUriHandler.current
+    val screenSize = LocalScreenSize.current
+
     val defaultTextColor = MaterialTheme.colorScheme.onBackground
     val greetingString = buildAnnotatedString {
         withStyle(
@@ -86,6 +97,11 @@ fun HomeSection(
         }
     }
 
+    val introTextAnimatedAlpha = animateFloatAsState(
+        if (screenSize.width >= SHOW_INTRO_TEXT_WIDTH_THRESHOLD) 1f else 0f,
+        animationSpec = tween(durationMillis = 1000)
+    )
+
     Box(
         modifier = modifier.then(
             Modifier
@@ -105,7 +121,7 @@ fun HomeSection(
         ) {
             GraphicImage(
                 themeMode = themeMode,
-                modifier = Modifier.fillMaxHeight()
+                modifier = Modifier.height(CONTENT_WIDTH.dp / 2.5f)
             )
         }
         Column(
@@ -131,7 +147,8 @@ fun HomeSection(
                     text = stringResource(Res.string.intro),
                     color = defaultTextColor.copy(alpha = 0.5f),
                     fontSize = 16.sp,
-                    lineHeight = 24.sp
+                    lineHeight = 24.sp,
+                    modifier = Modifier.alpha(introTextAnimatedAlpha.value)
                 )
             }
             AnimatedVisibility(
@@ -144,36 +161,42 @@ fun HomeSection(
             ) {
                 Row {
                     Button(
-                        onClick = {},
+                        onClick = { uriHandler.openUri("https://github.com/yjyoon-dev") },
                         modifier = Modifier.height(56.dp),
                         contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp)
                     ) {
                         Text(
-                            text = stringResource(Res.string.get_in_touch),
+                            text = stringResource(Res.string.follow_github),
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 16.sp
                         )
-                        Spacer(Modifier.width(4.dp))
+                        Spacer(Modifier.width(8.dp))
                         Icon(
-                            painterResource(Res.drawable.ic_open_in_new),
+                            painterResource(Res.drawable.ic_github),
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )
                     }
                     Spacer(Modifier.width(8.dp))
                     OutlinedButton(
-                        onClick = {},
+                        onClick = { uriHandler.openUri("http://blog.yjyoon.dev") },
                         modifier = Modifier.height(56.dp),
                         colors = ButtonDefaults.outlinedButtonColors(
-                            containerColor = MaterialTheme.colorScheme.background
+                            containerColor = MaterialTheme.colorScheme.background,
+                            contentColor = MaterialTheme.colorScheme.onBackground
                         ),
                         contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp)
                     ) {
                         Text(
-                            text = stringResource(Res.string.download_cv),
+                            text = stringResource(Res.string.visit_blog),
                             fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colorScheme.onBackground,
                             fontSize = 16.sp
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Icon(
+                            painterResource(Res.drawable.ic_open_in_new),
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp)
                         )
                     }
                 }
@@ -187,9 +210,20 @@ private fun GraphicImage(
     themeMode: ThemeMode,
     modifier: Modifier = Modifier
 ) {
+    val density = LocalDensity.current
+    val isLarge = with(density) { CONTENT_WIDTH.dp.toPx() >= 1920f }
     val graphicRes = when (themeMode) {
-        ThemeMode.Light -> Res.drawable.img_graphic_light
-        ThemeMode.Dark -> Res.drawable.img_graphic_dark
+        ThemeMode.Light -> if (isLarge) {
+            Res.drawable.img_graphic_light_large
+        } else {
+            Res.drawable.img_graphic_light
+        }
+
+        ThemeMode.Dark -> if (isLarge) {
+            Res.drawable.img_graphic_dark_large
+        } else {
+            Res.drawable.img_graphic_dark
+        }
     }
     Image(
         painter = painterResource(graphicRes),
@@ -198,3 +232,5 @@ private fun GraphicImage(
         modifier = modifier
     )
 }
+
+private const val SHOW_INTRO_TEXT_WIDTH_THRESHOLD = 1330
