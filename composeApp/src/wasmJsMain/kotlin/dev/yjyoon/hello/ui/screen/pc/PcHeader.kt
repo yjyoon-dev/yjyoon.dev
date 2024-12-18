@@ -61,7 +61,7 @@ fun PcHeader(
                     ) {
                         Text(
                             text = stringResource(it.title),
-                            color = MaterialTheme.colorScheme.onBackground,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
                             fontSize = 15.sp
                         )
                     }

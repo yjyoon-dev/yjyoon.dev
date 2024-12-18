@@ -22,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.theme.KotlinLightGray
 import org.jetbrains.compose.resources.DrawableResource
@@ -32,17 +33,18 @@ fun LogoButton(
     logoRes: DrawableResource,
     url: String,
     size: Dp,
-    theme: ThemeMode,
     modifier: Modifier = Modifier,
     cornerRadius: Dp = 32.dp,
-    contentPadding: PaddingValues = PaddingValues(12.dp)
+    contentPadding: PaddingValues = PaddingValues(12.dp),
+    forceDarkTheme: Boolean = false
 ) {
+    val themeMode = LocalThemeMode.current
     val uriHandler = LocalUriHandler.current
 
-    if (theme == ThemeMode.Light) {
+    if (themeMode == ThemeMode.Light && forceDarkTheme.not()) {
         Surface(
             shape = RoundedCornerShape(cornerRadius),
-            color = MaterialTheme.colorScheme.background,
+            color = MaterialTheme.colorScheme.primaryContainer,
             modifier = modifier.then(
                 Modifier
                     .size(size)
@@ -58,7 +60,7 @@ fun LogoButton(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = MaterialTheme.colorScheme.background)
+                    .background(color = MaterialTheme.colorScheme.primaryContainer)
                     .clip(RoundedCornerShape(cornerRadius))
                     .clickable { uriHandler.openUri(url) },
                 contentAlignment = Alignment.Center
@@ -77,8 +79,8 @@ fun LogoButton(
             shape = RoundedCornerShape(cornerRadius),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
             colors = CardDefaults.outlinedCardColors(
-                containerColor = MaterialTheme.colorScheme.surface,
-                contentColor = MaterialTheme.colorScheme.onSurface
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer
             ),
             modifier = modifier.then(Modifier.size(size))
         ) {

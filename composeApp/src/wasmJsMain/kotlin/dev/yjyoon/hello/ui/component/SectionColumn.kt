@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
@@ -22,7 +23,7 @@ import dev.yjyoon.hello.ui.theme.KotlinTheme
 @Composable
 fun SectionColumn(
     modifier: Modifier = Modifier,
-    inverseTheme: Boolean = false,
+    backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
     horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
     contentPadding: PaddingValues = PaddingValues(
         horizontal = CONTENT_HORIZONTAL_PADDING.dp,
@@ -30,15 +31,13 @@ fun SectionColumn(
     ),
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val themeMode = LocalThemeMode.current
-
     KotlinTheme(
-        isDarkTheme = if (inverseTheme) themeMode != ThemeMode.Dark else themeMode == ThemeMode.Dark
+        isDarkTheme = LocalThemeMode.current == ThemeMode.Dark
     ) {
         Box(
             modifier = modifier.then(
                 Modifier
-                    .background(color = MaterialTheme.colorScheme.background)
+                    .background(color = backgroundColor)
                     .fillMaxWidth()
             ),
             contentAlignment = Alignment.Center

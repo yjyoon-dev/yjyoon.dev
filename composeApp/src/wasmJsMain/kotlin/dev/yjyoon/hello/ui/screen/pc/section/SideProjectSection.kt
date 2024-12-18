@@ -70,7 +70,7 @@ fun SideProjectSection(modifier: Modifier = Modifier) {
         ) {
             Text(
                 stringResource(Res.string.side_project_lover),
-                color = MaterialTheme.colorScheme.onBackground,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
                 fontWeight = FontWeight.Bold,
                 fontSize = 36.sp,
                 textAlign = TextAlign.Center

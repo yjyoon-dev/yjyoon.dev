@@ -2,7 +2,6 @@ package dev.yjyoon.hello.ui.screen.pc.section
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,9 +17,9 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -29,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.LocalThemeMode
@@ -39,8 +37,6 @@ import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Skill
 import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
-import dev.yjyoon.hello.ui.theme.KotlinDarkGray
-import dev.yjyoon.hello.ui.theme.KotlinLightGray
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.about_me
@@ -57,7 +53,7 @@ fun AboutSection(modifier: Modifier = Modifier) {
 
     SectionColumn(
         modifier = modifier,
-        inverseTheme = true
+        backgroundColor = MaterialTheme.colorScheme.secondaryContainer
     ) {
         AnimatedVisibility(
             visibleState = visibleState,
@@ -66,7 +62,7 @@ fun AboutSection(modifier: Modifier = Modifier) {
         ) {
             Text(
                 stringResource(Res.string.section_about),
-                color = MaterialTheme.colorScheme.onBackground,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 36.sp,
                 textAlign = TextAlign.Center
@@ -79,7 +75,7 @@ fun AboutSection(modifier: Modifier = Modifier) {
         ) {
             Text(
                 stringResource(Res.string.about_me),
-                color = MaterialTheme.colorScheme.onBackground,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center,
                 lineHeight = 28.sp,
@@ -93,7 +89,7 @@ fun AboutSection(modifier: Modifier = Modifier) {
         ) {
             Text(
                 stringResource(Res.string.favorites),
-                color = MaterialTheme.colorScheme.onBackground,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center
@@ -127,7 +123,7 @@ private fun SkillCard(
     val themeMode = LocalThemeMode.current
     val uriHandler = LocalUriHandler.current
 
-    OutlinedCard(
+    Card(
         onClick = { uriHandler.openUri(skill.url) },
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(
@@ -136,10 +132,6 @@ private fun SkillCard(
         colors = CardDefaults.outlinedCardColors(
             containerColor = MaterialTheme.colorScheme.surface,
             contentColor = MaterialTheme.colorScheme.onSurface
-        ),
-        border = BorderStroke(
-            width = if (themeMode == ThemeMode.Light) 0.dp else Dp.Hairline,
-            color = if (themeMode == ThemeMode.Light) KotlinDarkGray else KotlinLightGray
         ),
         modifier = modifier.then(Modifier.aspectRatio(1f))
     ) {

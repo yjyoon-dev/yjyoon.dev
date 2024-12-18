@@ -54,7 +54,7 @@ fun CareerSection(modifier: Modifier = Modifier) {
             ) {
                 Text(
                     stringResource(Res.string.section_career),
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 36.sp
                 )
@@ -84,6 +84,8 @@ private fun CareerStep(
     isLast: Boolean,
     modifier: Modifier = Modifier
 ) {
+    val themeMode = LocalThemeMode.current
+
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.Top
@@ -112,26 +114,25 @@ private fun CareerStep(
             LogoButton(
                 logoRes = career.logoRes,
                 url = career.url,
-                size = CAREER_LOGO_SIZE,
-                theme = LocalThemeMode.current
+                size = CAREER_LOGO_SIZE
             )
             Spacer(Modifier.height(12.dp))
             Text(
                 text = stringResource(career.positionRes),
-                color = MaterialTheme.colorScheme.onBackground.copy(0.75f),
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(0.75f),
                 fontWeight = FontWeight.Medium,
                 fontSize = 20.sp
             )
             Spacer(Modifier.height(4.dp))
             Text(
                 text = stringResource(career.teamRes),
-                color = MaterialTheme.colorScheme.onBackground.copy(0.8f),
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(0.8f),
                 fontWeight = FontWeight.Medium,
                 fontSize = 15.sp
             )
             Text(
                 text = stringResource(career.descriptionRes),
-                color = MaterialTheme.colorScheme.onBackground.copy(0.8f),
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(0.8f),
                 fontWeight = FontWeight.Normal,
                 fontSize = 15.sp
             )

@@ -11,13 +11,15 @@ val lightColorTheme = lightColorScheme(
     onPrimary = KotlinWhite,
     primaryContainer = KotlinWhite,
     onPrimaryContainer = KotlinDarkGray,
+    secondaryContainer = KotlinDarkGray,
+    onSecondaryContainer = KotlinWhite,
     surfaceVariant = KotlinWhite,
     secondary = KotlinRed,
     onSecondary = KotlinWhite,
     background = KotlinWhite,
     onBackground = KotlinDarkGray,
-    surface = KotlinWhite,
-    onSurface = KotlinDarkGray
+    surface = KotlinGray,
+    onSurface = KotlinWhite
 )
 
 val darkColorTheme = darkColorScheme(
@@ -25,12 +27,14 @@ val darkColorTheme = darkColorScheme(
     onPrimary = KotlinWhite,
     primaryContainer = KotlinDarkGray,
     onPrimaryContainer = KotlinWhite,
+    secondaryContainer = KotlinGray,
+    onSecondaryContainer = KotlinWhite,
     surfaceVariant = KotlinGray,
     secondary = KotlinRed,
     onSecondary = KotlinWhite,
     background = KotlinDarkGray,
     onBackground = KotlinWhite,
-    surface = KotlinGray,
+    surface = KotlinDarkGray,
     onSurface = KotlinWhite
 )
 

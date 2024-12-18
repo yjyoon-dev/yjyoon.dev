@@ -67,7 +67,7 @@ fun HomeSection(
     val uriHandler = LocalUriHandler.current
     val screenSize = LocalScreenSize.current
 
-    val defaultTextColor = MaterialTheme.colorScheme.onBackground
+    val defaultTextColor = MaterialTheme.colorScheme.onPrimaryContainer
     val greetingString = buildAnnotatedString {
         withStyle(
             SpanStyle(
@@ -105,7 +105,7 @@ fun HomeSection(
     Box(
         modifier = modifier.then(
             Modifier
-                .background(color = MaterialTheme.colorScheme.background)
+                .background(color = MaterialTheme.colorScheme.primaryContainer)
                 .padding(
                     start = CONTENT_HORIZONTAL_PADDING.dp,
                     end = CONTENT_HORIZONTAL_PADDING.dp / 2
@@ -182,8 +182,8 @@ fun HomeSection(
                         onClick = { uriHandler.openUri("http://blog.yjyoon.dev") },
                         modifier = Modifier.height(56.dp),
                         colors = ButtonDefaults.outlinedButtonColors(
-                            containerColor = MaterialTheme.colorScheme.background,
-                            contentColor = MaterialTheme.colorScheme.onBackground
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                         ),
                         contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp)
                     ) {

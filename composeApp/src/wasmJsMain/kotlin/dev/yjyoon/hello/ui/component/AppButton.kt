@@ -48,7 +48,7 @@ fun AppButton(
 
     Surface(
         shape = RoundedCornerShape(cornerRadius),
-        color = MaterialTheme.colorScheme.background,
+        color = MaterialTheme.colorScheme.primaryContainer,
         modifier = modifier.then(
             Modifier
                 .size(size)
@@ -65,7 +65,7 @@ fun AppButton(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = MaterialTheme.colorScheme.background)
+                .background(color = MaterialTheme.colorScheme.primaryContainer)
                 .clip(RoundedCornerShape(cornerRadius))
                 .clickable { sideProject.url?.let { uriHandler.openUri(it) } },
             contentAlignment = Alignment.Center

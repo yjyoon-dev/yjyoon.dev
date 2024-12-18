@@ -45,7 +45,7 @@ fun PcScreen(
             modifier = modifier.then(
                 Modifier
                     .padding(innerPadding)
-                    .background(color = MaterialTheme.colorScheme.background)
+                    .background(color = MaterialTheme.colorScheme.primaryContainer)
                     .fillMaxSize()
             ),
             horizontalAlignment = Alignment.CenterHorizontally
