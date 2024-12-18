@@ -3,6 +3,7 @@ package dev.yjyoon.hello.ui.screen.pc.section
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
@@ -38,6 +39,10 @@ fun SideProjectSection(modifier: Modifier = Modifier) {
             targetState = true
         }
     }
+    val sideProjectListAnimatedBottomPadding = animateDpAsState(
+        if (visibleState.targetState) 64.dp else 0.dp,
+        animationSpec = tween(durationMillis = 1000)
+    )
     val listState = rememberLazyListState()
 
     LaunchedEffect(Unit) {
@@ -78,7 +83,8 @@ fun SideProjectSection(modifier: Modifier = Modifier) {
     ) {
         LazyRow(
             state = listState,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.padding(bottom = sideProjectListAnimatedBottomPadding.value)
         ) {
             items(List(100) { SideProject.entries }.flatten()) { sideProject ->
                 AppButton(
