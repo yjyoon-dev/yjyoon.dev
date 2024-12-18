@@ -6,10 +6,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -30,7 +29,7 @@ import yjyoondev.composeapp.generated.resources.img_logo_black
 import yjyoondev.composeapp.generated.resources.img_logo_white
 
 @Composable
-fun PcTopBar(
+fun PcHeader(
     onThemeChanged: (ThemeMode) -> Unit,
     onSectionClicked: (Section) -> Unit,
     modifier: Modifier = Modifier
@@ -38,7 +37,7 @@ fun PcTopBar(
     val themeMode = LocalThemeMode.current
     Row(
         modifier = modifier.then(
-            Modifier.fillMaxWidth()
+            Modifier.fillMaxWidth().padding(horizontal = 32.dp)
         ),
         horizontalArrangement = Arrangement.Center
     ) {
@@ -72,15 +71,6 @@ fun PcTopBar(
             IconButton(onClick = { onThemeChanged(themeMode.toggle()) }) {
                 Icon(
                     painterResource(themeMode.iconRes),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-            Spacer(Modifier.width(16.dp))
-            IconButton(onClick = {}) {
-                Icon(
-                    Icons.Default.Share,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(24.dp)

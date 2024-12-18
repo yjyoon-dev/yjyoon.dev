@@ -30,7 +30,7 @@ fun PcScreen(
 
     Scaffold(
         topBar = {
-            PcTopBar(
+            PcHeader(
                 onThemeChanged = onThemeChanged,
                 onSectionClicked = {
                     scope.launch {
