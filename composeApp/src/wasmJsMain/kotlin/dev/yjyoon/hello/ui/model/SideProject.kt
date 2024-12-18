@@ -21,6 +21,7 @@ import yjyoondev.composeapp.generated.resources.ic_side_neuro
 import yjyoondev.composeapp.generated.resources.ic_side_pimo
 import yjyoondev.composeapp.generated.resources.ic_side_ssoda
 import yjyoondev.composeapp.generated.resources.ic_side_whatnow
+import yjyoondev.composeapp.generated.resources.ic_side_yjyoon_dev
 import yjyoondev.composeapp.generated.resources.side_alreadyme
 import yjyoondev.composeapp.generated.resources.side_coverist
 import yjyoondev.composeapp.generated.resources.side_droidknights2023
@@ -39,6 +40,7 @@ import yjyoondev.composeapp.generated.resources.side_neuro
 import yjyoondev.composeapp.generated.resources.side_pimo
 import yjyoondev.composeapp.generated.resources.side_ssoda
 import yjyoondev.composeapp.generated.resources.side_whatnow
+import yjyoondev.composeapp.generated.resources.side_yjyoon_dev
 
 enum class SideProject(
     val titleRes: StringResource,
@@ -134,5 +136,10 @@ enum class SideProject(
         titleRes = Res.string.side_whatnow,
         logoRes = Res.drawable.ic_side_whatnow,
         url = "https://github.com/yjyoon-dev/whatnow-android"
+    ),
+    YjyoonDev(
+        titleRes = Res.string.side_yjyoon_dev,
+        logoRes = Res.drawable.ic_side_yjyoon_dev,
+        url = "https://github.com/yjyoon-dev/yjyoon.dev"
     )
 }
