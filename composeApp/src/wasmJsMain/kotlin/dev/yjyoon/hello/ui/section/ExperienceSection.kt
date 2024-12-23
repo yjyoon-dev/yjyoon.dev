@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.ui.screen.pc.section
+package dev.yjyoon.hello.ui.section
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
@@ -37,7 +37,9 @@ import dev.yjyoon.hello.ui.model.Club
 import dev.yjyoon.hello.ui.model.Experience
 import dev.yjyoon.hello.ui.model.Global
 import dev.yjyoon.hello.ui.model.Mentor
-import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
+import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_VERTICAL_PADDING
+import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.util.DeviceUtil
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.club_year
@@ -55,6 +57,7 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
             targetState = true
         }
     }
+    val isMobile = DeviceUtil.isMobile()
 
     SectionColumn(
         modifier = modifier,
@@ -101,9 +104,13 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
             enter = defaultEnterAnim(delayMillis = 400),
             modifier = Modifier.padding(bottom = 32.dp)
         ) {
+
+            val gridColumns = if (isMobile) 1 else 2
+            val height = if (isMobile) 344.dp else 172.dp
+
             LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier.height(172.dp),
+                columns = GridCells.Fixed(gridColumns),
+                modifier = Modifier.height(height),
                 horizontalArrangement = Arrangement.Center,
                 verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
             ) {
@@ -213,7 +220,15 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
         }
     }
     SectionColumn(
-        modifier = modifier.then(Modifier.height(CONTENT_WIDTH.dp / 9))
+        modifier = modifier.then(
+            Modifier.height(
+                if (isMobile) {
+                    MOBILE_CONTENT_VERTICAL_PADDING.dp
+                } else {
+                    PC_CONTENT_HORIZONTAL_PADDING.dp
+                }
+            )
+        )
     ) {}
 }
 

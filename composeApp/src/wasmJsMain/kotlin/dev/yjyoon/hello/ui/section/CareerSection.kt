@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.ui.screen.pc.section
+package dev.yjyoon.hello.ui.section
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
@@ -27,7 +27,7 @@ import dev.yjyoon.hello.ui.component.Stepper
 import dev.yjyoon.hello.ui.component.TagText
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Career
-import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
+import dev.yjyoon.hello.ui.screen.PC_CONTENT_WIDTH
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.section_career
@@ -60,7 +60,7 @@ fun CareerSection(modifier: Modifier = Modifier) {
                 )
             }
         }
-        Column(modifier = Modifier.width((CONTENT_WIDTH / 2).dp)) {
+        Column(modifier = Modifier.width((PC_CONTENT_WIDTH / 2).dp)) {
             Career.entries.forEachIndexed { index, career ->
                 AnimatedVisibility(
                     visibleState = visibleState,

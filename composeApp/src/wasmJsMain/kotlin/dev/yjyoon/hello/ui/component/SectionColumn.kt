@@ -16,20 +16,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
-import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
-import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
+import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_VERTICAL_PADDING
+import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.screen.PC_CONTENT_VERTICAL_PADDING
+import dev.yjyoon.hello.ui.screen.PC_CONTENT_WIDTH
 import dev.yjyoon.hello.ui.theme.KotlinTheme
+import dev.yjyoon.hello.ui.util.DeviceUtil
 
 @Composable
 fun SectionColumn(
     modifier: Modifier = Modifier,
+    isMobile: Boolean = DeviceUtil.isMobile(),
     backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
     horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
-    contentPadding: PaddingValues = PaddingValues(
-        horizontal = CONTENT_HORIZONTAL_PADDING.dp,
-        vertical = 72.dp
-    ),
-    content: @Composable ColumnScope.() -> Unit
+    contentPadding: PaddingValues = if (isMobile) {
+        mobileSectionPaddingValues
+    } else {
+        pcSectionPaddingValues
+    },
+    mobileContent: (@Composable ColumnScope.() -> Unit)? = null,
+    content: (@Composable ColumnScope.() -> Unit)? = null
 ) {
     KotlinTheme(
         isDarkTheme = LocalThemeMode.current == ThemeMode.Dark
@@ -44,11 +51,21 @@ fun SectionColumn(
         ) {
             Column(
                 modifier = Modifier
-                    .width(CONTENT_WIDTH.dp)
-                    .padding(contentPadding),
+                    .padding(contentPadding)
+                    .then(if (isMobile) Modifier else Modifier.width(PC_CONTENT_WIDTH.dp)),
                 horizontalAlignment = horizontalAlignment,
-                content = content
+                content = mobileContent?.takeIf { isMobile } ?: content ?: {}
             )
         }
     }
 }
+
+private val pcSectionPaddingValues = PaddingValues(
+    horizontal = PC_CONTENT_HORIZONTAL_PADDING.dp,
+    vertical = PC_CONTENT_VERTICAL_PADDING.dp
+)
+
+private val mobileSectionPaddingValues = PaddingValues(
+    horizontal = MOBILE_CONTENT_HORIZONTAL_PADDING.dp,
+    vertical = MOBILE_CONTENT_VERTICAL_PADDING.dp
+)

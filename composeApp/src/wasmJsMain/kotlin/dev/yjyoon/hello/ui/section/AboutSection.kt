@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.ui.screen.pc.section
+package dev.yjyoon.hello.ui.section
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -36,7 +37,8 @@ import dev.yjyoon.hello.ui.component.CenteredImage
 import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Skill
-import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.util.DeviceUtil
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.about_me
@@ -50,6 +52,7 @@ fun AboutSection(modifier: Modifier = Modifier) {
             targetState = true
         }
     }
+    val isMobile = DeviceUtil.isMobile()
 
     SectionColumn(
         modifier = modifier,
@@ -73,13 +76,18 @@ fun AboutSection(modifier: Modifier = Modifier) {
             enter = defaultEnterAnim(delayMillis = 400),
             modifier = Modifier.padding(bottom = 72.dp)
         ) {
+            val horizontalPadding = if (isMobile) {
+                0.dp
+            } else {
+                (PC_CONTENT_HORIZONTAL_PADDING / 2).dp
+            }
             Text(
                 stringResource(Res.string.about_me),
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center,
                 lineHeight = 28.sp,
-                modifier = Modifier.padding(horizontal = (CONTENT_HORIZONTAL_PADDING / 2).dp)
+                modifier = Modifier.padding(horizontal = horizontalPadding)
             )
         }
         AnimatedVisibility(
@@ -99,15 +107,23 @@ fun AboutSection(modifier: Modifier = Modifier) {
             visibleState = visibleState,
             enter = defaultEnterAnim(delayMillis = 1200)
         ) {
+            val gridColumns = if (isMobile) 2 else 4
+            val gridModifier = if (isMobile) {
+                Modifier.fillMaxWidth().aspectRatio(2 / 3f)
+            } else {
+                Modifier.width(720.dp).aspectRatio(2 / 1f)
+            }
+            val spacing = if (isMobile) 18.dp else 12.dp
+
             LazyVerticalGrid(
-                columns = GridCells.Fixed(4),
+                columns = GridCells.Fixed(gridColumns),
                 contentPadding = PaddingValues(4.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.width(720.dp).height(360.dp)
+                horizontalArrangement = Arrangement.spacedBy(spacing),
+                verticalArrangement = Arrangement.spacedBy(spacing),
+                modifier = gridModifier
 
             ) {
-                items(Skill.entries) {
+                items(Skill.entries.dropLast(if (isMobile) 2 else 0)) {
                     SkillCard(it, modifier = Modifier.weight(1f))
                 }
             }

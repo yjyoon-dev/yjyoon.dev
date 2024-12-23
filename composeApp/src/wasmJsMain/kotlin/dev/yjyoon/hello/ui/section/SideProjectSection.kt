@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.ui.screen.pc.section
+package dev.yjyoon.hello.ui.section
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
@@ -27,7 +27,7 @@ import dev.yjyoon.hello.ui.component.AppButton
 import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.SideProject
-import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
+import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.side_project_lover
@@ -59,7 +59,7 @@ fun SideProjectSection(modifier: Modifier = Modifier) {
 
     SectionColumn(
         modifier = modifier.then(
-            Modifier.height(CONTENT_WIDTH.dp / 9 * 2)
+            Modifier.height(PC_CONTENT_HORIZONTAL_PADDING.dp * 2)
         ),
         contentPadding = PaddingValues(0.dp)
     ) {
@@ -73,7 +73,8 @@ fun SideProjectSection(modifier: Modifier = Modifier) {
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 fontWeight = FontWeight.Bold,
                 fontSize = 36.sp,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                lineHeight = 42.sp
             )
         }
     }
