@@ -9,6 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -45,6 +46,7 @@ fun AppButton(
     val uriHandler = LocalUriHandler.current
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered by interactionSource.collectIsHoveredAsState()
+    val isPressed by interactionSource.collectIsPressedAsState()
 
     Surface(
         shape = RoundedCornerShape(cornerRadius),
@@ -76,7 +78,7 @@ fun AppButton(
                 contentScale = ContentScale.Fit
             )
             AnimatedVisibility(
-                visible = isHovered,
+                visible = isHovered || isPressed,
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {

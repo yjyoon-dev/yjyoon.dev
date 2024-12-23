@@ -1,6 +1,5 @@
-package dev.yjyoon.hello.ui.screen.pc
+package dev.yjyoon.hello.ui.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,19 +21,18 @@ import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.model.Section
+import dev.yjyoon.hello.ui.screen.PC_CONTENT_WIDTH
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import yjyoondev.composeapp.generated.resources.Res
-import yjyoondev.composeapp.generated.resources.img_logo_black
-import yjyoondev.composeapp.generated.resources.img_logo_white
 
 @Composable
-fun PcHeader(
+fun TopHeader(
     onThemeChanged: (ThemeMode) -> Unit,
     onSectionClicked: (Section) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val themeMode = LocalThemeMode.current
+
     Row(
         modifier = modifier.then(
             Modifier.fillMaxWidth().padding(horizontal = 32.dp)
@@ -43,13 +41,13 @@ fun PcHeader(
     ) {
         Row(
             modifier = Modifier
-                .width(CONTENT_WIDTH.dp)
+                .width(PC_CONTENT_WIDTH.dp)
                 .height(HEADER_HEIGHT.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             LogoImage(
                 onClick = { onSectionClicked(Section.Home) },
-                themeMode = themeMode
+                modifier = Modifier.height(48.dp)
             )
             Spacer(Modifier.weight(1f))
             Row(
@@ -77,28 +75,6 @@ fun PcHeader(
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun LogoImage(
-    themeMode: ThemeMode,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val logoRes = when (themeMode) {
-        ThemeMode.Light -> Res.drawable.img_logo_black
-        ThemeMode.Dark -> Res.drawable.img_logo_white
-    }
-    TextButton(
-        onClick = onClick,
-        modifier = modifier
-    ) {
-        Image(
-            painter = painterResource(logoRes),
-            contentDescription = null,
-            modifier = Modifier.height(24.dp)
-        )
     }
 }
 

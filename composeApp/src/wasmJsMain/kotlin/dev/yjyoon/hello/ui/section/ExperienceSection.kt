@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.ui.screen.pc.section
+package dev.yjyoon.hello.ui.section
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
@@ -34,10 +34,13 @@ import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Awards
 import dev.yjyoon.hello.ui.model.Certificate
 import dev.yjyoon.hello.ui.model.Club
+import dev.yjyoon.hello.ui.model.Device
 import dev.yjyoon.hello.ui.model.Experience
 import dev.yjyoon.hello.ui.model.Global
 import dev.yjyoon.hello.ui.model.Mentor
-import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
+import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_VERTICAL_PADDING
+import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.state.rememberDeviceState
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.club_year
@@ -50,6 +53,7 @@ import yjyoondev.composeapp.generated.resources.experience_mentor
 
 @Composable
 fun ExperienceSection(modifier: Modifier = Modifier) {
+    val deviceState = rememberDeviceState()
     val visibleState = remember {
         MutableTransitionState(false).apply {
             targetState = true
@@ -57,6 +61,7 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
     }
 
     SectionColumn(
+        deviceState = deviceState,
         modifier = modifier,
         backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
         horizontalAlignment = Alignment.Start
@@ -101,9 +106,14 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
             enter = defaultEnterAnim(delayMillis = 400),
             modifier = Modifier.padding(bottom = 32.dp)
         ) {
+            val (gridColumns, gridHeight) = when (deviceState.value) {
+                Device.Mobile -> 1 to 344.dp
+                Device.Pc -> 2 to 172.dp
+            }
+
             LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier.height(172.dp),
+                columns = GridCells.Fixed(gridColumns),
+                modifier = Modifier.height(gridHeight),
                 horizontalArrangement = Arrangement.Center,
                 verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
             ) {
@@ -213,8 +223,18 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
         }
     }
     SectionColumn(
-        modifier = modifier.then(Modifier.height(CONTENT_WIDTH.dp / 9))
-    ) {}
+        deviceState = deviceState,
+        modifier = modifier.then(
+            Modifier.height(
+                when (deviceState.value) {
+                    Device.Mobile -> MOBILE_CONTENT_VERTICAL_PADDING.dp
+                    Device.Pc -> PC_CONTENT_HORIZONTAL_PADDING.dp
+
+                }
+            )
+        ),
+        content = null
+    )
 }
 
 @Composable

@@ -1,4 +1,4 @@
-package dev.yjyoon.hello.ui.screen.pc.section
+package dev.yjyoon.hello.ui.section
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
@@ -25,8 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Contact
-import dev.yjyoon.hello.ui.screen.pc.CONTENT_HORIZONTAL_PADDING
-import dev.yjyoon.hello.ui.screen.pc.CONTENT_WIDTH
+import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_VERTICAL_PADDING
+import dev.yjyoon.hello.ui.screen.PC_CONTENT_WIDTH
 import dev.yjyoon.hello.ui.theme.KotlinGray
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -52,10 +53,10 @@ fun FooterSection(modifier: Modifier = Modifier) {
     ) {
         Column(
             modifier = Modifier
-                .width(CONTENT_WIDTH.dp)
+                .width(PC_CONTENT_WIDTH.dp)
                 .padding(
-                    horizontal = CONTENT_HORIZONTAL_PADDING.dp,
-                    vertical = 48.dp
+                    horizontal = MOBILE_CONTENT_HORIZONTAL_PADDING.dp,
+                    vertical = MOBILE_CONTENT_VERTICAL_PADDING.dp
                 ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

@@ -35,18 +35,18 @@ enum class Club(
         year = 20,
         url = "https://www.yapp.co.kr/"
     ),
-    Depromeet(
-        logoRes = Res.drawable.ic_exp_dpm,
-        titleRes = Res.string.club_dpm,
-        positionRes = Res.string.android_developer,
-        year = 13,
-        url = "https://www.depromeet.com/"
-    ),
     Nexters(
         logoRes = Res.drawable.ic_exp_nexters,
         titleRes = Res.string.club_nexters,
         positionRes = Res.string.android_developer,
         year = 22,
         url = "https://www.nexters.co.kr/"
+    ),
+    Depromeet(
+        logoRes = Res.drawable.ic_exp_dpm,
+        titleRes = Res.string.club_dpm,
+        positionRes = Res.string.android_developer,
+        year = 13,
+        url = "https://www.depromeet.com/"
     )
 }
