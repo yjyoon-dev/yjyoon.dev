@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
-import dev.yjyoon.hello.ui.theme.KotlinLightGray
+import dev.yjyoon.hello.ui.theme.YjyoonLightGray
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -52,8 +52,8 @@ fun LogoButton(
                         elevation = 24.dp,
                         shape = RoundedCornerShape(cornerRadius),
                         clip = false,
-                        ambientColor = KotlinLightGray.copy(0.01f),
-                        spotColor = KotlinLightGray.copy(0.01f)
+                        ambientColor = YjyoonLightGray.copy(0.01f),
+                        spotColor = YjyoonLightGray.copy(0.01f)
                     )
             ),
         ) {

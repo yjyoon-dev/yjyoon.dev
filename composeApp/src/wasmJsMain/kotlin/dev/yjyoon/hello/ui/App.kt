@@ -12,7 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import dev.yjyoon.hello.ui.screen.MainScreen
-import dev.yjyoon.hello.ui.theme.KotlinTheme
+import dev.yjyoon.hello.ui.theme.YjyoonTheme
 
 @Composable
 fun App() {
@@ -27,7 +27,7 @@ fun App() {
                     LocalScreenSize provides screenSize,
                     LocalThemeMode provides themeMode
                 ) {
-                    KotlinTheme(isDarkTheme = themeMode == ThemeMode.Dark) {
+                    YjyoonTheme(isDarkTheme = themeMode == ThemeMode.Dark) {
                         MainScreen(
                             onThemeChanged = { themeMode = it }
                         )

@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -28,7 +27,8 @@ import dev.yjyoon.hello.ui.model.Contact
 import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_HORIZONTAL_PADDING
 import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_VERTICAL_PADDING
 import dev.yjyoon.hello.ui.screen.PC_CONTENT_WIDTH
-import dev.yjyoon.hello.ui.theme.KotlinGray
+import dev.yjyoon.hello.ui.theme.YjyoonGray
+import dev.yjyoon.hello.ui.theme.YjyoonWhite
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
@@ -47,7 +47,7 @@ fun FooterSection(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.then(
             Modifier
-                .background(color = KotlinGray)
+                .background(color = YjyoonGray)
                 .fillMaxWidth()
         ),
         contentAlignment = Alignment.Center
@@ -68,7 +68,7 @@ fun FooterSection(modifier: Modifier = Modifier) {
             ) {
                 Text(
                     stringResource(Res.string.section_contact),
-                    color = Color.White.copy(0.4f),
+                    color = YjyoonWhite.copy(0.4f),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Medium
                 )
@@ -95,12 +95,12 @@ fun FooterSection(modifier: Modifier = Modifier) {
                 ) {
                     Text(
                         stringResource(Res.string.copyright),
-                        color = Color.White.copy(0.2f),
+                        color = YjyoonWhite.copy(0.2f),
                         fontSize = 16.sp
                     )
                     Text(
                         stringResource(Res.string.email),
-                        color = Color.White.copy(0.2f),
+                        color = YjyoonWhite.copy(0.2f),
                         fontSize = 16.sp
                     )
                 }
@@ -124,7 +124,7 @@ private fun ContactButton(
         Icon(
             painterResource(contact.iconRes),
             contentDescription = contact.name,
-            tint = Color.White.copy(0.3f),
+            tint = YjyoonWhite.copy(0.3f),
             modifier = Modifier.size(36.dp)
         )
     }

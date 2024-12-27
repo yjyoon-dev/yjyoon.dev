@@ -24,7 +24,7 @@ import dev.yjyoon.hello.ui.screen.PC_CONTENT_VERTICAL_PADDING
 import dev.yjyoon.hello.ui.screen.PC_CONTENT_WIDTH
 import dev.yjyoon.hello.ui.state.DeviceState
 import dev.yjyoon.hello.ui.state.isMobile
-import dev.yjyoon.hello.ui.theme.KotlinTheme
+import dev.yjyoon.hello.ui.theme.YjyoonTheme
 
 @Composable
 fun SectionColumn(
@@ -39,7 +39,7 @@ fun SectionColumn(
     mobileContent: (@Composable ColumnScope.() -> Unit)? = null,
     content: (@Composable ColumnScope.() -> Unit)? = null
 ) {
-    KotlinTheme(
+    YjyoonTheme(
         isDarkTheme = LocalThemeMode.current == ThemeMode.Dark
     ) {
         Box(

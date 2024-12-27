@@ -25,14 +25,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.yjyoon.hello.ui.model.SideProject
-import dev.yjyoon.hello.ui.theme.KotlinLightGray
+import dev.yjyoon.hello.ui.theme.YjyoonBlack
+import dev.yjyoon.hello.ui.theme.YjyoonLightGray
+import dev.yjyoon.hello.ui.theme.YjyoonWhite
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -58,8 +59,8 @@ fun AppButton(
                     elevation = 24.dp,
                     shape = RoundedCornerShape(cornerRadius),
                     clip = false,
-                    ambientColor = KotlinLightGray.copy(0.01f),
-                    spotColor = KotlinLightGray.copy(0.01f)
+                    ambientColor = YjyoonLightGray.copy(0.01f),
+                    spotColor = YjyoonLightGray.copy(0.01f)
                 )
                 .hoverable(interactionSource)
         ),
@@ -85,13 +86,13 @@ fun AppButton(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(color = Color.Black.copy(alpha = 0.75f))
+                        .background(color = YjyoonBlack.copy(alpha = 0.75f))
                         .clip(RoundedCornerShape(cornerRadius)),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
                         text = stringResource(sideProject.titleRes),
-                        color = Color.White,
+                        color = YjyoonWhite,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.padding(8.dp)
                     )
