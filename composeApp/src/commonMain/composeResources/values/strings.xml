@@ -1,5 +1,6 @@
 <resources>
     <string name="copyright"> 2024 (c) Yeojun Yoon All rights reserved.</string>
+    <string name="email">me@yjyoon.dev</string>
 
     <string name="language">KOR</string>
 

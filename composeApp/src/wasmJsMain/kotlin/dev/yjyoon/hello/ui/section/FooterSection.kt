@@ -33,6 +33,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.copyright
+import yjyoondev.composeapp.generated.resources.email
 import yjyoondev.composeapp.generated.resources.section_contact
 
 @Composable
@@ -89,11 +90,21 @@ fun FooterSection(modifier: Modifier = Modifier) {
                 visibleState = visibleState,
                 enter = defaultEnterAnim(delayMillis = 600)
             ) {
-                Text(
-                    stringResource(Res.string.copyright),
-                    color = Color.White.copy(0.2f),
-                    fontSize = 16.sp
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        stringResource(Res.string.copyright),
+                        color = Color.White.copy(0.2f),
+                        fontSize = 16.sp
+                    )
+                    Text(
+                        stringResource(Res.string.email),
+                        color = Color.White.copy(0.2f),
+                        fontSize = 16.sp
+                    )
+                }
+
             }
         }
     }
