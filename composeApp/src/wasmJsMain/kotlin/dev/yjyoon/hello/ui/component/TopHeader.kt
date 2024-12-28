@@ -47,7 +47,7 @@ fun TopHeader(
         ) {
             LogoImage(
                 onClick = { onSectionClicked(Section.Home) },
-                modifier = Modifier.height(48.dp)
+                modifier = Modifier.height(36.dp)
             )
             Spacer(Modifier.weight(1f))
             Row(

@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.component.LogoButton
 import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.component.Stepper
@@ -28,6 +27,9 @@ import dev.yjyoon.hello.ui.component.TagText
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Career
 import dev.yjyoon.hello.ui.screen.PC_CONTENT_WIDTH
+import dev.yjyoon.hello.ui.state.DeviceState
+import dev.yjyoon.hello.ui.state.isMobile
+import dev.yjyoon.hello.ui.state.isPc
 import dev.yjyoon.hello.ui.state.rememberDeviceState
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
@@ -72,7 +74,8 @@ fun CareerSection(modifier: Modifier = Modifier) {
                     CareerStep(
                         career = career,
                         isFirst = index == 0,
-                        isLast = index == Career.entries.lastIndex
+                        isLast = index == Career.entries.lastIndex,
+                        deviceState = deviceState
                     )
                 }
             }
@@ -85,24 +88,25 @@ private fun CareerStep(
     career: Career,
     isFirst: Boolean,
     isLast: Boolean,
+    deviceState: DeviceState,
     modifier: Modifier = Modifier
 ) {
-    val themeMode = LocalThemeMode.current
-
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.Top
     ) {
-        TagText(
-            text = career.startDate,
-            textColor = MaterialTheme.colorScheme.onPrimary,
-            fontWeight = FontWeight.Medium,
-            fontSize = 14.sp,
-            height = TAG_TEXT_HEIGHT,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(top = (CAREER_LOGO_SIZE - CAREER_DOT_SIZE) / 2)
-        )
-        Spacer(Modifier.width(24.dp))
+        if (deviceState.isPc()) {
+            TagText(
+                text = career.startDate,
+                textColor = MaterialTheme.colorScheme.onPrimary,
+                fontWeight = FontWeight.Medium,
+                fontSize = 14.sp,
+                height = TAG_TEXT_HEIGHT,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(top = (CAREER_LOGO_SIZE - CAREER_DOT_SIZE) / 2)
+            )
+            Spacer(Modifier.width(24.dp))
+        }
         Stepper(
             dotSize = CAREER_DOT_SIZE,
             frontHeight = (TAG_TEXT_HEIGHT - CAREER_DOT_SIZE) / 2 + (CAREER_LOGO_SIZE - CAREER_DOT_SIZE) / 2 - 8.dp,
@@ -114,11 +118,27 @@ private fun CareerStep(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
         ) {
-            LogoButton(
-                logoRes = career.logoRes,
-                url = career.url,
-                size = CAREER_LOGO_SIZE
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                LogoButton(
+                    logoRes = career.logoRes,
+                    url = career.url,
+                    size = CAREER_LOGO_SIZE
+                )
+                if (deviceState.isMobile()) {
+                    Spacer(Modifier.width(24.dp))
+                    TagText(
+                        text = career.startDate,
+                        textColor = MaterialTheme.colorScheme.onPrimary,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 13.sp,
+                        height = TAG_TEXT_HEIGHT,
+                        color = MaterialTheme.colorScheme.primary,
+                        inverse = true
+                    )
+                }
+            }
             Spacer(Modifier.height(12.dp))
             Text(
                 text = stringResource(career.positionRes),
