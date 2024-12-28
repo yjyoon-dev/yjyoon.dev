@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,7 +27,8 @@ fun TagText(
     fontSize: TextUnit,
     height: Dp,
     color: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    inverse: Boolean = false
 ) {
     Box(
         modifier = modifier,
@@ -38,24 +40,40 @@ fun TagText(
                 .aspectRatio(2.5f / 1f),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            if (inverse) {
+                Canvas(modifier = Modifier.height(height).width(height / 2), onDraw = {
+                    val trianglePath = Path().apply {
+                        moveTo(0f, size.height / 2f)
+                        lineTo(size.height / 2f, size.height)
+                        lineTo(size.height / 2f, 0f)
+                        close()
+                    }
+                    drawPath(
+                        path = trianglePath,
+                        color = color
+                    )
+                })
+            }
             Box(
                 modifier = Modifier
                     .background(color = color)
                     .fillMaxHeight()
                     .weight(1f)
             )
-            Canvas(modifier = Modifier.height(height), onDraw = {
-                val trianglePath = Path().apply {
-                    moveTo(size.height / 2f, size.height / 2f)
-                    lineTo(0f, size.height)
-                    lineTo(0f, 0f)
-                    close()
-                }
-                drawPath(
-                    path = trianglePath,
-                    color = color
-                )
-            })
+            if (inverse.not()) {
+                Canvas(modifier = Modifier.height(height), onDraw = {
+                    val trianglePath = Path().apply {
+                        moveTo(size.height / 2f, size.height / 2f)
+                        lineTo(0f, size.height)
+                        lineTo(0f, 0f)
+                        close()
+                    }
+                    drawPath(
+                        path = trianglePath,
+                        color = color
+                    )
+                })
+            }
         }
         Text(
             text = text,

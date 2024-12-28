@@ -44,6 +44,7 @@ import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
+import dev.yjyoon.hello.ui.model.Device
 import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_HORIZONTAL_PADDING
 import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_VERTICAL_PADDING
 import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
@@ -82,7 +83,10 @@ fun HomeSection(
     val greetingString = buildAnnotatedString {
         withStyle(
             SpanStyle(
-                fontSize = 72.sp,
+                fontSize = when (deviceState.value) {
+                    Device.Pc -> 72.sp
+                    Device.Mobile -> 56.sp
+                },
                 fontWeight = FontWeight.Black
             )
         ) {
@@ -106,7 +110,13 @@ fun HomeSection(
             themeMode = themeMode,
             greetingString = greetingString,
             visibleState = visibleState,
-            modifier = modifier
+            modifier = modifier.then(
+                if (deviceState.isMobile()) {
+                    Modifier.height(1.dp)
+                } else {
+                    Modifier
+                }
+            )
         )
         if (deviceState.isMobile()) {
             HomeMobileSection(
@@ -148,7 +158,12 @@ private fun HomeMobileSection(
                         .padding(top = MOBILE_CONTENT_VERTICAL_PADDING.dp)
                         .padding(horizontal = MOBILE_CONTENT_HORIZONTAL_PADDING.dp)
                 ) {
-                    Text(greetingString, lineHeight = 92.sp)
+                    Text(
+                        greetingString, lineHeight = when (deviceState.value) {
+                            Device.Pc -> 92.sp
+                            Device.Mobile -> 76.sp
+                        }
+                    )
                 }
             }
             AnimatedVisibility(

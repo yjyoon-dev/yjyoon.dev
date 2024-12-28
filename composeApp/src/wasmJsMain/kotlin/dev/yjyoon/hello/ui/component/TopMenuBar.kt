@@ -1,6 +1,6 @@
 package dev.yjyoon.hello.ui.component
 
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -32,7 +32,7 @@ fun TopMenuBar(
         title = {
             LogoImage(
                 onClick = onTitleClick,
-                modifier = Modifier.fillMaxHeight()
+                modifier = Modifier.height(36.dp)
             )
         },
         actions = {

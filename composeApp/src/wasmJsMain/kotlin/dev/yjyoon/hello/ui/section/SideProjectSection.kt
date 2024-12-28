@@ -88,7 +88,8 @@ fun SideProjectSection(modifier: Modifier = Modifier) {
         LazyRow(
             state = listState,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.padding(bottom = sideProjectListAnimatedBottomPadding.value)
+            modifier = Modifier.padding(bottom = sideProjectListAnimatedBottomPadding.value),
+            userScrollEnabled = false
         ) {
             items(List(100) { SideProject.entries }.flatten()) { sideProject ->
                 AppButton(

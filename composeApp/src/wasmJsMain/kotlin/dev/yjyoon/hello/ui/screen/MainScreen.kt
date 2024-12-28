@@ -3,6 +3,7 @@ package dev.yjyoon.hello.ui.screen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -18,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
 import dev.yjyoon.hello.ui.ThemeMode
 import dev.yjyoon.hello.ui.component.ModalDrawerContent
 import dev.yjyoon.hello.ui.component.TopHeader
@@ -75,7 +77,14 @@ fun MainScreen(
                                     scope.launch {
                                         listState.animateScrollToItem(it.ordinal)
                                     }
-                                }
+                                },
+                                modifier = Modifier.then(
+                                    if (deviceState.isMobile()) {
+                                        Modifier.height(1.dp)
+                                    } else {
+                                        Modifier
+                                    }
+                                )
                             )
                             if (deviceState.isMobile()) {
                                 TopMenuBar(

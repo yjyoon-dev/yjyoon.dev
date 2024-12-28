@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
@@ -96,12 +97,14 @@ fun FooterSection(modifier: Modifier = Modifier) {
                     Text(
                         stringResource(Res.string.copyright),
                         color = YjyoonWhite.copy(0.2f),
-                        fontSize = 16.sp
+                        fontSize = 16.sp,
+                        textAlign = TextAlign.Center
                     )
                     Text(
                         stringResource(Res.string.email),
                         color = YjyoonWhite.copy(0.2f),
-                        fontSize = 16.sp
+                        fontSize = 16.sp,
+                        textAlign = TextAlign.Center
                     )
                 }
 
