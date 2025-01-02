@@ -27,6 +27,7 @@ import dev.yjyoon.hello.ui.component.AppButton
 import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.SideProject
+import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_HORIZONTAL_PADDING
 import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
 import dev.yjyoon.hello.ui.state.isMobile
 import dev.yjyoon.hello.ui.state.rememberDeviceState
@@ -79,7 +80,8 @@ fun SideProjectSection(modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.Bold,
                 fontSize = 36.sp,
                 textAlign = TextAlign.Center,
-                lineHeight = 42.sp
+                lineHeight = 42.sp,
+                modifier = Modifier.padding(horizontal = MOBILE_CONTENT_HORIZONTAL_PADDING.dp)
             )
         }
     }
