@@ -95,7 +95,7 @@ private fun CareerStep(
         modifier = modifier,
         verticalAlignment = Alignment.Top
     ) {
-        if (deviceState.isPc()) {
+        if (deviceState.isPc) {
             TagText(
                 text = career.startDate,
                 textColor = MaterialTheme.colorScheme.onPrimary,
@@ -126,7 +126,7 @@ private fun CareerStep(
                     url = career.url,
                     size = CAREER_LOGO_SIZE
                 )
-                if (deviceState.isMobile()) {
+                if (deviceState.isMobile) {
                     Spacer(Modifier.width(24.dp))
                     TagText(
                         text = career.startDate,

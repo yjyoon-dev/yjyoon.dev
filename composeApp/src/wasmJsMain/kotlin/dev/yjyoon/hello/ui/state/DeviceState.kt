@@ -16,5 +16,7 @@ fun rememberDeviceState(): DeviceState {
     return remember(screenWidthInDp) { derivedStateOf { Device.fromWidth(screenWidthInDp) } }
 }
 
-fun DeviceState.isMobile() = value == Device.Mobile
-fun DeviceState.isPc() = value == Device.Pc
+val DeviceState.isMobile
+    get() = value == Device.Mobile
+val DeviceState.isPc
+    get() = value == Device.Pc

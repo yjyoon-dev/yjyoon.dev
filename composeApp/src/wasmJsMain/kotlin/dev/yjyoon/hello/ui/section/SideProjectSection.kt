@@ -28,6 +28,7 @@ import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.SideProject
 import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.state.isMobile
 import dev.yjyoon.hello.ui.state.rememberDeviceState
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
@@ -50,7 +51,8 @@ fun SideProjectSection(modifier: Modifier = Modifier) {
     LaunchedEffect(Unit) {
         while (true) {
             listState.animateScrollBy(
-                1f, animationSpec = tween(
+                value = if(deviceState.isMobile) 3f else 1f,
+                animationSpec = tween(
                     durationMillis = 10,
                     delayMillis = 0,
                     easing = LinearEasing
