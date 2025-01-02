@@ -85,7 +85,7 @@ fun HomeSection(
             SpanStyle(
                 fontSize = when (deviceState.value) {
                     Device.Pc -> 72.sp
-                    Device.Mobile -> 56.sp
+                    Device.Mobile -> 48.sp
                 },
                 fontWeight = FontWeight.Black
             )
@@ -111,14 +111,14 @@ fun HomeSection(
             greetingString = greetingString,
             visibleState = visibleState,
             modifier = modifier.then(
-                if (deviceState.isMobile()) {
+                if (deviceState.isMobile) {
                     Modifier.height(1.dp)
                 } else {
                     Modifier
                 }
             )
         )
-        if (deviceState.isMobile()) {
+        if (deviceState.isMobile) {
             HomeMobileSection(
                 themeMode = themeMode,
                 greetingString = greetingString,

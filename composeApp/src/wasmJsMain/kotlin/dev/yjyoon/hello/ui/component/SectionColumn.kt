@@ -53,9 +53,9 @@ fun SectionColumn(
             Column(
                 modifier = Modifier
                     .padding(contentPadding)
-                    .then(if (deviceState.isMobile()) Modifier else Modifier.width(PC_CONTENT_WIDTH.dp)),
+                    .then(if (deviceState.isMobile) Modifier else Modifier.width(PC_CONTENT_WIDTH.dp)),
                 horizontalAlignment = horizontalAlignment,
-                content = mobileContent?.takeIf { deviceState.isMobile() } ?: content ?: {}
+                content = mobileContent?.takeIf { deviceState.isMobile } ?: content ?: {}
             )
         }
     }

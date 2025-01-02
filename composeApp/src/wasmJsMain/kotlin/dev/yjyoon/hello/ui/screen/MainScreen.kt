@@ -79,14 +79,14 @@ fun MainScreen(
                                     }
                                 },
                                 modifier = Modifier.then(
-                                    if (deviceState.isMobile()) {
+                                    if (deviceState.isMobile) {
                                         Modifier.height(1.dp)
                                     } else {
                                         Modifier
                                     }
                                 )
                             )
-                            if (deviceState.isMobile()) {
+                            if (deviceState.isMobile) {
                                 TopMenuBar(
                                     onTitleClick = {
                                         scope.launch {

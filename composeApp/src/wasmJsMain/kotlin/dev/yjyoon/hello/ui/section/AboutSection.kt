@@ -127,7 +127,7 @@ fun AboutSection(modifier: Modifier = Modifier) {
                 modifier = gridModifier
 
             ) {
-                items(Skill.entries.dropLast(if (deviceState.isMobile()) 2 else 0)) {
+                items(Skill.entries.dropLast(if (deviceState.isMobile) 2 else 0)) {
                     SkillCard(it, modifier = Modifier.weight(1f))
                 }
             }
