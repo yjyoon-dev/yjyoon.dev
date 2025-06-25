@@ -69,11 +69,17 @@
 
     <string name="experience_for">Experiences for...</string>
     <string name="experience_development">Development</string>
+    <string name="experience_sharing">Sharing</string>
     <string name="experience_mentor">Mentor</string>
     <string name="experience_global">Global</string>
     <string name="experience_awards">Honors and Awards</string>
     <string name="experience_certificates">Certificates</string>
     <string name="side_project_lover">...and I love enjoying side projects!</string>
+
+    <string name="sharing_super_init_6">GDG Korea Android super.init(version=6) - 사이드 프로젝트를 20번 실패한 주니어의 오답노트</string>
+    <string name="sharing_super_init_6_date">2025.03</string>
+    <string name="sharing_naver_engineering_day_2025">2025 NAVER Engineering Day - 생산성을 높이는 Android SDK 배포 전략</string>
+    <string name="sharing_naver_engineering_day_2025_date">2025.05</string>
 
     <string name="mentor_sw_meister_high_school">SW마이스터고 연합해커톤 기술 멘토</string>
     <string name="mentor_sw_meister_high_school_date">2022.10</string>
