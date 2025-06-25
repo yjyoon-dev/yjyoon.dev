@@ -2,6 +2,10 @@ package dev.yjyoon.hello.ui.model
 
 import org.jetbrains.compose.resources.StringResource
 import yjyoondev.composeapp.generated.resources.Res
+import yjyoondev.composeapp.generated.resources.sharing_super_init_6
+import yjyoondev.composeapp.generated.resources.sharing_super_init_6_date
+import yjyoondev.composeapp.generated.resources.sharing_naver_engineering_day_2025
+import yjyoondev.composeapp.generated.resources.sharing_naver_engineering_day_2025_date
 import yjyoondev.composeapp.generated.resources.awards_cau_campus_town
 import yjyoondev.composeapp.generated.resources.awards_cau_campus_town_prize
 import yjyoondev.composeapp.generated.resources.awards_cau_campus_town_year
@@ -37,6 +41,20 @@ import yjyoondev.composeapp.generated.resources.mentor_woongjin_game_challenge_d
 sealed interface Experience {
     val titleRes: StringResource
     val dateRes: StringResource
+}
+
+enum class Sharing(
+    override val titleRes: StringResource,
+    override val dateRes: StringResource
+) : Experience {
+    NaverEngineeringDay2025(
+        titleRes = Res.string.sharing_naver_engineering_day_2025,
+        dateRes = Res.string.sharing_naver_engineering_day_2025_date
+    ),
+    SuperInit6(
+        titleRes = Res.string.sharing_super_init_6,
+        dateRes = Res.string.sharing_super_init_6_date
+    )
 }
 
 enum class Mentor(

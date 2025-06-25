@@ -38,6 +38,7 @@ import dev.yjyoon.hello.ui.model.Device
 import dev.yjyoon.hello.ui.model.Experience
 import dev.yjyoon.hello.ui.model.Global
 import dev.yjyoon.hello.ui.model.Mentor
+import dev.yjyoon.hello.ui.model.Sharing
 import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_VERTICAL_PADDING
 import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
 import dev.yjyoon.hello.ui.state.rememberDeviceState
@@ -45,6 +46,7 @@ import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.club_year
 import yjyoondev.composeapp.generated.resources.experience_awards
+import yjyoondev.composeapp.generated.resources.experience_sharing
 import yjyoondev.composeapp.generated.resources.experience_certificates
 import yjyoondev.composeapp.generated.resources.experience_development
 import yjyoondev.composeapp.generated.resources.experience_for
@@ -169,6 +171,31 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
             Column {
                 Mentor.entries.forEach { mentor ->
                     ExperienceText(mentor)
+                    Spacer(Modifier.height(4.dp))
+                }
+            }
+        }
+        AnimatedVisibility(
+            visibleState = visibleState,
+            enter = defaultEnterAnim(delayMillis = 1000),
+            modifier = Modifier.padding(bottom = 12.dp)
+        ) {
+            Text(
+                stringResource(Res.string.experience_sharing),
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+        AnimatedVisibility(
+            visibleState = visibleState,
+            enter = defaultEnterAnim(delayMillis = 1200, orientation = Orientation.Horizontal),
+            modifier = Modifier.padding(bottom = 32.dp)
+        ) {
+            Column {
+                Sharing.entries.forEach { sharing ->
+                    ExperienceText(sharing)
                     Spacer(Modifier.height(4.dp))
                 }
             }
@@ -337,7 +364,7 @@ private fun ExperienceText(
                     append(stringResource(experience.levelRes))
                 }
             }
-            if (experience is Mentor || experience is Global) {
+            if (experience is Mentor || experience is Global || experience is Sharing) {
                 withStyle(
                     SpanStyle(
                         color = MaterialTheme.colorScheme.onSecondaryContainer.copy(0.5f),
