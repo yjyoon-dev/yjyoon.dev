@@ -1,0 +1,12 @@
+[build]
+command = """
+  # JDK 17 설치
+  curl -L https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.13%2B11/OpenJDK17U-jdk_x64_linux_hotspot_17.0.13_11.tar.gz -o jdk.tar.gz
+  tar -xzf jdk.tar.gz
+  export JAVA_HOME=$PWD/jdk-17.0.13+11
+  export PATH=$JAVA_HOME/bin:$PATH
+  
+  # 빌드 실행
+  ./gradlew wasmJsBrowserDistribution
+"""
+publish = "composeApp/build/dist/wasmJs/productionExecutable"
