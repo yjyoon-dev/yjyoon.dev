@@ -1,7 +1,6 @@
 package dev.yjyoon.hello.ui.section
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.MutableTransitionState
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,7 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
@@ -23,11 +22,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.yjyoon.hello.ui.component.defaultEnterAnim
+import dev.yjyoon.hello.ui.component.AnimatedContent
+import dev.yjyoon.hello.ui.component.AnimatedContentWithDelay
 import dev.yjyoon.hello.ui.model.Contact
-import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_HORIZONTAL_PADDING
-import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_VERTICAL_PADDING
-import dev.yjyoon.hello.ui.screen.PC_CONTENT_WIDTH
+import dev.yjyoon.hello.ui.theme.MobileContentHorizontalPadding
+import dev.yjyoon.hello.ui.theme.MobileContentVerticalPadding
+import dev.yjyoon.hello.ui.theme.PcContentWidth
 import dev.yjyoon.hello.ui.theme.YjyoonGray
 import dev.yjyoon.hello.ui.theme.YjyoonWhite
 import org.jetbrains.compose.resources.painterResource
@@ -39,12 +39,6 @@ import yjyoondev.composeapp.generated.resources.section_contact
 
 @Composable
 fun FooterSection(modifier: Modifier = Modifier) {
-    val visibleState = remember {
-        MutableTransitionState(false).apply {
-            targetState = true
-        }
-    }
-
     Box(
         modifier = modifier.then(
             Modifier
@@ -55,16 +49,14 @@ fun FooterSection(modifier: Modifier = Modifier) {
     ) {
         Column(
             modifier = Modifier
-                .width(PC_CONTENT_WIDTH.dp)
+                .width(PcContentWidth)
                 .padding(
-                    horizontal = MOBILE_CONTENT_HORIZONTAL_PADDING.dp,
-                    vertical = MOBILE_CONTENT_VERTICAL_PADDING.dp
+                    horizontal = MobileContentHorizontalPadding,
+                    vertical = MobileContentVerticalPadding
                 ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AnimatedVisibility(
-                visibleState = visibleState,
-                enter = defaultEnterAnim(),
+            AnimatedContent(
                 modifier = Modifier.padding(bottom = 16.dp)
             ) {
                 Text(
@@ -74,9 +66,9 @@ fun FooterSection(modifier: Modifier = Modifier) {
                     fontWeight = FontWeight.Medium
                 )
             }
-            AnimatedVisibility(
-                visibleState = visibleState,
-                enter = defaultEnterAnim(delayMillis = 300),
+            AnimatedContentWithDelay(
+                delayIndex = 1,
+                baseDelay = 300,
                 modifier = Modifier.padding(bottom = 16.dp)
             ) {
                 Row(
@@ -87,9 +79,9 @@ fun FooterSection(modifier: Modifier = Modifier) {
                     }
                 }
             }
-            AnimatedVisibility(
-                visibleState = visibleState,
-                enter = defaultEnterAnim(delayMillis = 600)
+            AnimatedContentWithDelay(
+                delayIndex = 2,
+                baseDelay = 300
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -107,7 +99,6 @@ fun FooterSection(modifier: Modifier = Modifier) {
                         textAlign = TextAlign.Center
                     )
                 }
-
             }
         }
     }

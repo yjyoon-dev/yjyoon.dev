@@ -1,7 +1,6 @@
 package dev.yjyoon.hello.ui.section
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.MutableTransitionState
+
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -25,7 +24,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -42,13 +40,17 @@ import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.LocalScreenSize
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
+import dev.yjyoon.hello.ui.component.AnimatedContent
+import dev.yjyoon.hello.ui.component.AnimatedContentWithDelay
 import dev.yjyoon.hello.ui.component.SectionColumn
-import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Device
-import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_HORIZONTAL_PADDING
-import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_VERTICAL_PADDING
-import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
-import dev.yjyoon.hello.ui.screen.PC_CONTENT_WIDTH
+import dev.yjyoon.hello.ui.theme.ButtonHeight
+import dev.yjyoon.hello.ui.theme.ItemSpacing
+import dev.yjyoon.hello.ui.theme.MobileContentHorizontalPadding
+import dev.yjyoon.hello.ui.theme.MobileContentVerticalPadding
+import dev.yjyoon.hello.ui.theme.PcContentHorizontalPadding
+import dev.yjyoon.hello.ui.theme.PcContentWidth
+import dev.yjyoon.hello.ui.theme.SectionSpacing
 import dev.yjyoon.hello.ui.state.DeviceState
 import dev.yjyoon.hello.ui.state.isMobile
 import dev.yjyoon.hello.ui.state.rememberDeviceState
@@ -72,11 +74,6 @@ import yjyoondev.composeapp.generated.resources.yjyoon
 fun HomeSection(
     modifier: Modifier = Modifier
 ) {
-    val visibleState = rememberSaveable {
-        MutableTransitionState(false).apply {
-            targetState = true
-        }
-    }
     val deviceState = rememberDeviceState()
     val themeMode = LocalThemeMode.current
     val defaultTextColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -109,7 +106,6 @@ fun HomeSection(
         HomePcSection(
             themeMode = themeMode,
             greetingString = greetingString,
-            visibleState = visibleState,
             modifier = modifier.then(
                 if (deviceState.isMobile) {
                     Modifier.height(1.dp)
@@ -123,7 +119,6 @@ fun HomeSection(
                 themeMode = themeMode,
                 greetingString = greetingString,
                 deviceState = deviceState,
-                visibleState = visibleState,
                 modifier = modifier
             )
         }
@@ -134,7 +129,6 @@ fun HomeSection(
 private fun HomeMobileSection(
     themeMode: ThemeMode,
     greetingString: AnnotatedString,
-    visibleState: MutableTransitionState<Boolean>,
     deviceState: DeviceState,
     modifier: Modifier = Modifier
 ) {
@@ -144,19 +138,16 @@ private fun HomeMobileSection(
         contentPadding = PaddingValues(bottom = 24.dp),
         content = null,
         mobileContent = {
-            AnimatedVisibility(
-                visibleState = visibleState,
-                enter = defaultEnterAnim(
-                    delayMillis = 500,
-                    orientation = Orientation.Horizontal,
-                    inverseSlide = true
-                ),
-                modifier = Modifier.padding(bottom = 12.dp)
+            AnimatedContent(
+                delayMillis = 500,
+                orientation = Orientation.Horizontal,
+                inverseSlide = true,
+                modifier = Modifier.padding(bottom = ItemSpacing)
             ) {
                 Column(
                     modifier = Modifier
-                        .padding(top = MOBILE_CONTENT_VERTICAL_PADDING.dp)
-                        .padding(horizontal = MOBILE_CONTENT_HORIZONTAL_PADDING.dp)
+                        .padding(top = MobileContentVerticalPadding)
+                        .padding(horizontal = MobileContentHorizontalPadding)
                 ) {
                     Text(
                         greetingString, lineHeight = when (deviceState.value) {
@@ -166,26 +157,20 @@ private fun HomeMobileSection(
                     )
                 }
             }
-            AnimatedVisibility(
-                visibleState = visibleState,
-                enter = defaultEnterAnim()
-            ) {
+            AnimatedContent {
                 GraphicImage(
                     themeMode = themeMode,
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier.fillMaxWidth()
                 )
             }
-            AnimatedVisibility(
-                visibleState = visibleState,
-                enter = defaultEnterAnim(
-                    delayMillis = 500,
-                    inverseSlide = true
-                ),
+            AnimatedContent(
+                delayMillis = 500,
+                inverseSlide = true
             ) {
                 Column(
                     modifier = Modifier.padding(
-                        horizontal = MOBILE_CONTENT_HORIZONTAL_PADDING.dp
+                        horizontal = MobileContentHorizontalPadding
                     ),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
@@ -201,7 +186,6 @@ private fun HomeMobileSection(
 private fun HomePcSection(
     themeMode: ThemeMode,
     greetingString: AnnotatedString,
-    visibleState: MutableTransitionState<Boolean>,
     modifier: Modifier = Modifier
 ) {
     val screenSize = LocalScreenSize.current
@@ -215,41 +199,38 @@ private fun HomePcSection(
             Modifier
                 .background(color = MaterialTheme.colorScheme.primaryContainer)
                 .padding(
-                    start = PC_CONTENT_HORIZONTAL_PADDING.dp,
-                    end = PC_CONTENT_HORIZONTAL_PADDING.dp / 2
+                    start = PcContentHorizontalPadding,
+                    end = PcContentHorizontalPadding / 2
                 )
-                .width(PC_CONTENT_WIDTH.dp)
+                .width(PcContentWidth)
         )
     ) {
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(orientation = Orientation.Horizontal),
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
+        AnimatedContent(
+            orientation = Orientation.Horizontal,
+            modifier = Modifier.align(Alignment.BottomEnd)
         ) {
             GraphicImage(
                 themeMode = themeMode,
-                modifier = Modifier.height(PC_CONTENT_WIDTH.dp / 2.5f)
+                modifier = Modifier.height(PcContentWidth / 2.5f)
             )
         }
         Column(
             modifier = Modifier
-                .width((PC_CONTENT_WIDTH * 2 / 3).dp)
+                .width((PcContentWidth.value * 2 / 3).dp)
                 .align(Alignment.BottomStart)
-                .padding(vertical = 36.dp),
+                .padding(vertical = SectionSpacing),
             verticalArrangement = Arrangement.Bottom
         ) {
-            AnimatedVisibility(
-                visibleState = visibleState,
-                enter = defaultEnterAnim(delayMillis = 500, inverseSlide = true),
-                modifier = Modifier.padding(bottom = 12.dp)
+            AnimatedContent(
+                delayMillis = 500,
+                inverseSlide = true,
+                modifier = Modifier.padding(bottom = ItemSpacing)
             ) {
                 Text(greetingString, lineHeight = 92.sp)
             }
-            AnimatedVisibility(
-                visibleState = visibleState,
-                enter = defaultEnterAnim(delayMillis = 500),
-                modifier = Modifier.padding(bottom = 36.dp)
+            AnimatedContent(
+                delayMillis = 500,
+                modifier = Modifier.padding(bottom = SectionSpacing)
             ) {
                 Text(
                     text = stringResource(Res.string.intro),
@@ -259,13 +240,10 @@ private fun HomePcSection(
                     modifier = Modifier.alpha(introTextAnimatedAlpha.value)
                 )
             }
-            AnimatedVisibility(
-                visibleState = visibleState,
-                enter = defaultEnterAnim(
-                    orientation = Orientation.Horizontal,
-                    inverseSlide = true,
-                    delayMillis = 500
-                ),
+            AnimatedContent(
+                orientation = Orientation.Horizontal,
+                inverseSlide = true,
+                delayMillis = 500
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -286,7 +264,7 @@ private fun GraphicImage(
     modifier: Modifier = Modifier
 ) {
     val density = LocalDensity.current
-    val isLarge = with(density) { PC_CONTENT_WIDTH.dp.toPx() >= 1920f }
+    val isLarge = with(density) { PcContentWidth.toPx() >= 1920f }
     val graphicRes = when (themeMode) {
         ThemeMode.Light -> if (isLarge) {
             Res.drawable.img_graphic_light_large
@@ -314,7 +292,7 @@ private fun GithubButton(modifier: Modifier = Modifier) {
 
     Button(
         onClick = { uriHandler.openUri("https://github.com/yjyoon-dev") },
-        modifier = modifier.then(Modifier.height(56.dp)),
+        modifier = modifier.then(Modifier.height(ButtonHeight)),
         contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp)
     ) {
         Text(
@@ -337,7 +315,7 @@ private fun BlogButton(modifier: Modifier = Modifier) {
 
     OutlinedButton(
         onClick = { uriHandler.openUri("http://blog.yjyoon.dev") },
-        modifier = modifier.then(Modifier.height(56.dp)),
+        modifier = modifier.then(Modifier.height(ButtonHeight)),
         colors = ButtonDefaults.outlinedButtonColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer

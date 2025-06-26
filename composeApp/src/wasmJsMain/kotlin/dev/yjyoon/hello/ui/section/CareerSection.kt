@@ -1,7 +1,5 @@
 package dev.yjyoon.hello.ui.section
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,23 +12,24 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.yjyoon.hello.ui.component.AnimatedContent
+import dev.yjyoon.hello.ui.component.AnimatedContentWithDelay
 import dev.yjyoon.hello.ui.component.LogoButton
 import dev.yjyoon.hello.ui.component.SectionColumn
 import dev.yjyoon.hello.ui.component.Stepper
 import dev.yjyoon.hello.ui.component.TagText
-import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Career
-import dev.yjyoon.hello.ui.screen.PC_CONTENT_WIDTH
 import dev.yjyoon.hello.ui.state.DeviceState
 import dev.yjyoon.hello.ui.state.isMobile
 import dev.yjyoon.hello.ui.state.isPc
 import dev.yjyoon.hello.ui.state.rememberDeviceState
+import dev.yjyoon.hello.ui.theme.ItemSpacing
+import dev.yjyoon.hello.ui.theme.PcContentWidth
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.section_career
@@ -38,19 +37,14 @@ import yjyoondev.composeapp.generated.resources.section_career
 @Composable
 fun CareerSection(modifier: Modifier = Modifier) {
     val deviceState = rememberDeviceState()
-    val visibleState = remember {
-        MutableTransitionState(false).apply {
-            targetState = true
-        }
-    }
 
     SectionColumn(
         modifier = modifier,
         deviceState = deviceState
     ) {
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(orientation = Orientation.Horizontal, inverseSlide = true),
+        AnimatedContent(
+            orientation = Orientation.Horizontal,
+            inverseSlide = true,
             modifier = Modifier.padding(bottom = 48.dp)
         ) {
             Row(
@@ -65,11 +59,11 @@ fun CareerSection(modifier: Modifier = Modifier) {
                 )
             }
         }
-        Column(modifier = Modifier.width((PC_CONTENT_WIDTH / 2).dp)) {
+        Column(modifier = Modifier.width((PcContentWidth.value / 2).dp)) {
             Career.entries.forEachIndexed { index, career ->
-                AnimatedVisibility(
-                    visibleState = visibleState,
-                    enter = defaultEnterAnim(delayMillis = (index + 1) * 300)
+                AnimatedContentWithDelay(
+                    delayIndex = index + 1,
+                    baseDelay = 300
                 ) {
                     CareerStep(
                         career = career,
@@ -139,7 +133,7 @@ private fun CareerStep(
                     )
                 }
             }
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(ItemSpacing))
             Text(
                 text = stringResource(career.positionRes),
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(0.75f),

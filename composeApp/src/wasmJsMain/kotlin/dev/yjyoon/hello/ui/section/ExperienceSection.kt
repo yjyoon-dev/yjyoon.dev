@@ -1,7 +1,6 @@
 package dev.yjyoon.hello.ui.section
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.MutableTransitionState
+
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,7 +17,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
@@ -30,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.component.LogoButton
 import dev.yjyoon.hello.ui.component.SectionColumn
-import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Awards
 import dev.yjyoon.hello.ui.model.Certificate
 import dev.yjyoon.hello.ui.model.Club
@@ -39,8 +37,13 @@ import dev.yjyoon.hello.ui.model.Experience
 import dev.yjyoon.hello.ui.model.Global
 import dev.yjyoon.hello.ui.model.Mentor
 import dev.yjyoon.hello.ui.model.Sharing
-import dev.yjyoon.hello.ui.screen.MOBILE_CONTENT_VERTICAL_PADDING
-import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.component.AnimatedContent
+import dev.yjyoon.hello.ui.component.AnimatedContentWithDelay
+import dev.yjyoon.hello.ui.theme.MobileContentVerticalPadding
+import dev.yjyoon.hello.ui.theme.PcContentHorizontalPadding
+import dev.yjyoon.hello.ui.theme.CardRadius
+import dev.yjyoon.hello.ui.theme.ItemSpacing
+import dev.yjyoon.hello.ui.theme.SectionSpacing
 import dev.yjyoon.hello.ui.state.rememberDeviceState
 import org.jetbrains.compose.resources.stringResource
 import yjyoondev.composeapp.generated.resources.Res
@@ -56,11 +59,6 @@ import yjyoondev.composeapp.generated.resources.experience_mentor
 @Composable
 fun ExperienceSection(modifier: Modifier = Modifier) {
     val deviceState = rememberDeviceState()
-    val visibleState = remember {
-        MutableTransitionState(false).apply {
-            targetState = true
-        }
-    }
 
     SectionColumn(
         deviceState = deviceState,
@@ -68,10 +66,8 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
         backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
         horizontalAlignment = Alignment.Start
     ) {
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(),
-            modifier = Modifier.padding(bottom = 36.dp)
+        AnimatedContent(
+            modifier = Modifier.padding(bottom = SectionSpacing)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -86,13 +82,10 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
                 )
             }
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(
-                delayMillis = 200,
-                orientation = Orientation.Horizontal,
-                inverseSlide = true
-            ),
+        AnimatedContent(
+            delayMillis = 200,
+            orientation = Orientation.Horizontal,
+            inverseSlide = true,
             modifier = Modifier.padding(bottom = 16.dp)
         ) {
             Text(
@@ -103,9 +96,8 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
                 textAlign = TextAlign.Center
             )
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 400),
+        AnimatedContent(
+            delayMillis = 400,
             modifier = Modifier.padding(bottom = 32.dp)
         ) {
             val (gridColumns, gridHeight) = when (deviceState.value) {
@@ -121,64 +113,16 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
             ) {
                 items(Club.entries) {
                     ClubListItem(club = it, modifier = Modifier.weight(1f))
-                    Spacer(Modifier.height(12.dp))
+                    Spacer(Modifier.height(ItemSpacing))
                 }
             }
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 600),
-            modifier = Modifier.padding(bottom = 12.dp)
-        ) {
-            Text(
-                stringResource(Res.string.experience_awards),
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 800, orientation = Orientation.Horizontal),
-            modifier = Modifier.padding(bottom = 32.dp)
-        ) {
-            Column {
-                Awards.entries.forEach { awards ->
-                    ExperienceText(awards)
-                    Spacer(Modifier.height(4.dp))
-                }
-            }
-        }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 1000),
-            modifier = Modifier.padding(bottom = 12.dp)
-        ) {
-            Text(
-                stringResource(Res.string.experience_mentor),
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 1200, orientation = Orientation.Horizontal),
-            modifier = Modifier.padding(bottom = 32.dp)
-        ) {
-            Column {
-                Mentor.entries.forEach { mentor ->
-                    ExperienceText(mentor)
-                    Spacer(Modifier.height(4.dp))
-                }
-            }
-        }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 1000),
-            modifier = Modifier.padding(bottom = 12.dp)
+        AnimatedContentWithDelay(
+            delayIndex = 3,
+            baseDelay = 200,
+            orientation = Orientation.Horizontal,
+            inverseSlide = true,
+            modifier = Modifier.padding(bottom = ItemSpacing)
         ) {
             Text(
                 stringResource(Res.string.experience_sharing),
@@ -188,9 +132,9 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
                 textAlign = TextAlign.Center
             )
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 1200, orientation = Orientation.Horizontal),
+        AnimatedContentWithDelay(
+            delayIndex = 4,
+            baseDelay = 200,
             modifier = Modifier.padding(bottom = 32.dp)
         ) {
             Column {
@@ -200,10 +144,66 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
                 }
             }
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 1400),
-            modifier = Modifier.padding(bottom = 12.dp)
+        AnimatedContentWithDelay(
+            delayIndex = 5,
+            baseDelay = 200,
+            orientation = Orientation.Horizontal,
+            inverseSlide = true,
+            modifier = Modifier.padding(bottom = ItemSpacing)
+        ) {
+            Text(
+                stringResource(Res.string.experience_mentor),
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+        AnimatedContentWithDelay(
+            delayIndex = 6,
+            baseDelay = 200,
+            modifier = Modifier.padding(bottom = 32.dp)
+        ) {
+            Column {
+                Mentor.entries.forEach { mentor ->
+                    ExperienceText(mentor)
+                    Spacer(Modifier.height(4.dp))
+                }
+            }
+        }
+        AnimatedContentWithDelay(
+            delayIndex = 7,
+            baseDelay = 200,
+            orientation = Orientation.Horizontal,
+            inverseSlide = true,
+            modifier = Modifier.padding(bottom = ItemSpacing)
+        ) {
+            Text(
+                stringResource(Res.string.experience_awards),
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+        AnimatedContentWithDelay(
+            delayIndex = 8,
+            baseDelay = 200,
+            modifier = Modifier.padding(bottom = 32.dp)
+        ) {
+            Column {
+                Awards.entries.forEach { awards ->
+                    ExperienceText(awards)
+                    Spacer(Modifier.height(4.dp))
+                }
+            }
+        }
+        AnimatedContentWithDelay(
+            delayIndex = 9,
+            baseDelay = 200,
+            orientation = Orientation.Horizontal,
+            inverseSlide = true,
+            modifier = Modifier.padding(bottom = ItemSpacing)
         ) {
             Text(
                 stringResource(Res.string.experience_global),
@@ -213,9 +213,9 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
                 textAlign = TextAlign.Center
             )
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 1600, orientation = Orientation.Horizontal),
+        AnimatedContentWithDelay(
+            delayIndex = 10,
+            baseDelay = 200,
             modifier = Modifier.padding(bottom = 32.dp)
         ) {
             Column {
@@ -225,10 +225,12 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
                 }
             }
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 1800),
-            modifier = Modifier.padding(bottom = 12.dp)
+        AnimatedContentWithDelay(
+            delayIndex = 11,
+            baseDelay = 200,
+            orientation = Orientation.Horizontal,
+            inverseSlide = true,
+            modifier = Modifier.padding(bottom = ItemSpacing)
         ) {
             Text(
                 stringResource(Res.string.experience_certificates),
@@ -237,9 +239,9 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
                 fontSize = 24.sp
             )
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 2000, orientation = Orientation.Horizontal)
+        AnimatedContentWithDelay(
+            delayIndex = 12,
+            baseDelay = 200,
         ) {
             Column {
                 Certificate.entries.forEach { certificate ->
@@ -254,9 +256,8 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
         modifier = modifier.then(
             Modifier.height(
                 when (deviceState.value) {
-                    Device.Mobile -> MOBILE_CONTENT_VERTICAL_PADDING.dp
-                    Device.Pc -> PC_CONTENT_HORIZONTAL_PADDING.dp
-
+                    Device.Mobile -> MobileContentVerticalPadding
+                    Device.Pc -> PcContentHorizontalPadding
                 }
             )
         ),
@@ -279,10 +280,10 @@ private fun ClubListItem(
             url = club.url,
             size = 72.dp,
             contentPadding = PaddingValues(0.dp),
-            cornerRadius = 12.dp,
+            cornerRadius = CardRadius,
             forceDarkTheme = true
         )
-        Spacer(Modifier.width(12.dp))
+                    Spacer(Modifier.width(ItemSpacing))
         Column {
             Row(
                 verticalAlignment = Alignment.CenterVertically
