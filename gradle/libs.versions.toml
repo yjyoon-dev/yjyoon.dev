@@ -1,8 +1,8 @@
 [versions]
-kotlin = "2.1.0"
-kotlinx-datetime = "0.6.1"
-compose-plugin = "1.7.1"
-androidx-lifecycle = "2.8.0"
+kotlin = "2.1.21"
+kotlinx-datetime = "0.6.2"
+compose-plugin = "1.8.1"
+androidx-lifecycle = "2.9.0"
 junit = "4.13.2"
 
 [libraries]
