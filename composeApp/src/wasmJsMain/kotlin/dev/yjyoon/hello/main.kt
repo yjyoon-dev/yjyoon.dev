@@ -11,7 +11,12 @@ import dev.yjyoon.hello.ui.App
 import kotlinx.browser.document
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.preloadFont
+import org.jetbrains.compose.resources.preloadImageBitmap
 import yjyoondev.composeapp.generated.resources.Res
+import yjyoondev.composeapp.generated.resources.img_graphic_dark
+import yjyoondev.composeapp.generated.resources.img_graphic_dark_large
+import yjyoondev.composeapp.generated.resources.img_graphic_light
+import yjyoondev.composeapp.generated.resources.img_graphic_light_large
 import yjyoondev.composeapp.generated.resources.pretendard_black
 import yjyoondev.composeapp.generated.resources.pretendard_bold
 import yjyoondev.composeapp.generated.resources.pretendard_extrabold
@@ -35,6 +40,10 @@ fun main() {
             preloadFont(Res.font.pretendard_regular),
             preloadFont(Res.font.pretendard_semibold),
             preloadFont(Res.font.pretendard_thin),
+            preloadImageBitmap(Res.drawable.img_graphic_light),
+            preloadImageBitmap(Res.drawable.img_graphic_dark),
+            preloadImageBitmap(Res.drawable.img_graphic_light_large),
+            preloadImageBitmap(Res.drawable.img_graphic_dark_large)
         )
         if (fontStates.all { it.value != null }) {
             App()
