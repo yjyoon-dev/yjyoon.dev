@@ -1,7 +1,6 @@
 package dev.yjyoon.hello.ui.section
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.MutableTransitionState
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +22,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
@@ -33,12 +32,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
+import dev.yjyoon.hello.ui.component.AnimatedContent
+import dev.yjyoon.hello.ui.component.AnimatedContentWithDelay
 import dev.yjyoon.hello.ui.component.CenteredImage
 import dev.yjyoon.hello.ui.component.SectionColumn
-import dev.yjyoon.hello.ui.component.defaultEnterAnim
 import dev.yjyoon.hello.ui.model.Device
 import dev.yjyoon.hello.ui.model.Skill
-import dev.yjyoon.hello.ui.screen.PC_CONTENT_HORIZONTAL_PADDING
+import dev.yjyoon.hello.ui.theme.CardRadius
+import dev.yjyoon.hello.ui.theme.ItemSpacing
+import dev.yjyoon.hello.ui.theme.PcContentHorizontalPadding
+import dev.yjyoon.hello.ui.theme.PcContentVerticalPadding
+import dev.yjyoon.hello.ui.theme.SectionSpacing
 import dev.yjyoon.hello.ui.state.isMobile
 import dev.yjyoon.hello.ui.state.rememberDeviceState
 import org.jetbrains.compose.resources.stringResource
@@ -50,21 +54,14 @@ import yjyoondev.composeapp.generated.resources.section_about
 @Composable
 fun AboutSection(modifier: Modifier = Modifier) {
     val deviceState = rememberDeviceState()
-    val visibleState = remember {
-        MutableTransitionState(false).apply {
-            targetState = true
-        }
-    }
 
     SectionColumn(
         modifier = modifier,
         deviceState = deviceState,
         backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
     ) {
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(),
-            modifier = Modifier.padding(bottom = 36.dp)
+        AnimatedContent(
+            modifier = Modifier.padding(bottom = SectionSpacing)
         ) {
             Text(
                 stringResource(Res.string.section_about),
@@ -74,14 +71,13 @@ fun AboutSection(modifier: Modifier = Modifier) {
                 textAlign = TextAlign.Center
             )
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 400),
-            modifier = Modifier.padding(bottom = 72.dp)
+        AnimatedContentWithDelay(
+            delayIndex = 1,
+            modifier = Modifier.padding(bottom = PcContentVerticalPadding)
         ) {
             val horizontalPadding = when (deviceState.value) {
                 Device.Mobile -> 0.dp
-                Device.Pc -> (PC_CONTENT_HORIZONTAL_PADDING / 2).dp
+                Device.Pc -> PcContentHorizontalPadding / 2
             }
             Text(
                 stringResource(Res.string.about_me),
@@ -92,10 +88,9 @@ fun AboutSection(modifier: Modifier = Modifier) {
                 modifier = Modifier.padding(horizontal = horizontalPadding)
             )
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 800),
-            modifier = Modifier.padding(bottom = 36.dp)
+        AnimatedContentWithDelay(
+            delayIndex = 2,
+            modifier = Modifier.padding(bottom = SectionSpacing)
         ) {
             Text(
                 stringResource(Res.string.favorites),
@@ -105,17 +100,16 @@ fun AboutSection(modifier: Modifier = Modifier) {
                 textAlign = TextAlign.Center
             )
         }
-        AnimatedVisibility(
-            visibleState = visibleState,
-            enter = defaultEnterAnim(delayMillis = 1200)
+        AnimatedContentWithDelay(
+            delayIndex = 3
         ) {
             val (gridColumns, gridModifier, gridSpacing) = when (deviceState.value) {
                 Device.Mobile -> {
-                    Triple(2, Modifier.fillMaxWidth().aspectRatio(2 / 3f), 12.dp)
+                    Triple(2, Modifier.fillMaxWidth().aspectRatio(2 / 3f), ItemSpacing)
                 }
 
                 Device.Pc -> {
-                    Triple(4, Modifier.width(720.dp).aspectRatio(2 / 1f), 12.dp)
+                    Triple(4, Modifier.width(720.dp).aspectRatio(2 / 1f), ItemSpacing)
                 }
             }
 
@@ -145,7 +139,7 @@ private fun SkillCard(
 
     Card(
         onClick = { uriHandler.openUri(skill.url) },
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(CardRadius),
         elevation = CardDefaults.cardElevation(
             defaultElevation = if (themeMode == ThemeMode.Light) 2.dp else 0.dp
         ),
@@ -156,7 +150,7 @@ private fun SkillCard(
         modifier = modifier.then(Modifier.aspectRatio(1f))
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(top = 36.dp, bottom = 24.dp),
+            modifier = Modifier.fillMaxSize().padding(top = SectionSpacing, bottom = 24.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -164,7 +158,7 @@ private fun SkillCard(
                 resource = skill.logo,
                 modifier = Modifier.size(48.dp)
             )
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(ItemSpacing))
             Box(
                 modifier = Modifier.height(40.dp),
                 contentAlignment = Alignment.Center
