@@ -5,7 +5,7 @@ import org.jetbrains.compose.resources.StringResource
 import yjyoondev.composeapp.generated.resources.Res
 import yjyoondev.composeapp.generated.resources.ic_side_alreadyme
 import yjyoondev.composeapp.generated.resources.ic_side_coverist
-import yjyoondev.composeapp.generated.resources.ic_side_droidknights
+import yjyoondev.composeapp.generated.resources.ic_side_duckz
 import yjyoondev.composeapp.generated.resources.ic_side_enphago
 import yjyoondev.composeapp.generated.resources.ic_side_goorlemap
 import yjyoondev.composeapp.generated.resources.ic_side_jsgame
@@ -24,7 +24,7 @@ import yjyoondev.composeapp.generated.resources.ic_side_whatnow
 import yjyoondev.composeapp.generated.resources.ic_side_yjyoon_dev
 import yjyoondev.composeapp.generated.resources.side_alreadyme
 import yjyoondev.composeapp.generated.resources.side_coverist
-import yjyoondev.composeapp.generated.resources.side_droidknights2023
+import yjyoondev.composeapp.generated.resources.side_duckz
 import yjyoondev.composeapp.generated.resources.side_enphago
 import yjyoondev.composeapp.generated.resources.side_goorlemap
 import yjyoondev.composeapp.generated.resources.side_jsgame
@@ -57,10 +57,10 @@ enum class SideProject(
         logoRes = Res.drawable.ic_side_coverist,
         url = "https://github.com/coverist"
     ),
-    Droidknights(
-        titleRes = Res.string.side_droidknights2023,
-        logoRes = Res.drawable.ic_side_droidknights,
-        url = "https://github.com/yjyoon-dev/DroidKnights2023_App"
+    Duckz(
+        titleRes = Res.string.side_duckz,
+        logoRes = Res.drawable.ic_side_duckz,
+        url = "https://play.google.com/store/apps/details?id=com.upf.memorytrace_android"
     ),
     Enphago(
         titleRes = Res.string.side_enphago,
@@ -90,7 +90,7 @@ enum class SideProject(
     KwNoti(
         titleRes = Res.string.side_kwnoti,
         logoRes = Res.drawable.ic_side_kwnoti,
-        url = "https://github.com/kw-service/kw-notice-android-v2"
+        url = "https://play.google.com/store/apps/details?id=dev.yjyoon.kwnotice"
     ),
     KwPass(
         titleRes = Res.string.side_kwpass,
