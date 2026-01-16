@@ -13,12 +13,12 @@
     <string name="hi">Hi</string>
     <string name="i_am">I am </string>
     <string name="yjyoon">Yeojun Yoon</string>
-    <string name="intro">Software Engineer &amp; Junior Android Developer specialized in\nmobile application development for Android using Kotlin.</string>
+    <string name="intro">Software Engineer &amp; Android Developer specialized in\nmobile application development for Android using Kotlin.</string>
 
     <string name="follow_github">Follow on Github</string>
     <string name="visit_blog">Visit my Blog</string>
 
-    <string name="about_me">이제 막 2년 차에 접어든 주니어 안드로이드 개발자입니다. 내가 좋아하는 것, 나에게 필요한 것을 직접 만들 수 있다는 매력을 느껴 개발을 시작하게 되었고 그 중 우리에게 가장 가까이 있는 모바일 플랫폼에 푹 빠지게 되었습니다. 지금까지 20개가 넘는 팀 또는 개인 사이드 프로젝트에 참여하였으며, 현재는 네이버에서 안드로이드 개발자로 근무하고 있습니다. 최근에는 Kotlin Multiplatform 에 관심이 많아, 이 페이지 또한 Kotlin/Wasm 과 Compose Multiplatform 을 이용해 개발하게 되었습니다.</string>
+    <string name="about_me">3년차 안드로이드 개발자입니다. 내가 좋아하는 것, 나에게 필요한 것을 직접 만들 수 있다는 매력을 느껴 개발을 시작하게 되었고 그 중 우리에게 가장 가까이 있는 모바일 플랫폼에 푹 빠지게 되었습니다. 지금까지 20개가 넘는 팀 또는 개인 사이드 프로젝트에 참여하였으며, 현재는 네이버에서 안드로이드 개발자로 근무하고 있습니다. 최근에는 Kotlin Multiplatform 에 관심이 많아, 이 페이지 또한 Kotlin/Wasm 과 Compose Multiplatform 을 이용해 개발하게 되었습니다.</string>
 
     <string name="favorites">Favorites</string>
     <string name="kotlin">Kotlin</string>
@@ -37,7 +37,7 @@
     <string name="career_naver_team">디스플레이 광고 SDK 개발팀</string>
     <string name="career_kakaobrain_team">언어모델사업실 TF</string>
     <string name="career_neurosky_team">CTO 직속 개발팀</string>
-    <string name="career_naver_desc"> - 네이티브 광고 커스텀 뷰 개발\n - 웹뷰 내 광고 통신 인터페이스 개발\n - 외부 광고 Mediation SDK 연동\n - Compose 연동 가이드 및 샘플앱 개발</string>
+    <string name="career_naver_desc"> - 네이티브 광고 커스텀 뷰 개발\n - 광고 디스크 캐싱 기능 개발\n - 광고 미디어 Lazy Loading 기능 개발\n - 위치 정보 수집 및 전송 기능 개발\n - 웹뷰 내 광고 통신 인터페이스 개발\n - 외부 광고 Mediation SDK 연동</string>
     <string name="career_kakaobrain_desc"> - AI 소설 프로토타이핑 서비스 개발\n - LLM 기반 프롬프트 엔지니어링 학습\n - Kotlin 과 Compose 를 이용한 Desktop 앱 개발</string>
     <string name="career_neurosky_desc"> - 실시간 EEG 통신 서비스 개발\n - Bluetooth 를 이용한 실시간 뇌파 측정 헤드셋 데이터 시각화\n - Compose 를 이용한 게이미피케이션 및 녹화 기능 개발</string>
 
@@ -80,6 +80,8 @@
     <string name="sharing_super_init_6_date">2025.03</string>
     <string name="sharing_naver_engineering_day_2025">2025 NAVER Engineering Day - 생산성을 높이는 Android SDK 배포 전략</string>
     <string name="sharing_naver_engineering_day_2025_date">2025.05</string>
+    <string name="sharing_kugs_kmp_meetup_2025">Kotlin User Group Seoul KMP Meetup - KMP + Supabase: 1인 개발의 새로운 패러다임</string>
+    <string name="sharing_kugs_kmp_meetup_2025_date">2025.12</string>
 
     <string name="mentor_sw_meister_high_school">SW마이스터고 연합해커톤 기술 멘토</string>
     <string name="mentor_sw_meister_high_school_date">2022.10</string>

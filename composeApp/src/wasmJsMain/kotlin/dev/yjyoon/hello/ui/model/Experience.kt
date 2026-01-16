@@ -37,6 +37,8 @@ import yjyoondev.composeapp.generated.resources.mentor_sw_meister_high_school
 import yjyoondev.composeapp.generated.resources.mentor_sw_meister_high_school_date
 import yjyoondev.composeapp.generated.resources.mentor_woongjin_game_challenge
 import yjyoondev.composeapp.generated.resources.mentor_woongjin_game_challenge_date
+import yjyoondev.composeapp.generated.resources.sharing_kugs_kmp_meetup_2025
+import yjyoondev.composeapp.generated.resources.sharing_kugs_kmp_meetup_2025_date
 
 sealed interface Experience {
     val titleRes: StringResource
@@ -47,6 +49,10 @@ enum class Sharing(
     override val titleRes: StringResource,
     override val dateRes: StringResource
 ) : Experience {
+    KmpMeetup2025(
+      titleRes = Res.string.sharing_kugs_kmp_meetup_2025,
+      dateRes = Res.string.sharing_kugs_kmp_meetup_2025_date
+    ),
     NaverEngineeringDay2025(
         titleRes = Res.string.sharing_naver_engineering_day_2025,
         dateRes = Res.string.sharing_naver_engineering_day_2025_date

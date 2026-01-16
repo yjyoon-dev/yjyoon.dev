@@ -17,14 +17,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.yjyoon.hello.ui.LocalThemeMode
 import dev.yjyoon.hello.ui.ThemeMode
-import dev.yjyoon.hello.ui.theme.YjyoonLightGray
+import dev.yjyoon.hello.ui.theme.lightShadow
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -40,38 +39,26 @@ fun LogoButton(
 ) {
     val themeMode = LocalThemeMode.current
     val uriHandler = LocalUriHandler.current
+    val useLightTheme = themeMode == ThemeMode.Light && forceDarkTheme.not()
 
-    if (themeMode == ThemeMode.Light && forceDarkTheme.not()) {
+    if (useLightTheme) {
         Surface(
             shape = RoundedCornerShape(cornerRadius),
             color = MaterialTheme.colorScheme.primaryContainer,
             modifier = modifier.then(
                 Modifier
                     .size(size)
-                    .shadow(
-                        elevation = 24.dp,
-                        shape = RoundedCornerShape(cornerRadius),
-                        clip = false,
-                        ambientColor = YjyoonLightGray.copy(0.01f),
-                        spotColor = YjyoonLightGray.copy(0.01f)
-                    )
+                    .lightShadow(cornerRadius)
             ),
         ) {
-            Box(
+            LogoContent(
+                logoRes = logoRes,
+                contentPadding = contentPadding,
                 modifier = Modifier
-                    .fillMaxSize()
                     .background(color = MaterialTheme.colorScheme.primaryContainer)
                     .clip(RoundedCornerShape(cornerRadius))
-                    .clickable { uriHandler.openUri(url) },
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(logoRes),
-                    contentDescription = null,
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier.padding(contentPadding)
-                )
-            }
+                    .clickable { uriHandler.openUri(url) }
+            )
         }
     } else {
         Card(
@@ -84,17 +71,26 @@ fun LogoButton(
             ),
             modifier = modifier.then(Modifier.size(size))
         ) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(logoRes),
-                    contentDescription = null,
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier.padding(contentPadding)
-                )
-            }
+            LogoContent(logoRes = logoRes, contentPadding = contentPadding)
         }
+    }
+}
+
+@Composable
+private fun LogoContent(
+    logoRes: DrawableResource,
+    contentPadding: PaddingValues,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            painter = painterResource(logoRes),
+            contentDescription = null,
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.padding(contentPadding)
+        )
     }
 }

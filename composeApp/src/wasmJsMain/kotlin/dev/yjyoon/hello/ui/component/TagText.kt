@@ -41,18 +41,7 @@ fun TagText(
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (inverse) {
-                Canvas(modifier = Modifier.height(height).width(height / 2), onDraw = {
-                    val trianglePath = Path().apply {
-                        moveTo(0f, size.height / 2f)
-                        lineTo(size.height / 2f, size.height)
-                        lineTo(size.height / 2f, 0f)
-                        close()
-                    }
-                    drawPath(
-                        path = trianglePath,
-                        color = color
-                    )
-                })
+                TrianglePointer(height = height, color = color, pointsLeft = true)
             }
             Box(
                 modifier = Modifier
@@ -61,18 +50,7 @@ fun TagText(
                     .weight(1f)
             )
             if (inverse.not()) {
-                Canvas(modifier = Modifier.height(height), onDraw = {
-                    val trianglePath = Path().apply {
-                        moveTo(size.height / 2f, size.height / 2f)
-                        lineTo(0f, size.height)
-                        lineTo(0f, 0f)
-                        close()
-                    }
-                    drawPath(
-                        path = trianglePath,
-                        color = color
-                    )
-                })
+                TrianglePointer(height = height, color = color, pointsLeft = false)
             }
         }
         Text(
@@ -82,5 +60,32 @@ fun TagText(
             fontSize = fontSize,
             modifier = Modifier.padding(start = height / 4, bottom = height / 8)
         )
+    }
+}
+
+@Composable
+private fun TrianglePointer(
+    height: Dp,
+    color: Color,
+    pointsLeft: Boolean
+) {
+    Canvas(
+        modifier = Modifier
+            .height(height)
+            .width(height / 2)
+    ) {
+        val trianglePath = Path().apply {
+            if (pointsLeft) {
+                moveTo(0f, size.height / 2f)
+                lineTo(size.height / 2f, size.height)
+                lineTo(size.height / 2f, 0f)
+            } else {
+                moveTo(size.height / 2f, size.height / 2f)
+                lineTo(0f, size.height)
+                lineTo(0f, 0f)
+            }
+            close()
+        }
+        drawPath(path = trianglePath, color = color)
     }
 }

@@ -117,139 +117,16 @@ fun ExperienceSection(modifier: Modifier = Modifier) {
                 }
             }
         }
-        AnimatedContentWithDelay(
-            delayIndex = 3,
-            baseDelay = 200,
-            orientation = Orientation.Horizontal,
-            inverseSlide = true,
-            modifier = Modifier.padding(bottom = ItemSpacing)
-        ) {
-            Text(
-                stringResource(Res.string.experience_sharing),
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-        AnimatedContentWithDelay(
-            delayIndex = 4,
-            baseDelay = 200,
-            modifier = Modifier.padding(bottom = 32.dp)
-        ) {
-            Column {
-                Sharing.entries.forEach { sharing ->
-                    ExperienceText(sharing)
-                    Spacer(Modifier.height(4.dp))
-                }
-            }
-        }
-        AnimatedContentWithDelay(
-            delayIndex = 5,
-            baseDelay = 200,
-            orientation = Orientation.Horizontal,
-            inverseSlide = true,
-            modifier = Modifier.padding(bottom = ItemSpacing)
-        ) {
-            Text(
-                stringResource(Res.string.experience_mentor),
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-        AnimatedContentWithDelay(
-            delayIndex = 6,
-            baseDelay = 200,
-            modifier = Modifier.padding(bottom = 32.dp)
-        ) {
-            Column {
-                Mentor.entries.forEach { mentor ->
-                    ExperienceText(mentor)
-                    Spacer(Modifier.height(4.dp))
-                }
-            }
-        }
-        AnimatedContentWithDelay(
-            delayIndex = 7,
-            baseDelay = 200,
-            orientation = Orientation.Horizontal,
-            inverseSlide = true,
-            modifier = Modifier.padding(bottom = ItemSpacing)
-        ) {
-            Text(
-                stringResource(Res.string.experience_awards),
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-        AnimatedContentWithDelay(
-            delayIndex = 8,
-            baseDelay = 200,
-            modifier = Modifier.padding(bottom = 32.dp)
-        ) {
-            Column {
-                Awards.entries.forEach { awards ->
-                    ExperienceText(awards)
-                    Spacer(Modifier.height(4.dp))
-                }
-            }
-        }
-        AnimatedContentWithDelay(
-            delayIndex = 9,
-            baseDelay = 200,
-            orientation = Orientation.Horizontal,
-            inverseSlide = true,
-            modifier = Modifier.padding(bottom = ItemSpacing)
-        ) {
-            Text(
-                stringResource(Res.string.experience_global),
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-        AnimatedContentWithDelay(
-            delayIndex = 10,
-            baseDelay = 200,
-            modifier = Modifier.padding(bottom = 32.dp)
-        ) {
-            Column {
-                Global.entries.forEach { global ->
-                    ExperienceText(global)
-                    Spacer(Modifier.height(4.dp))
-                }
-            }
-        }
-        AnimatedContentWithDelay(
-            delayIndex = 11,
-            baseDelay = 200,
-            orientation = Orientation.Horizontal,
-            inverseSlide = true,
-            modifier = Modifier.padding(bottom = ItemSpacing)
-        ) {
-            Text(
-                stringResource(Res.string.experience_certificates),
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp
-            )
-        }
-        AnimatedContentWithDelay(
-            delayIndex = 12,
-            baseDelay = 200,
-        ) {
-            Column {
-                Certificate.entries.forEach { certificate ->
-                    ExperienceText(certificate)
-                    Spacer(Modifier.height(4.dp))
-                }
-            }
-        }
+        ExperienceCategoryTitle(Res.string.experience_sharing, delayIndex = 3)
+        ExperienceList(Sharing.entries, delayIndex = 4)
+        ExperienceCategoryTitle(Res.string.experience_mentor, delayIndex = 5)
+        ExperienceList(Mentor.entries, delayIndex = 6)
+        ExperienceCategoryTitle(Res.string.experience_awards, delayIndex = 7)
+        ExperienceList(Awards.entries, delayIndex = 8)
+        ExperienceCategoryTitle(Res.string.experience_global, delayIndex = 9)
+        ExperienceList(Global.entries, delayIndex = 10)
+        ExperienceCategoryTitle(Res.string.experience_certificates, delayIndex = 11)
+        ExperienceList(Certificate.entries, delayIndex = 12, bottomPadding = false)
     }
     SectionColumn(
         deviceState = deviceState,
@@ -308,6 +185,50 @@ private fun ClubListItem(
                 fontWeight = FontWeight.Normal,
                 fontSize = 14.sp
             )
+        }
+    }
+}
+
+@Composable
+private fun ExperienceCategoryTitle(
+    titleRes: org.jetbrains.compose.resources.StringResource,
+    delayIndex: Int,
+    modifier: Modifier = Modifier
+) {
+    AnimatedContentWithDelay(
+        delayIndex = delayIndex,
+        baseDelay = 200,
+        orientation = Orientation.Horizontal,
+        inverseSlide = true,
+        modifier = modifier.padding(bottom = ItemSpacing)
+    ) {
+        Text(
+            stringResource(titleRes),
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+private fun <T : Experience> ExperienceList(
+    items: List<T>,
+    delayIndex: Int,
+    modifier: Modifier = Modifier,
+    bottomPadding: Boolean = true
+) {
+    AnimatedContentWithDelay(
+        delayIndex = delayIndex,
+        baseDelay = 200,
+        modifier = if (bottomPadding) modifier.padding(bottom = 32.dp) else modifier
+    ) {
+        Column {
+            items.forEach { item ->
+                ExperienceText(item)
+                Spacer(Modifier.height(4.dp))
+            }
         }
     }
 }

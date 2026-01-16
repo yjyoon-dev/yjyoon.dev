@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.yjyoon.hello.ui.component.AnimatedContent
@@ -69,6 +70,7 @@ fun CareerSection(modifier: Modifier = Modifier) {
                         career = career,
                         isFirst = index == 0,
                         isLast = index == Career.entries.lastIndex,
+                        height = if (career.name == "Naver") 270.dp else 224.dp,
                         deviceState = deviceState
                     )
                 }
@@ -83,6 +85,7 @@ private fun CareerStep(
     isFirst: Boolean,
     isLast: Boolean,
     deviceState: DeviceState,
+    height: Dp = 224.dp,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -104,7 +107,7 @@ private fun CareerStep(
         Stepper(
             dotSize = CAREER_DOT_SIZE,
             frontHeight = (TAG_TEXT_HEIGHT - CAREER_DOT_SIZE) / 2 + (CAREER_LOGO_SIZE - CAREER_DOT_SIZE) / 2 - 8.dp,
-            rearHeight = if (isLast) 192.dp else 224.dp,
+            rearHeight = if (isLast) 192.dp else height,
             isHead = isFirst
         )
         Spacer(Modifier.width(24.dp))

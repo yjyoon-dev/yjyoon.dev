@@ -1,5 +1,10 @@
 package dev.yjyoon.hello.ui.theme
 
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 // PC Layout
@@ -19,4 +24,16 @@ val CardRadius = 12.dp
 
 // Animation
 const val DefaultAnimDuration = 500
-const val DefaultAnimDelay = 400 
+const val DefaultAnimDelay = 400
+
+// Modifier Extensions
+fun Modifier.lightShadow(
+    cornerRadius: Dp = 16.dp,
+    shape: Shape = RoundedCornerShape(cornerRadius)
+): Modifier = shadow(
+    elevation = 24.dp,
+    shape = shape,
+    clip = false,
+    ambientColor = YjyoonLightGray.copy(0.01f),
+    spotColor = YjyoonLightGray.copy(0.01f)
+)
