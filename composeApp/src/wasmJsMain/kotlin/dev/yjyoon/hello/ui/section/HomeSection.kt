@@ -287,53 +287,68 @@ private fun GraphicImage(
 }
 
 @Composable
-private fun GithubButton(modifier: Modifier = Modifier) {
+private fun LinkButton(
+    labelRes: org.jetbrains.compose.resources.StringResource,
+    iconRes: org.jetbrains.compose.resources.DrawableResource,
+    url: String,
+    isOutlined: Boolean = false,
+    modifier: Modifier = Modifier
+) {
     val uriHandler = LocalUriHandler.current
-
-    Button(
-        onClick = { uriHandler.openUri("https://github.com/yjyoon-dev") },
-        modifier = modifier.then(Modifier.height(ButtonHeight)),
-        contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp)
-    ) {
+    val buttonContent: @Composable () -> Unit = {
         Text(
-            text = stringResource(Res.string.follow_github),
+            text = stringResource(labelRes),
             fontWeight = FontWeight.SemiBold,
             fontSize = 16.sp
         )
         Spacer(Modifier.width(8.dp))
         Icon(
-            painterResource(Res.drawable.ic_github),
+            painterResource(iconRes),
             contentDescription = null,
             modifier = Modifier.size(24.dp)
+        )
+    }
+
+    if (isOutlined) {
+        OutlinedButton(
+            onClick = { uriHandler.openUri(url) },
+            modifier = modifier.then(Modifier.height(ButtonHeight)),
+            colors = ButtonDefaults.outlinedButtonColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            ),
+            contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp),
+            content = { buttonContent() }
+        )
+    } else {
+        Button(
+            onClick = { uriHandler.openUri(url) },
+            modifier = modifier.then(Modifier.height(ButtonHeight)),
+            contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp),
+            content = { buttonContent() }
         )
     }
 }
 
 @Composable
-private fun BlogButton(modifier: Modifier = Modifier) {
-    val uriHandler = LocalUriHandler.current
+private fun GithubButton(modifier: Modifier = Modifier) {
+    LinkButton(
+        labelRes = Res.string.follow_github,
+        iconRes = Res.drawable.ic_github,
+        url = "https://github.com/yjyoon-dev",
+        modifier = modifier
+    )
+}
 
-    OutlinedButton(
-        onClick = { uriHandler.openUri("http://blog.yjyoon.dev") },
-        modifier = modifier.then(Modifier.height(ButtonHeight)),
-        colors = ButtonDefaults.outlinedButtonColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        ),
-        contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp)
-    ) {
-        Text(
-            text = stringResource(Res.string.visit_blog),
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 16.sp
-        )
-        Spacer(Modifier.width(8.dp))
-        Icon(
-            painterResource(Res.drawable.ic_open_in_new),
-            contentDescription = null,
-            modifier = Modifier.size(24.dp)
-        )
-    }
+@Composable
+private fun BlogButton(modifier: Modifier = Modifier) {
+    LinkButton(
+        labelRes = Res.string.visit_blog,
+        iconRes = Res.drawable.ic_open_in_new,
+        url = "http://blog.yjyoon.dev",
+        isOutlined = true,
+        modifier = modifier
+    )
 }
 
 private const val SHOW_INTRO_TEXT_WIDTH_THRESHOLD = 1330

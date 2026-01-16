@@ -24,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
@@ -32,8 +31,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.yjyoon.hello.ui.model.SideProject
 import dev.yjyoon.hello.ui.theme.YjyoonBlack
-import dev.yjyoon.hello.ui.theme.YjyoonLightGray
 import dev.yjyoon.hello.ui.theme.YjyoonWhite
+import dev.yjyoon.hello.ui.theme.lightShadow
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -55,13 +54,7 @@ fun AppButton(
         modifier = modifier.then(
             Modifier
                 .size(size)
-                .shadow(
-                    elevation = 24.dp,
-                    shape = RoundedCornerShape(cornerRadius),
-                    clip = false,
-                    ambientColor = YjyoonLightGray.copy(0.01f),
-                    spotColor = YjyoonLightGray.copy(0.01f)
-                )
+                .lightShadow(cornerRadius)
                 .hoverable(interactionSource)
         ),
     ) {
