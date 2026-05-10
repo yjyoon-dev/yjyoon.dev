@@ -25,14 +25,15 @@
   font-display: swap;
 }
 :root {
-  --font-sans: "NanumSquareNeo", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
-  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-sans: "NanumSquareNeo", Pretendard, "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, Pretendard, "Noto Sans KR", monospace;
 }
 </style>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
@@ -198,9 +199,11 @@ section:first-of-type { border-top: 0; }
 }
 .hero .greeting .blink { width: 8px; height: 14px; background: var(--accent); animation: blink 1.1s steps(2) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
+.hero-grid > * { min-width: 0; }
 .hero h1 {
   font-family: var(--font-sans); font-weight: 900;
-  font-size: clamp(40px, 11vw, 104px);
+  font-size: clamp(36px, 10vw, 104px);
+  overflow-wrap: anywhere;
   line-height: 0.98; letter-spacing: -0.035em; margin: 0;
   color: var(--fg);
 }
@@ -299,7 +302,7 @@ html[data-theme="dark"] .btn.primary:hover { background: #dfe2e7; border-color: 
   display: flex; align-items: center; gap: 10px;
 }
 .skills-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
-.skill-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.skill-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
 .skill {
   display: flex; align-items: center; gap: 10px;
   padding: 12px 14px; border: 1px solid var(--border);
@@ -411,7 +414,7 @@ html[data-theme="dark"] .btn.primary:hover { background: #dfe2e7; border-color: 
 
 /* Clubs */
 .clubs-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
   margin-top: 24px;
 }
 .club {
@@ -446,7 +449,7 @@ html[data-theme="dark"] .btn.primary:hover { background: #dfe2e7; border-color: 
 .sp-count strong { color: var(--accent-strong); font-weight: 700; }
 .exp-item .ttl em.hl { color: var(--accent-strong); font-style: normal; font-weight: 700; }
 .sp-grid {
-  display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px;
 }
 .sp {
   position: relative;
@@ -480,7 +483,7 @@ html[data-theme="dark"] .btn.primary:hover { background: #dfe2e7; border-color: 
 /* Talks */
 .talks-list { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 8px; }
 .talk {
-  display: grid; grid-template-columns: 64px 1fr auto; gap: 20px; align-items: center;
+  display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 20px; align-items: center;
   padding: 22px 12px; border-top: 1px solid var(--border);
 }
 .talk:first-child { border-top: 0; }
@@ -590,14 +593,14 @@ footer {
   .theme-label { display: none !important; }
   .topbar-inner { grid-template-columns: auto auto; justify-content: space-between; padding-right: 14px; }
   .controls { justify-self: end; }
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; align-items: start; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: start; }
   .hero-grid > div:first-child { order: 2; }
   .hero-art { max-width: 220px; justify-self: start; order: 1; }
-  .section-head, .about-grid { grid-template-columns: 1fr; gap: 16px; }
-  .skill-grid { grid-template-columns: repeat(2, 1fr); }
-  .clubs-grid { grid-template-columns: repeat(2, 1fr); }
-  .sp-grid { grid-template-columns: repeat(2, 1fr); }
-  .career-row { grid-template-columns: 56px 1fr; gap: 16px; }
+  .section-head, .about-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .clubs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .career-row { grid-template-columns: 56px minmax(0, 1fr); gap: 16px; }
   .career-row .date { grid-column: 2; padding: 0; order: -1; }
   .career-row .stint:has(.stint-dates:not(:empty)) .stint-head { flex-direction: column; align-items: flex-start; gap: 2px; }
   .career-row .stint:has(.stint-dates:not(:empty)) .stint-dates { order: -1; }
@@ -605,11 +608,11 @@ footer {
   .section-head h2 { white-space: normal; }
   .section-head { align-items: start; }
   .footer-left h2 { font-size: 36px; }
-  .footer-inner { grid-template-columns: 1fr; align-items: start; }
+  .footer-inner { grid-template-columns: minmax(0, 1fr); align-items: start; }
   section { padding: 64px 0; }
 }
 @media (max-width: 560px) {
-  .sp-grid { grid-template-columns: 1fr 1fr; }
+  .sp-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 </style>
 </head>
