@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ko" data-lang="kor" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yeojun Yoon</title>
+<meta name="description" content="An Android Developer who loves to build and share." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Yeojun Yoon" />
+<meta property="og:description" content="An Android Developer who loves to build and share." />
+<meta property="og:url" content="https://yjyoon.dev" />
+<meta property="og:image" content="https://yjyoon.dev/assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Yeojun Yoon" />
+<meta name="twitter:description" content="An Android Developer who loves to build and share." />
+<meta name="twitter:image" content="https://yjyoon.dev/assets/og-image.png" />
+<style>
+@font-face {
+  font-family: "NanumSquareNeo";
+  src: url("./fonts/NanumSquareNeo-Variable.ttf") format("truetype-variations");
+  font-weight: 100 950;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --font-sans: "NanumSquareNeo", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+</style>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { overflow-x: clip; }
+:root {
+  --max-w: 1180px;
+  --side-pad: 40px;
+  --bg-app: #ffffff;
+  --bg-elev: #f7f8fa;
+  --bg-card: #ffffff;
+  --fg: #0b0d10;
+  --fg-2: #424952;
+  --fg-3: #7a828d;
+  --border: #dfe2e7;
+  --border-strong: #c5cad1;
+  --brand: #0a1f44;
+  --accent: #03c75a;
+  --accent-strong: #02ad4f;
+  --grid-line: rgba(10, 31, 68, 0.06);
+}
+html[data-theme="dark"] {
+  --bg-app: #06101f;
+  --bg-elev: #0a1a30;
+  --bg-card: #0c1d36;
+  --fg: #f3f6fb;
+  --fg-2: #b6c0cf;
+  --fg-3: #7d8696;
+  --border: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --brand: #ffffff;
+  --accent: #2ed47a;
+  --accent-strong: #03c75a;
+  --grid-line: rgba(255, 255, 255, 0.05);
+}
+html, body {
+  background: var(--bg-app); color: var(--fg);
+  font-family: var(--font-sans); font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+/* Make headings respect the theme-aware --fg (overrides naver-tokens hard-coded color) */
+h1, h2, h3, h4 { color: var(--fg); }
+html[data-lang="kor"] [data-lang="eng"], html[data-lang="eng"] [data-lang="kor"] { display: none !important; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; cursor: pointer; background: none; border: 0; color: inherit; padding: 0; }
+.mono { font-family: var(--font-mono); }
+.eyebrow {
+  font-family: var(--font-mono); font-weight: 500; font-size: 12px;
+  letter-spacing: 0.04em; color: var(--accent-strong);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.eyebrow::before {
+  content: ""; width: 8px; height: 8px; border-radius: 999px;
+  background: var(--accent); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent);
+}
+
+/* Top bar */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in oklab, var(--bg-app) 55%, transparent);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 14px var(--side-pad);
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 32px;
+}
+.brand {
+  font-family: var(--font-mono); font-weight: 600; font-size: 15px;
+  letter-spacing: -0.01em; color: var(--fg); display: inline-flex; align-items: center; gap: 2px;
+}
+.brand .accent { color: var(--accent-strong); }
+.nav { display: flex; gap: 26px; justify-content: center; }
+.nav a {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+  color: var(--fg-2); padding: 4px 0; position: relative;
+  transition: color .16s ease;
+}
+.nav a:hover { color: var(--fg); }
+.nav a::before { content: "// "; color: var(--fg-3); opacity: 0; transition: opacity .16s ease; }
+.nav a:hover::before { opacity: 1; }
+.controls { display: flex; gap: 6px; align-items: center; }
+.ctrl .lang-short { display: none; }
+.ctrl.menu-btn { display: none; width: 32px; padding: 0; }
+.ctrl.menu-btn svg { width: 18px; height: 18px; }
+.drawer-scrim {
+  position: fixed; inset: 0; background: color-mix(in oklab, var(--bg-app) 60%, transparent);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none; transition: opacity .22s ease; z-index: 99;
+}
+.drawer-scrim.open { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(82vw, 320px);
+  background: var(--bg-app); border-left: 1px solid var(--border);
+  transform: translateX(100%); transition: transform .26s ease; z-index: 100;
+  display: flex; flex-direction: column;
+}
+.drawer.open { transform: translateX(0); }
+.drawer-head {
+  display: flex; justify-content: flex-end; padding: 14px var(--side-pad);
+  border-bottom: 1px solid var(--border);
+}
+.drawer-close {
+  background: transparent; border: 1px solid var(--border); color: var(--fg-2);
+  border-radius: 6px; padding: 6px; cursor: pointer; display: inline-flex;
+  transition: all .16s ease;
+}
+.drawer-close:hover { color: var(--fg); border-color: var(--border-strong); }
+.drawer-close svg { width: 16px; height: 16px; }
+.drawer-nav { display: flex; flex-direction: column; padding: 20px 0; }
+.drawer-nav a {
+  font-family: var(--font-mono); font-size: 15px; font-weight: 500;
+  color: var(--fg); padding: 16px var(--side-pad);
+  display: flex; align-items: center; gap: 14px;
+  transition: background .16s ease, color .16s ease;
+}
+.drawer-nav a:hover { background: var(--bg-elev); color: var(--accent-strong); }
+.drawer-nav a .num {
+  font-size: 11px; color: var(--accent-strong); letter-spacing: 0.06em;
+  width: 24px; flex-shrink: 0;
+}
+.ctrl {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  color: var(--fg-2); border: 1px solid var(--border);
+  height: 32px; padding: 0 10px; box-sizing: border-box;
+  border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  transition: border-color .16s ease, color .16s ease, background .16s ease;
+}
+.ctrl:hover { color: var(--fg); border-color: var(--border-strong); background: var(--bg-elev); }
+.ctrl svg { width: 14px; height: 14px; }
+
+/* Layout */
+main { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--side-pad); }
+section { padding: 96px 0; border-top: 1px solid var(--border); position: relative; }
+section:first-of-type { border-top: 0; }
+.section-label {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  color: var(--fg-3); letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+.section-label .num { color: var(--accent-strong); margin-right: 8px; }
+.section-head {
+  display: grid; grid-template-columns: 280px 1fr; gap: 56px;
+  margin-bottom: 56px; align-items: center;
+}
+.section-head h2 {
+  font-family: var(--font-sans); font-weight: 900; font-size: 44px;
+  line-height: 1.1; letter-spacing: -0.025em; margin: 0;
+  white-space: nowrap;
+}
+.section-head .desc { color: var(--fg-2); font-size: 16px; line-height: 1.65; max-width: 640px; margin: 0; }
+
+/* Hero */
+.hero { padding: 80px 0 100px; border-top: 0; }
+.hero-grid {
+  display: grid; grid-template-columns: 1.4fr 0.85fr; gap: 56px; align-items: end;
+}
+.hero .greeting {
+  font-family: var(--font-mono); font-size: 13px; color: var(--fg-3);
+  margin-bottom: 18px; display: inline-flex; align-items: center; gap: 10px;
+}
+.hero .greeting .blink { width: 8px; height: 14px; background: var(--accent); animation: blink 1.1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.hero h1 {
+  font-family: var(--font-sans); font-weight: 900;
+  font-size: clamp(40px, 11vw, 104px);
+  line-height: 0.98; letter-spacing: -0.035em; margin: 0;
+  color: var(--fg);
+}
+.hero h1 .accent { color: var(--accent-strong); }
+.hero .role {
+  font-family: var(--font-mono); font-size: 14px; font-weight: 500;
+  color: var(--fg-2); margin-top: 28px; line-height: 1.7;
+  border-left: 2px solid var(--accent); padding-left: 14px;
+}
+.hero .meta {
+  margin-top: 36px; display: flex; gap: 24px; flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 12px; color: var(--fg-3);
+}
+.hero .meta span strong { color: var(--fg); font-weight: 600; }
+.hero .cta-row { margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 18px; border-radius: 8px;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+  border: 1px solid var(--border-strong); color: var(--fg);
+  transition: all .16s ease;
+}
+.btn:hover { border-color: var(--fg); transform: translateY(-1px); }
+.btn.primary { background: var(--brand); color: #ffffff; border-color: var(--brand); }
+html[data-theme="dark"] .btn.primary { background: #ffffff; color: #06112a; border-color: #ffffff; }
+.btn.primary:hover { background: #14305f; border-color: #14305f; }
+html[data-theme="dark"] .btn.primary:hover { background: #dfe2e7; border-color: #dfe2e7; }
+.btn svg { width: 14px; height: 14px; }
+
+.hero-art { position: relative; max-width: 320px; justify-self: end; width: 100%; }
+.hero-art .frame {
+  position: relative; aspect-ratio: 1 / 1; border: 1px solid var(--border);
+  background: var(--bg-elev); border-radius: 12px; overflow: hidden;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.hero-art .frame::before, .hero-art .frame::after {
+  content: ""; position: absolute; width: 10px; height: 10px;
+  border: 1px solid var(--accent); background: var(--bg-app);
+}
+.hero-art .frame::before { top: -5px; left: -5px; }
+.hero-art .frame::after { bottom: -5px; right: -5px; }
+.hero-art img {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 78%; height: 78%; object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-elev);
+}
+.hero-art .photo-placeholder {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 13px; color: var(--fg-3);
+  text-align: center; line-height: 1.5;
+}
+.hero-art .photo-placeholder small { font-size: 11px; opacity: 0.7; }
+.hero-art .corner-label {
+  position: absolute; bottom: 14px; right: 14px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-3);
+  background: var(--bg-app); padding: 4px 8px; border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.scroll-cue {
+  margin-top: 80px; display: flex; align-items: center; gap: 14px;
+  font-family: var(--font-mono); font-size: 12px; color: var(--fg-3);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.scroll-cue::before { content: ""; width: 56px; height: 1px; background: var(--border-strong); }
+.scroll-cue .arrow { display: inline-flex; animation: arrow 1.6s ease-in-out infinite; }
+@keyframes arrow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+/* About */
+.about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 56px; }
+.about-grid .label {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  color: var(--fg-3); letter-spacing: 0.06em;
+}
+.about-grid .label .num { color: var(--accent-strong); margin-right: 8px; }
+.about-grid h2 {
+  font-family: var(--font-sans); font-weight: 900; font-size: 36px;
+  line-height: 1.15; letter-spacing: -0.025em; margin: 12px 0 0;
+}
+.about-prose p {
+  font-size: 17px; line-height: 1.8; color: var(--fg);
+  margin: 0 0 20px;
+}
+.about-prose .highlight { background: linear-gradient(transparent 60%, color-mix(in oklab, var(--accent) 28%, transparent) 60%); padding: 0 2px; }
+
+.skills { margin-top: 40px; }
+.skills-label {
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-3);
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.skills-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.skill-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.skill {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg-card);
+  transition: border-color .16s ease, background .16s ease, transform .16s ease;
+}
+.skill:hover { border-color: var(--border-strong); background: var(--bg-elev); transform: translateY(-1px); }
+.skill img { width: 24px; height: 24px; object-fit: contain; }
+.skill .name { font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
+
+/* Career */
+.career-list { display: flex; flex-direction: column; }
+.career-row {
+  display: grid; grid-template-columns: 140px 80px 1fr;
+  gap: 32px; align-items: start;
+  padding: 28px 0; border-top: 1px solid var(--border);
+}
+.career-row:first-child { border-top: 0; }
+.career-row .date { font-family: var(--font-mono); font-size: 13px; color: var(--fg-3); padding-left: 8px; padding-top: 4px; }
+.career-row .logo {
+  width: 64px; height: 64px; border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: #ffffff;
+  padding: 6px;
+}
+.career-row .logo img { width: 100%; height: auto; max-height: 100%; object-fit: contain; }
+.career-row .info .company {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-bottom: 18px;
+  transition: color .16s ease;
+}
+.career-row .info .company:hover { color: var(--accent-strong); }
+.career-row .info .company:hover .career-arrow { color: var(--accent-strong); transform: translate(2px, -2px); }
+.career-row .info h3 {
+  font-family: var(--font-sans); font-weight: 800; font-size: 22px;
+  margin: 0; letter-spacing: -0.015em;
+}
+.career-arrow {
+  width: 18px; height: 18px; color: var(--fg-3);
+  transition: color .16s ease, transform .16s ease;
+}
+
+/* Career stints (multiple teams within one company) */
+.career-row .stint {
+  position: relative; padding: 14px 0 14px 18px;
+  border-left: 1px dashed var(--border-strong);
+  margin-left: 4px;
+}
+.career-row .stint + .stint { padding-top: 18px; }
+.career-row .stint .dot {
+  position: absolute; left: -5px; top: 22px;
+  width: 9px; height: 9px; border-radius: 999px;
+  background: var(--bg-card); border: 2px solid var(--border-strong);
+}
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0   color-mix(in oklab, var(--accent) 35%, transparent); }
+  70%  { box-shadow: 0 0 0 8px color-mix(in oklab, var(--accent) 0%,  transparent); }
+  100% { box-shadow: 0 0 0 0   color-mix(in oklab, var(--accent) 0%,  transparent); }
+}
+.career-row .stint.current .dot {
+  background: var(--accent); border-color: var(--accent);
+  animation: pulseRing 1.8s ease-out infinite;
+}
+.career-row .stint-head {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; margin-bottom: 4px;
+}
+.career-row .stint-team {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-sans); font-weight: 700; font-size: 15px;
+  letter-spacing: -0.01em;
+}
+.career-row .stint-team .team-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  color: inherit; text-decoration: none;
+  transition: color .14s ease;
+}
+.career-row .stint-team .team-link:hover { color: var(--accent-strong); }
+.career-row .stint-team .team-link:hover .team-arrow { color: var(--accent-strong); transform: translate(2px, -2px); }
+.career-row .stint-team .team-arrow {
+  width: 12px; height: 12px; color: var(--fg-3);
+  transition: transform .14s ease, color .14s ease;
+}
+.career-row .stint-team .now {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent-strong);
+  border: 1px solid var(--accent);
+  padding: 2px 6px; border-radius: 999px;
+  background: color-mix(in oklab, var(--accent) 12%, transparent);
+}
+.career-row .stint-dates {
+  font-family: var(--font-mono); font-size: 12px; color: var(--fg-3);
+  white-space: nowrap;
+}
+.career-row .stint-pos {
+  font-family: var(--font-mono); font-size: 12.5px; color: var(--accent-strong);
+  margin-bottom: 8px;
+}
+.career-row .stint-main {
+  font-size: 14.5px; color: var(--fg); font-weight: 500; line-height: 1.6;
+  margin: 0 0 4px 0; letter-spacing: -0.005em;
+}
+.career-row .stint-desc {
+  font-size: 14.5px; color: var(--fg-2); line-height: 1.75;
+  white-space: pre-line; margin: 0;
+}
+
+/* Clubs */
+.clubs-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  margin-top: 24px;
+}
+.club {
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 18px; display: flex; flex-direction: column; gap: 12px;
+  background: var(--bg-card); transition: all .16s ease;
+}
+.club:hover { border-color: var(--border-strong); background: var(--bg-elev); transform: translateY(-2px); }
+.club .top { display: flex; justify-content: space-between; align-items: flex-start; }
+.club .logo {
+  width: 44px; height: 44px; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+.club .logo img { width: 100%; height: 100%; object-fit: cover; }
+.club .gen {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.06em; color: var(--fg-3);
+  border: 1px solid var(--border); padding: 3px 8px; border-radius: 999px;
+}
+.club .name { font-family: var(--font-sans); font-weight: 800; font-size: 16px; margin: 0; }
+.club .role { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); }
+
+/* Side projects */
+.sp-meta {
+  display: flex; align-items: baseline; gap: 14px;
+  margin-bottom: 24px;
+}
+.sp-count {
+  font-family: var(--font-mono); font-size: 12px; color: var(--fg-3);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.sp-count strong { color: var(--accent-strong); font-weight: 700; }
+.exp-item .ttl em.hl { color: var(--accent-strong); font-style: normal; font-weight: 700; }
+.sp-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+}
+.sp {
+  position: relative;
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--border); border-radius: 10px;
+  background: var(--bg-card);
+  transition: all .16s ease;
+}
+.sp:hover { border-color: var(--accent); background: var(--bg-elev); transform: translateY(-2px); }
+.sp .logo {
+  width: 36px; height: 36px; border-radius: 7px; overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-elev); border: 1px solid var(--border);
+}
+.sp .logo img { width: 100%; height: 100%; object-fit: cover; }
+.sp .title {
+  font-family: var(--font-sans); font-weight: 700; font-size: 13px;
+  letter-spacing: -0.01em; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.sp.disabled { cursor: default; }
+.sp.disabled .ext { display: none; }
+.sp .ext {
+  position: absolute; top: 8px; right: 8px;
+  width: 10px; height: 10px; color: var(--fg-3);
+  opacity: 0; transition: opacity .16s ease;
+}
+.sp:not(.disabled):hover .ext { opacity: 1; color: var(--accent-strong); }
+
+/* Talks */
+.talks-list { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 8px; }
+.talk {
+  display: grid; grid-template-columns: 64px 1fr auto; gap: 20px; align-items: center;
+  padding: 22px 12px; border-top: 1px solid var(--border);
+}
+.talk:first-child { border-top: 0; }
+.talk {
+  color: inherit; text-decoration: none;
+  transition: background .14s ease, padding .14s ease;
+}
+.talk:hover { background: var(--bg-elev); padding-left: 18px; }
+.talk-logo {
+  width: 56px; height: 56px; border-radius: 12px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-card); border: 1px solid var(--border);
+}
+.talk-logo img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+.talk-body { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.talk-host { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); letter-spacing: 0.02em; }
+.talk-ttl { font-family: var(--font-sans); font-weight: 600; font-size: 16px; color: var(--fg); letter-spacing: -0.01em; line-height: 1.4; }
+.talk:hover .talk-ttl { color: var(--accent-strong); }
+.talk-meta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.talk-date { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); white-space: nowrap; }
+.talk-arrow { width: 16px; height: 16px; color: var(--fg-3); flex-shrink: 0; transition: transform .14s ease, color .14s ease; }
+.talk:hover .talk-arrow { color: var(--accent-strong); transform: translate(2px, -2px); }
+@media (max-width: 720px) {
+  .talk { grid-template-columns: 48px 1fr; gap: 14px; padding: 18px 10px; }
+  .talk-logo { width: 48px; height: 48px; border-radius: 10px; }
+  .talk-meta { grid-column: 2; margin-top: 4px; }
+  .talk-ttl { font-size: 15px; }
+  .talk:hover { padding-left: 14px; }
+}
+
+/* Experience */
+.exp-group { margin-bottom: 36px; }
+.exp-group:last-child { margin-bottom: 0; }
+.exp-group-label {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  color: var(--fg-3); letter-spacing: 0.08em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+}
+.exp-group-label .num { color: var(--accent-strong); }
+.exp-group-label .line { flex: 1; height: 1px; background: var(--border); }
+.exp-list { display: flex; flex-direction: column; }
+.exp-item {
+  padding: 14px 0 14px 18px; position: relative;
+  display: flex; justify-content: space-between; gap: 16px; align-items: baseline;
+  border-bottom: 1px solid var(--border);
+  transition: background .14s ease, padding .14s ease;
+}
+.exp-item::before {
+  content: ""; position: absolute; left: 4px; top: 22px;
+  width: 4px; height: 4px; border-radius: 999px;
+  background: var(--fg-3); transition: background .14s ease, transform .14s ease;
+}
+a.exp-item { color: inherit; }
+a.exp-item:hover { background: var(--bg-elev); padding-left: 22px; }
+a.exp-item:hover::before { background: var(--accent-strong); transform: scale(1.6); }
+.exp-item .ttl { font-family: var(--font-sans); font-weight: 600; font-size: 14.5px; line-height: 1.5; letter-spacing: -0.01em; }
+.exp-item .ttl em.hl { color: var(--accent-strong); font-style: normal; font-weight: 700; }
+.exp-item .ttl .prize { color: var(--accent-strong); margin-left: 6px; font-weight: 700; }
+.exp-item .date { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); white-space: nowrap; flex-shrink: 0; }
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border-strong);
+  padding: 64px 0 56px;
+}
+.footer-inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 0 var(--side-pad);
+  display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end;
+}
+.footer-left .label {
+  font-family: var(--font-mono); font-size: 12px; color: var(--fg-3);
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;
+}
+.footer-left h2 {
+  font-family: var(--font-sans); font-weight: 900; font-size: 56px;
+  margin: 0 0 12px; letter-spacing: -0.03em; line-height: 1;
+}
+.footer-left h2 a {
+  border-bottom: 3px solid var(--accent);
+  transition: color .16s ease;
+}
+.footer-left h2 a:hover { color: var(--accent-strong); }
+.footer-left .copyright {
+  margin-top: 32px; font-family: var(--font-mono); font-size: 12px; color: var(--fg-3);
+}
+.contacts { display: flex; gap: 8px; }
+.contact {
+  width: 44px; height: 44px; border: 1px solid var(--border-strong);
+  border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-2); transition: all .16s ease;
+}
+.contact:hover { border-color: var(--accent); color: var(--accent-strong); transform: translateY(-2px); }
+.contact svg { width: 18px; height: 18px; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  :root { --side-pad: 24px; }
+  .nav { display: none; }
+  .ctrl.menu-btn { display: inline-flex; }
+  .ctrl { height: 36px; padding: 0 12px; font-size: 13px; }
+  .ctrl svg { width: 16px; height: 16px; }
+  .ctrl.menu-btn { width: 36px; padding: 0; }
+  .ctrl.menu-btn svg { width: 20px; height: 20px; }
+  #theme-toggle { width: 36px; padding: 0; gap: 0; }
+  .ctrl .lang-long { display: none; }
+  .ctrl .lang-short { display: inline; }
+  .theme-label { display: none !important; }
+  .topbar-inner { grid-template-columns: auto auto; justify-content: space-between; padding-right: 14px; }
+  .controls { justify-self: end; }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; align-items: start; }
+  .hero-grid > div:first-child { order: 2; }
+  .hero-art { max-width: 220px; justify-self: start; order: 1; }
+  .section-head, .about-grid { grid-template-columns: 1fr; gap: 16px; }
+  .skill-grid { grid-template-columns: repeat(2, 1fr); }
+  .clubs-grid { grid-template-columns: repeat(2, 1fr); }
+  .sp-grid { grid-template-columns: repeat(2, 1fr); }
+  .career-row { grid-template-columns: 56px 1fr; gap: 16px; }
+  .career-row .date { grid-column: 2; padding: 0; order: -1; }
+  .career-row .stint:has(.stint-dates:not(:empty)) .stint-head { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .career-row .stint:has(.stint-dates:not(:empty)) .stint-dates { order: -1; }
+  .career-row .stint:has(.stint-dates:not(:empty)) .dot { top: 42px; }
+  .section-head h2 { white-space: normal; }
+  .section-head { align-items: start; }
+  .footer-left h2 { font-size: 36px; }
+  .footer-inner { grid-template-columns: 1fr; align-items: start; }
+  section { padding: 64px 0; }
+}
+@media (max-width: 560px) {
+  .sp-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#home">
+      <span>yjyoon</span><span class="accent">.</span><span>dev</span>
+    </a>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#career">Career</a>
+      <a href="#talks">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="controls">
+      <button class="ctrl" id="lang-toggle" aria-label="Toggle language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+        <span data-lang="kor"><span class="lang-long">KOR</span><span class="lang-short">KO</span></span><span data-lang="eng"><span class="lang-long">ENG</span><span class="lang-short">EN</span></span>
+      </button>
+      <button class="ctrl" id="theme-toggle" aria-label="Toggle theme">
+        <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <span data-lang="kor" id="theme-label-kor" class="theme-label">라이트</span>
+        <span data-lang="eng" id="theme-label-eng" class="theme-label">Light</span>
+      </button>
+      <button class="ctrl menu-btn" id="menu-btn" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <button class="drawer-close" id="drawer-close" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
+  </div>
+  <nav class="drawer-nav">
+    <a href="#about"><span class="num">01</span>About</a>
+    <a href="#career"><span class="num">02</span>Career</a>
+    <a href="#talks"><span class="num">03</span>Experience</a>
+    <a href="#contact"><span class="num">04</span>Contact</a>
+  </nav>
+</aside>
+
+<script>
+(() => {
+  const btn = document.getElementById('menu-btn');
+  const drawer = document.getElementById('drawer');
+  const scrim = document.getElementById('drawer-scrim');
+  const close = document.getElementById('drawer-close');
+  const open = () => { drawer.classList.add('open'); scrim.classList.add('open'); drawer.setAttribute('aria-hidden','false'); };
+  const shut = () => { drawer.classList.remove('open'); scrim.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); };
+  btn.addEventListener('click', open);
+  close.addEventListener('click', shut);
+  scrim.addEventListener('click', shut);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
+})();
+</script>
+
+<main id="home">
+
+  <!-- HERO -->
+  <section class="hero" data-screen-label="01 Hero">
+    <div class="hero-grid">
+      <div>
+        <div class="greeting"><span class="blink"></span>
+          <span data-lang="kor">$ whoami</span>
+          <span data-lang="eng">$ whoami</span>
+        </div>
+        <h1>
+          <span data-lang="kor">윤여준<span class="accent">.</span></span>
+          <span data-lang="eng">Yeojun Yoon<span class="accent">.</span></span>
+        </h1>
+        <p class="role">
+          <span data-lang="kor">만들거나 공유하는 것을 좋아하는 Android 개발자입니다.</span>
+          <span data-lang="eng">An Android developer who loves to build and share.</span>
+        </p>
+        <div class="meta">
+          <span><strong>NAVER</strong> · Android Developer</span>
+          <span data-lang="kor"><strong class="yrs">3</strong>년차</span>
+          <span data-lang="eng"><strong class="yrs">3</strong>+ years</span>
+          <span><strong>Gyeonggi</strong>, KR</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn primary" href="https://github.com/yjyoon-dev" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.1.79-.25.79-.55v-1.93c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.34.95.1-.74.4-1.24.73-1.53-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.93 10.93 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.68.41.36.78 1.05.78 2.13v3.16c0 .31.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            <span>Github</span>
+          </a>
+          <a class="btn" href="https://blog.yjyoon.dev" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h11a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4V4Z"/><path d="M4 16a4 4 0 0 1 4-4h11"/></svg>
+            <span data-lang="kor">기술 블로그</span><span data-lang="eng">Tech Blog</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="frame">
+          <img src="assets/profile.jpg" alt="Yeojun Yoon"/>
+          <span class="corner-label">profile.jpg</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <span class="arrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" data-screen-label="02 About">
+    <div class="about-grid">
+      <div>
+        <div class="label"><span class="num">01</span>About</div>
+        <h2><span data-lang="kor">소개</span><span data-lang="eng">Hello, world!</span></h2>
+      </div>
+      <div>
+        <div class="about-prose">
+          <p data-lang="kor">
+            <span class="highlight"><span class="yrs">3</span>년차 안드로이드 개발자</span>입니다. 내가 좋아하는 것, 나에게 필요한 것을
+            직접 만들 수 있다는 매력을 느껴 개발을 시작하게 되었고 그 중 우리에게 가장 가까이 있는
+            모바일 플랫폼에 푹 빠지게 되었습니다.
+          </p>
+          <p data-lang="kor">
+            지금까지 <span class="highlight">20개가 넘는 팀 또는 개인 사이드 프로젝트를 진행</span>했고, 현재는 네이버에서
+            <strong>ThingsBook 글로벌 서비스의 Android 앱 개발</strong>을 맡고 있습니다.
+          </p>
+          <p data-lang="kor">
+            최근에는 취미로 <strong>Kotlin Multiplatform</strong> 을 사용해 간간히 떠오르는
+            <span class="highlight">아이디어들을 앱으로 출시</span>해보고 있습니다.
+          </p>
+
+          <p data-lang="eng">
+            <span class="highlight">Android developer with <span class="yrs">3</span>+ years of experience.</span>
+            I started building software because I love being able to create the things I want
+            and the things I need — and I fell deeply for mobile, the platform closest to us.
+          </p>
+          <p data-lang="eng">
+            I've worked on <span class="highlight">20+ team and personal side projects so far</span>, and I'm currently building
+            the <strong>Android app for ThingsBook</strong>, NAVER's global service.
+          </p>
+          <p data-lang="eng">
+            Lately, as a hobby, I've been using <strong>Kotlin Multiplatform</strong> to
+            <span class="highlight">turn random ideas into shipped apps</span>.
+          </p>
+        </div>
+        <div class="skills">
+          <div class="skills-label"><span data-lang="kor">즐겨 쓰는 기술</span><span data-lang="eng">Favorites</span></div>
+          <div class="skill-grid" id="skills"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER -->
+  <section id="career" data-screen-label="03 Career">
+    <div class="section-label"><span class="num">02</span>Career</div>
+    <div class="section-head">
+      <h2><span data-lang="kor">경력</span><span data-lang="eng">History</span></h2>
+      <p class="desc">
+        <span data-lang="kor">지난 몇 년 동안 함께한 회사들. 현재는 네이버 ThingsBook 글로벌 서비스 개발팀에서 일하고 있습니다.</span>
+        <span data-lang="eng">Companies I've worked with over the past years. Currently on NAVER's ThingsBook Global Service team.</span>
+      </p>
+    </div>
+    <div class="career-list" id="career-list"></div>
+  </section>
+
+  <!-- TALKS -->
+  <section id="talks" data-screen-label="04 Talks">
+    <div class="section-label"><span class="num">03</span>Talks</div>
+    <div class="section-head">
+      <h2><span data-lang="kor">발표</span><span data-lang="eng">On stage</span></h2>
+      <p class="desc">
+        <span data-lang="kor">무대에 서서 경험과 생각을 나눈 자리들.</span>
+        <span data-lang="eng">Stages where I shared what I've learned and built.</span>
+      </p>
+    </div>
+    <div class="talks-list" id="talks-list"></div>
+  </section>
+
+  <!-- CLUBS -->
+  <section id="clubs" data-screen-label="05 Clubs">
+    <div class="section-label"><span class="num">04</span>Clubs</div>
+    <div class="section-head">
+      <h2><span data-lang="kor">IT 활동</span><span data-lang="eng">Dev Clubs</span></h2>
+      <p class="desc">
+        <span data-lang="kor">수개월간 한 팀을 이뤄 하나의 프로덕트를 만들었던 활동들.</span>
+        <span data-lang="eng">Developer programs I've been part of in Korea — months-long team builds.</span>
+      </p>
+    </div>
+    <div class="clubs-grid" id="clubs-grid"></div>
+  </section>
+
+  <!-- SIDE PROJECTS -->
+  <section id="projects" data-screen-label="06 Projects">
+    <div class="section-label"><span class="num">05</span>Projects</div>
+    <div class="section-head">
+      <h2><span data-lang="kor">사이드 프로젝트</span><span data-lang="eng">Things I built</span></h2>
+      <p class="desc">
+        <span data-lang="kor">팀 또는 개인적으로 만들어 본 프로젝트들. 만드는 일 자체를 좋아합니다.</span>
+        <span data-lang="eng">Projects I've shipped — solo or with a team. I just love building.</span>
+      </p>
+    </div>
+    <div class="sp-meta">
+      <span class="sp-count"><strong id="sp-count">19</strong>
+        <span data-lang="kor"> Projects</span><span data-lang="eng"> Projects</span>
+      </span>
+      <span class="sp-count" style="color: var(--fg-3);">
+        <span data-lang="kor">팀 · 개인</span><span data-lang="eng">team · personal</span>
+      </span>
+    </div>
+    <div class="sp-grid" id="sp-grid"></div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" data-screen-label="07 Highlights">
+    <div class="section-label"><span class="num">06</span>Highlights</div>
+    <div class="section-head">
+      <h2><span data-lang="kor">그 외 이력</span><span data-lang="eng">And more</span></h2>
+      <p class="desc">
+        <span data-lang="kor">수상, 심사, 멘토링, 자격증 등.</span>
+        <span data-lang="eng">Awards, judging, mentoring and certs.</span>
+      </p>
+    </div>
+    <div id="exp-panels"></div>
+  </section>
+
+</main>
+
+<footer id="contact" data-screen-label="08 Contact">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="label">
+        <span data-lang="kor">// 연락하기</span><span data-lang="eng">// Get in touch</span>
+      </div>
+      <h2><a href="mailto:me@yjyoon.dev">me@yjyoon.dev</a></h2>
+      <div class="copyright">© <span id="year">2024</span> Yeojun Yoon. All rights reserved.</div>
+    </div>
+    <div class="contacts">
+      <a class="contact" href="https://github.com/yjyoon-dev" target="_blank" rel="noopener" aria-label="Github">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.1.79-.25.79-.55v-1.93c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.34.95.1-.74.4-1.24.73-1.53-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.93 10.93 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.68.41.36.78 1.05.78 2.13v3.16c0 .31.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+      </a>
+      <a class="contact" href="https://www.linkedin.com/in/yjyoon-dev/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.21 0 22.23 0Z"/></svg>
+      </a>
+      <a class="contact" href="https://www.instagram.com/yjyo_on" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </a>
+      <a class="contact" href="mailto:me@yjyoon.dev" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   Data
+   ========================================================= */
+const SKILLS = [
+  { name: "Kotlin",   icon: "assets/ic_kotlin.png",   url: "https://kotlinlang.org/" },
+  { name: "Android",  icon: "assets/ic_android.png",  url: "https://developer.android.com/" },
+  { name: "Compose",  icon: "assets/ic_compose.png",  url: "https://www.jetbrains.com/compose-multiplatform/" },
+  { name: "Ktor",     icon: "assets/ic_ktor.png",     url: "https://ktor.io/" },
+  { name: "Flutter",  icon: "assets/ic_flutter.png",  url: "https://flutter.dev/" },
+  { name: "Supabase", icon: "assets/ic_supabase.png", url: "https://supabase.com/" },
+  { name: "AWS",      icon: "assets/ic_aws.png",      url: "https://aws.amazon.com/" },
+  { name: "Claude",   icon: "assets/ic_claude.png",   url: "https://claude.com/" },
+];
+
+const CAREERS = [
+  {
+    logo: "assets/img_naver.png", url: "https://navercorp.com",
+    name: { kor: "네이버", eng: "NAVER" },
+    date: "2023.12 — Now",
+    stints: [
+      {
+        current: true, dates: "2026.04 — Now",
+        team: { kor: "ThingsBook", eng: "ThingsBook Team" },
+        url: "https://www.thbk.me/about",
+        pos:  { kor: "Android Developer", eng: "Android Developer" },
+        main: {
+          kor: "ThingsBook 글로벌 서비스 Android 개발",
+          eng: "ThingsBook Global Service Android"
+        },
+        desc: {
+          kor: "- Coming Soon!",
+          eng: "- Coming Soon!"
+        }
+      },
+      {
+        current: false, dates: "2023.12 — 2026.04",
+        team: { kor: "디스플레이 광고", eng: "Display Ads Team" },
+        pos:  { kor: "Android Developer", eng: "Android Developer" },
+        main: {
+          kor: "광고 SDK Android 개발",
+          eng: "Ad SDK Android"
+        },
+        desc: {
+          kor: "- 네이티브 광고 커스텀 뷰 개발\n- 광고 디스크 캐싱 기능 개발\n- 광고 미디어 Lazy Loading 기능 개발\n- 위치 정보 수집 및 전송 기능 개발\n- 웹뷰 내 광고 통신 인터페이스 개발\n- 외부 광고 Mediation SDK 연동",
+          eng: "- Native ad custom views\n- Ad disk-caching\n- Ad media lazy loading\n- Location collection & transmission\n- WebView ↔ ad bridge interface\n- 3rd-party Mediation SDK integration"
+        }
+      }
+    ]
+  },
+  {
+    logo: "assets/img_kakaobrain.png", url: "https://kakaobrain.com",
+    name: { kor: "카카오브레인", eng: "Kakao Brain" },
+    date: "2023.06 — 2023.11",
+    stints: [{
+      current: false, dates: "",
+      team: { kor: "언어모델사업실 TF", eng: "Language Model Business TF" },
+      pos:  { kor: "Android Developer Intern", eng: "Android Developer Intern" },
+      main: {
+        kor: "AI 소설 프로토타이핑 서비스 개발",
+        eng: "AI fiction prototyping service"
+      },
+      desc: {
+        kor: "- Kotlin 을 이용한 멀티플랫폼 데스크탑 앱 개발",
+        eng: "- Multiplatform desktop app development with Kotlin"
+      }
+    }]
+  },
+  {
+    logo: "assets/img_neurosky.png", url: "https://neurosky.com",
+    name: { kor: "뉴로스카이", eng: "Neurosky" },
+    date: "2022.08 — 2022.12",
+    stints: [{
+      current: false, dates: "",
+      team: { kor: "CTO R&D", eng: "CTO's R&D Team" },
+      pos:  { kor: "Android Developer Intern", eng: "Android Developer Intern" },
+      main: {
+        kor: "실시간 EEG 통신 서비스 개발",
+        eng: "Real-time EEG communication service"
+      },
+      desc: {
+        kor: "- Bluetooth 를 이용한 실시간 뇌파 측정 헤드셋 데이터 시각화\n- Compose 를 이용한 게이미피케이션 및 녹화 기능 개발",
+        eng: "- Bluetooth EEG headset data visualization\n- Gamification & recording features with Compose"
+      }
+    }]
+  }
+];
+
+const CLUBS = [
+  { logo: "assets/ic_exp_swm.jpg",     name: { kor: "SW마에스트로", eng: "SW Maestro" }, role: { kor: "Flutter Developer", eng: "Flutter Developer" }, year: 12, url: "https://swmaestro.org/" },
+  { logo: "assets/ic_exp_yapp.jpg",    name: { kor: "YAPP",        eng: "YAPP" },        role: { kor: "Android Developer", eng: "Android Developer" }, year: 20, url: "https://www.yapp.co.kr/" },
+  { logo: "assets/ic_exp_nexters.png", name: { kor: "넥스터즈",     eng: "Nexters" },     role: { kor: "Android Developer", eng: "Android Developer" }, year: 22, url: "https://www.nexters.co.kr/" },
+  { logo: "assets/ic_exp_dpm.png",     name: { kor: "디프만",       eng: "Depromeet" },   role: { kor: "Android Developer", eng: "Android Developer" }, year: 13, url: "https://www.depromeet.com/" },
+];
+
+const SIDE = [
+  { name: { kor: "덕지",           eng: "Duckz"         }, logo: "assets/side/duckz.png",     url: "https://play.google.com/store/apps/details?id=com.upf.memorytrace_android" },
+  { name: { kor: "모목지",         eng: "Momokzi"       }, logo: "assets/side/momokzi.png",   url: "https://github.com/momokzi/momokzi-app" },
+  { name: { kor: "쏘다",           eng: "Ssoda"         }, logo: "assets/side/ssoda.png",     url: "https://github.com/yjyoon-dev/ssoda" },
+  { name: { kor: "모이미",         eng: "Moime"         }, logo: "assets/side/moime.png",     url: "https://github.com/team-capybara/moime-mobile" },
+  { name: { kor: "왔나",           eng: "Whatnow"       }, logo: "assets/side/whatnow.png",   url: "https://github.com/yjyoon-dev/whatnow-android" },
+  { name: { kor: "피모",           eng: "Pimo"          }, logo: "assets/side/pimo.png",      url: "https://github.com/Nexters-PIMO/PIMO_Android" },
+  { name: { kor: "널리",           eng: "Knowlly"       }, logo: "assets/side/knowlly.png",   url: "https://github.com/yjyoon-dev/knowlly-android" },
+  { name: { kor: "얼레디미",       eng: "ALREADYME.md"  }, logo: "assets/side/alreadyme.png", url: "https://github.com/readme-generator/alreadyme-desktop" },
+  { name: { kor: "커버리스트",     eng: "Coverist"      }, logo: "assets/side/coverist.png",  url: "https://github.com/coverist" },
+  { name: { kor: "엔파고",         eng: "Enphago"       }, logo: "assets/side/enphago.png",   url: "https://github.com/yjyoon-dev/enphago-android" },
+  { name: { kor: "구를지도",       eng: "GoorleMap"     }, logo: "assets/side/goorlemap.png", url: null },
+  { name: { kor: "JS 미니게임천국", eng: "JS mini-games" }, logo: "assets/side/jsgame.png",    url: "https://github.com/yjyoon-dev/javascript-mini-game" },
+  { name: { kor: "KW 기숙사",      eng: "KW Dorm"       }, logo: "assets/side/kwdorm.png",    url: "https://github.com/kw-dormitory/kw-dormitory-mobile" },
+  { name: { kor: "KW 알리미",      eng: "KW Noti"       }, logo: "assets/side/kwnoti.png",    url: "https://play.google.com/store/apps/details?id=dev.yjyoon.kwnotice" },
+  { name: { kor: "KW 패스",        eng: "KW Pass"       }, logo: "assets/side/kwpass.png",    url: "https://github.com/kw-service/kw-pass-wearos" },
+  { name: { kor: "LOCO",          eng: "LOCO"          }, logo: "assets/side/loco.png",      url: "https://github.com/love-compass/loco-android" },
+  { name: { kor: "MBTMI",         eng: "MBTMI"         }, logo: "assets/side/mbtmi.png",     url: "https://github.com/sw-hackathon-2022/mbtmi-flutter" },
+  { name: { kor: "실종아동찾기",   eng: "Missing"        }, logo: "assets/side/missing.png",   url: "https://github.com/oss-talkative/missing-mobile" },
+  { name: { kor: "뉴로스카이",     eng: "Neurosky"      }, logo: "assets/side/neuro.png",     url: "https://github.com/neurosky-internship/zonetrainer-android" },
+  { name: { kor: "yjyoon.dev",    eng: "yjyoon.dev"    }, logo: "assets/favicon.svg", url: "https://github.com/yjyoon-dev/yjyoon.dev" },
+  { name: { kor: "Coming soon",   eng: "Coming soon"   }, logo: "assets/side/unknown.svg", url: null },
+];
+
+const TALKS = [
+  { ttl: { kor: "AI 시대에도 통하는 개발자 취업 전략", eng: "Job-search strategies for the AI era" }, host: "2026 JOBKOREA DEVCON", logo: "assets/ic_org_jobkorea.png", date: "2026.04", url: "https://speakerdeck.com/yjyoon/ai-sidaeedo-tonghaneun-gaebalja-cwieob-jeonryag" },
+  { ttl: { kor: "KMP + Supabase: 1인 개발의 새로운 패러다임", eng: "KMP + Supabase: a new paradigm for solo dev" }, host: "Kotlin User Group Seoul · KMP Meetup", logo: "assets/ic_org_kug.png", date: "2025.12", url: "https://speakerdeck.com/yjyoon/kmp-plus-supabase-1in-gaebalyi-saeroun-paereodaim" },
+  { ttl: { kor: "생산성을 높이는 Android SDK 배포 전략", eng: "Android SDK release strategy for productivity" }, host: "2025 NAVER Engineering Day", logo: "assets/ic_org_d2.png", date: "2025.05", url: "https://speakerdeck.com/yjyoon/saengsanseongeul-nopineun-android-sdk-baepo-jeonryag" },
+  { ttl: { kor: "사이드 프로젝트를 20번 실패한 주니어의 오답노트", eng: "Notes from a junior who failed 20 side projects" }, host: "GDG Korea Android · super.init(v=6)", logo: "assets/ic_org_gdg.png", date: "2025.03", url: "https://speakerdeck.com/yjyoon/saideu-peurojegteureul-20beon-silpaehan-junieoyi-odabnoteu-feat-kmp" },
+];
+
+const EXP = {
+  awards: {
+    label: { kor: "수상", eng: "Awards" },
+    items: [
+      { ttl: { kor: "공개SW 개발자 대회",         eng: "Open Source SW Contest" },        prize: { kor: "금상",       eng: "Gold" },           date: "2022" },
+      { ttl: { kor: "SW중심대학 공동 해커톤",      eng: "SW-Centered Univ. Hackathon" },   prize: { kor: "우수상",     eng: "Excellence" },     date: "2022" },
+      { ttl: { kor: "중앙대학교 캠퍼스타운 창업경진대회", eng: "CAU Campus Town Startup Comp." }, prize: { kor: "대상",       eng: "Grand Prize" },    date: "2022" },
+      { ttl: { kor: "SW마에스트로 12기 해커톤",    eng: "SW Maestro 12th Hackathon" },     prize: { kor: "최우수상",   eng: "Best Prize" },     date: "2021" },
+      { ttl: { kor: "광운대학교 AI 아이디어 공모전", eng: "KW Univ. AI Idea Contest" },     prize: { kor: "우수상",     eng: "Excellence" },     date: "2018" },
+    ]
+  },
+  mentoring: {
+    label: { kor: "멘토링", eng: "Mentoring" },
+    items: [
+      { ttl: { kor: "디프만 IT동아리 현직자와의 만남 <em class=\"hl\">멘토</em>",                  eng: "Depromeet IT Club — Industry <em class=\"hl\">Mentor</em> Session" }, date: "2026.03" },
+      { ttl: { kor: "한국대학생IT경영학회 KUSITMS 밋업데이 <em class=\"hl\">심사위원</em>", eng: "KUSITMS Meetup Day — <em class=\"hl\">Judge</em>" }, date: "2024.05 · 2024.11" },
+      { ttl: { kor: "SW마이스터고 연합해커톤 기술 <em class=\"hl\">멘토</em>",              eng: "SW Meister High School Hackathon — Tech <em class=\"hl\">Mentor</em>" }, date: "2022.10" },
+      { ttl: { kor: "웅진씽크빅 게임 개발 챌린지 <em class=\"hl\">리뷰어</em>",              eng: "Woongjin Game Dev Challenge — <em class=\"hl\">Reviewer</em>" }, date: "2022.09 · 2023.09" },
+    ]
+  },
+  certs: {
+    label: { kor: "자격증", eng: "Certs" },
+    items: [
+      { ttl: { kor: "AWS Certified Solutions Architect", eng: "AWS Certified Solutions Architect" }, prize: { kor: "Associate", eng: "Associate" }, date: "2021" },
+      { ttl: { kor: "TOPCIT", eng: "TOPCIT" }, prize: { kor: "Level 3", eng: "Level 3" }, date: "2021" },
+    ]
+  }
+};
+
+/* =========================================================
+   Render
+   ========================================================= */
+function el(html) { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; }
+function lang(obj) { return `<span data-lang="kor">${obj.kor}</span><span data-lang="eng">${obj.eng}</span>`; }
+
+// Skills
+{
+  const root = document.getElementById("skills");
+  SKILLS.forEach(s => root.appendChild(el(`
+    <a class="skill" href="${s.url}" target="_blank" rel="noopener">
+      <img src="${s.icon}" alt="${s.name}"/><span class="name">${s.name}</span>
+    </a>`)));
+}
+
+// Career
+{
+  const root = document.getElementById("career-list");
+  CAREERS.forEach(c => {
+    const stintsHtml = c.stints.map(s => `
+      <div class="stint ${s.current ? 'current' : ''}">
+        <div class="stint-head">
+          <div class="stint-team">
+            <span class="dot"></span>
+            ${s.url
+              ? `<a class="team team-link" href="${s.url}" target="_blank" rel="noopener">${lang(s.team)}<svg class="team-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg></a>`
+              : `<span class="team">${lang(s.team)}</span>`}
+            ${s.current ? '<span class=\"now\"><span data-lang=\"kor\">현재</span><span data-lang=\"eng\">Now</span></span>' : ''}
+          </div>
+          <div class="stint-dates">${s.dates || ''}</div>
+        </div>
+        <div class="stint-pos">${lang(s.pos)}</div>
+        ${s.main ? `<p class="stint-main">${lang(s.main)}</p>` : ''}
+        <p class="stint-desc">${lang(s.desc)}</p>
+      </div>`).join('');
+    root.appendChild(el(`
+      <div class="career-row">
+        <div class="date">${c.date}</div>
+        <div class="logo"><img src="${c.logo}" alt=""/></div>
+        <div class="info">
+          <a class="company" href="${c.url}" target="_blank" rel="noopener">
+            <h3>${lang(c.name)}</h3>
+            <svg class="career-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+          ${stintsHtml}
+        </div>
+      </div>`));
+  });
+}
+
+// Talks
+{
+  const root = document.getElementById("talks-list");
+  TALKS.forEach(t => root.appendChild(el(`
+    <a class="talk" href="${t.url}" target="_blank" rel="noopener">
+      <div class="talk-logo"><img src="${t.logo}" alt="${t.host}"/></div>
+      <div class="talk-body">
+        <div class="talk-host">${t.host}</div>
+        <div class="talk-ttl">${lang(t.ttl)}</div>
+      </div>
+      <div class="talk-meta">
+        <span class="talk-date">${t.date}</span>
+        <svg class="talk-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </div>
+    </a>`)));
+}
+
+// Clubs
+{
+  const root = document.getElementById("clubs-grid");
+  CLUBS.forEach(c => root.appendChild(el(`
+    <a class="club" href="${c.url}" target="_blank" rel="noopener">
+      <div class="top">
+        <div class="logo"><img src="${c.logo}" alt=""/></div>
+        <div class="gen">${c.year}<span data-lang="kor">기</span><span data-lang="eng">th</span></div>
+      </div>
+      <div>
+        <h3 class="name">${lang(c.name)}</h3>
+        <div class="role">${lang(c.role)}</div>
+      </div>
+    </a>`)));
+}
+
+// Side projects
+{
+  const root = document.getElementById("sp-grid");
+  SIDE.forEach(p => {
+    const tag = p.url ? "a" : "div";
+    const attrs = p.url ? `href="${p.url}" target="_blank" rel="noopener"` : "";
+    const cls = p.url ? "sp" : "sp disabled";
+    root.appendChild(el(`
+      <${tag} class="${cls}" ${attrs}>
+        <div class="logo"><img src="${p.logo}" alt=""/></div>
+        <div class="title">${lang(p.name)}</div>
+        <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </${tag}>`));
+  });
+  document.getElementById("sp-count").textContent = "20+";
+}
+
+// Experience — flat grouped list
+{
+  const root = document.getElementById("exp-panels");
+  Object.keys(EXP).forEach((k, i) => {
+    const e = EXP[k];
+    const group = el(`<div class="exp-group"></div>`);
+    group.appendChild(el(`
+      <div class="exp-group-label">
+        <span class="num">0${i + 1}</span><span>${lang(e.label)}</span><span class="line"></span>
+      </div>`));
+    const list = document.createElement("div");
+    list.className = "exp-list";
+    e.items.forEach(it => {
+      const tag = it.url ? "a" : "div";
+      const attrs = it.url ? `href="${it.url}" target="_blank" rel="noopener"` : "";
+      list.appendChild(el(`
+        <${tag} class="exp-item" ${attrs}>
+          <div class="ttl">${lang(it.ttl)}${it.prize ? `<span class="prize">${lang(it.prize)}</span>` : ''}</div>
+          <div class="date">${it.date}</div>
+        </${tag}>`));
+    });
+    group.appendChild(list);
+    root.appendChild(group);
+  });
+}
+
+/* =========================================================
+   Theme + language toggle (persisted)
+   ========================================================= */
+function setTheme(t) {
+  document.documentElement.dataset.theme = t;
+  localStorage.setItem("yj-theme", t);
+  const sun = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+  const moon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>';
+  const btn = document.getElementById("theme-toggle");
+  btn.querySelector("svg").outerHTML = t === "dark" ? moon : sun;
+  document.getElementById("theme-label-kor").textContent = t === "dark" ? "다크" : "라이트";
+  document.getElementById("theme-label-eng").textContent = t === "dark" ? "Dark" : "Light";
+}
+function setLang(l) {
+  document.documentElement.dataset.lang = l;
+  document.documentElement.lang = l === "kor" ? "ko" : "en";
+  localStorage.setItem("yj-lang", l);
+}
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+});
+document.getElementById("lang-toggle").addEventListener("click", () => {
+  setLang(document.documentElement.dataset.lang === "kor" ? "eng" : "kor");
+});
+
+setTheme(localStorage.getItem("yj-theme") || "light");
+setLang(localStorage.getItem("yj-lang") || "kor");
+
+// Auto-update copyright year
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+<script>
+(() => {
+  const yrs = Math.max(1, new Date().getFullYear() - 2023);
+  document.querySelectorAll('.yrs').forEach(el => el.textContent = yrs);
+})();
+</script>
+</html>
